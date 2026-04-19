@@ -1,0 +1,938 @@
+{
+  "devices": {
+    "b77272f8": {
+      "meta": {
+        "lastSeen": 1776553776703,
+        "ownerUid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2",
+        "status": "paired"
+      }
+    }
+  },
+  "dispositivos": {
+    "SeQvctD2cjfmLffdIDoAEZ0QqNV2": {
+      "config": {
+        "nombre": "Usuario",
+        "pitch_off": 5,
+        "pitch_on": 6,
+        "roll_off": 5,
+        "roll_on": 6,
+        "sensibilidad": "alta",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2"
+      },
+      "control": {
+        "comando": "idle"
+      },
+      "estado": {
+        "activo": false,
+        "calibrado": false,
+        "sesion_activa": false,
+        "ts_ultimo": 0
+      }
+    }
+  },
+  "eventos": {
+    "79cfae80": {
+      "-OoMrdfiD52LOIMBo9Yr": {
+        "pitch_dev": 16.095,
+        "roll_dev": 22.514,
+        "session_id": "9186c396-2101-4792-8003-c16639e4a18e",
+        "theta_abs": 27.675,
+        "tipo": "ALERTA",
+        "ts": "2026-03-22T18:25:57.788677",
+        "uid": "79cfae80"
+      },
+      "-OpxBEuktB0uCpzyjuKh": {
+        "pitch_dev": -23.847,
+        "roll_dev": -23.822,
+        "session_id": "fe3646ec-f81b-4db3-8f0d-0de03077756f",
+        "theta_abs": 33.707,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T10:37:35.492860",
+        "uid": "79cfae80"
+      },
+      "-OpxBFC1AX9oYgozQNuh": {
+        "pitch_dev": 0.64,
+        "roll_dev": -0.864,
+        "session_id": "fe3646ec-f81b-4db3-8f0d-0de03077756f",
+        "theta_abs": 1.075,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-11T10:37:37.272259",
+        "uid": "79cfae80"
+      },
+      "-OpxBWteGb4LYxiLU3Gb": {
+        "pitch_dev": 16.034,
+        "roll_dev": 6.079,
+        "session_id": "fe3646ec-f81b-4db3-8f0d-0de03077756f",
+        "theta_abs": 17.148,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T10:38:49.753847",
+        "uid": "79cfae80"
+      },
+      "-OpxB_6Hc-pymoGydFt4": {
+        "pitch_dev": -0.811,
+        "roll_dev": -0.836,
+        "session_id": "fe3646ec-f81b-4db3-8f0d-0de03077756f",
+        "theta_abs": 1.165,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-11T10:39:02.909820",
+        "uid": "79cfae80"
+      },
+      "-OpxJDQhJv4v_iljLWEJ": {
+        "pitch_dev": -23.635,
+        "roll_dev": -24.916,
+        "session_id": "7c942acb-1873-478d-98c4-e043cb5e910c",
+        "theta_abs": 34.343,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T11:12:26.572943",
+        "uid": "79cfae80"
+      },
+      "-OpxJVan4N1ovIRf0ilx": {
+        "pitch_dev": -23.653,
+        "roll_dev": -25.027,
+        "session_id": "5a5a13a6-bc80-4437-8627-a534c9e8d7a2",
+        "theta_abs": 34.436,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T11:13:41.054820",
+        "uid": "79cfae80"
+      },
+      "-OpxKB3SRwXONFbg0iyT": {
+        "pitch_dev": -23.531,
+        "roll_dev": -24.883,
+        "session_id": "da0dde94-0549-4fd3-b485-4e80d3c2c1ce",
+        "theta_abs": 34.247,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T11:16:39.029273",
+        "uid": "79cfae80"
+      },
+      "-OpxLLq_zKlqCkHPxJVI": {
+        "pitch_dev": -29.283,
+        "roll_dev": -27.642,
+        "session_id": "1725edb3-5176-4071-a11b-7e1b9a1772f0",
+        "theta_abs": 40.269,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T11:21:45.426481",
+        "uid": "79cfae80"
+      },
+      "-OpxLnDQBRmB2uHJLUv8": {
+        "pitch_dev": -28.68,
+        "roll_dev": -27.222,
+        "session_id": "19a7e6d4-412c-48cb-a302-4a7a0efbc707",
+        "theta_abs": 39.542,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T11:23:41.524067",
+        "uid": "79cfae80"
+      },
+      "-OpxLnXQaayHYMrc53w9": {
+        "pitch_dev": -0.766,
+        "roll_dev": -0.818,
+        "session_id": "19a7e6d4-412c-48cb-a302-4a7a0efbc707",
+        "theta_abs": 1.121,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-11T11:23:43.430130",
+        "uid": "79cfae80"
+      },
+      "-OpxNufSxbl2cjuN7_Q_": {
+        "pitch_dev": -28.307,
+        "roll_dev": -26.836,
+        "session_id": "fa67277e-9d50-41ad-8cba-3cc185c4e106",
+        "theta_abs": 39.006,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T11:32:56.411544",
+        "uid": "79cfae80"
+      },
+      "-OpxNuwBTSKAgTU8-5lc": {
+        "pitch_dev": -0.71,
+        "roll_dev": -0.932,
+        "session_id": "fa67277e-9d50-41ad-8cba-3cc185c4e106",
+        "theta_abs": 1.172,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-11T11:32:58.046557",
+        "uid": "79cfae80"
+      },
+      "-OpxPmExvuVHz10QQ8D4": {
+        "pitch_dev": -28.737,
+        "roll_dev": -27.059,
+        "session_id": "2514e299-8701-4284-a906-96fc88bad8a7",
+        "theta_abs": 39.471,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T11:41:06.168215",
+        "uid": "79cfae80"
+      },
+      "-OpxPmX239rKBjcRtXSE": {
+        "pitch_dev": -0.184,
+        "roll_dev": -0.789,
+        "session_id": "2514e299-8701-4284-a906-96fc88bad8a7",
+        "theta_abs": 0.811,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-11T11:41:07.890185",
+        "uid": "79cfae80"
+      },
+      "-OpxkgSLQa5IdAGC-DCs": {
+        "pitch_dev": -28.532,
+        "roll_dev": -27.485,
+        "session_id": "8405c9f0-e7d8-44dd-8011-052c6a35c886",
+        "theta_abs": 39.617,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T13:16:49.600870",
+        "uid": "79cfae80"
+      },
+      "-OpxzgNb2G7oqYnugRvV": {
+        "pitch_dev": -30.582,
+        "roll_dev": -25.925,
+        "session_id": "b810e76f-3793-49a9-8658-b9688eea797c",
+        "theta_abs": 40.092,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T14:22:21.509424",
+        "uid": "79cfae80"
+      },
+      "-OpxzgdNPtDvoQ-34FS-": {
+        "pitch_dev": -0.716,
+        "roll_dev": -0.633,
+        "session_id": "b810e76f-3793-49a9-8658-b9688eea797c",
+        "theta_abs": 0.956,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-11T14:22:23.110316",
+        "uid": "79cfae80"
+      }
+    },
+    "SeQvctD2cjfmLffdIDoAEZ0QqNV2": {
+      "-OpyT0EZMOhhct6Py2Mf": {
+        "pitch_dev": -30.889,
+        "roll_dev": -26.503,
+        "session_id": "90f5282d-5380-43b6-b311-16a9c13cb609",
+        "theta_abs": 40.701,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T16:34:51.266061",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2"
+      },
+      "-OpyT0W4Z4DkQblNRKV4": {
+        "pitch_dev": 0.55,
+        "roll_dev": -0.747,
+        "session_id": "90f5282d-5380-43b6-b311-16a9c13cb609",
+        "theta_abs": 0.927,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-11T16:34:52.909665",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2"
+      },
+      "-OpyTR4n-sSR4S6s4Z70": {
+        "pitch_dev": 23.118,
+        "roll_dev": -13.941,
+        "session_id": "90f5282d-5380-43b6-b311-16a9c13cb609",
+        "theta_abs": 26.996,
+        "tipo": "ALERTA",
+        "ts": "2026-04-11T16:36:41.765285",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2"
+      },
+      "-OqXFJfFW-KrolOK2ACz": {
+        "pitch_dev": -22.307,
+        "roll_dev": -0.742,
+        "session_id": "1c25365a-74ae-4543-b6cc-a9bd5169dfa1",
+        "theta_abs": 22.319,
+        "tipo": "ALERTA",
+        "ts": "2026-04-18T15:21:21.137109",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2"
+      },
+      "-OqXFJx8-vLCl8o84bqT": {
+        "pitch_dev": -0.618,
+        "roll_dev": -0.057,
+        "session_id": "1c25365a-74ae-4543-b6cc-a9bd5169dfa1",
+        "theta_abs": 0.621,
+        "tipo": "CORRECCION",
+        "ts": "2026-04-18T15:21:22.280934",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2"
+      },
+      "-OqXFKGy1LZFCYJhDR5G": {
+        "pitch_dev": 7.681,
+        "roll_dev": -0.02,
+        "session_id": "1c25365a-74ae-4543-b6cc-a9bd5169dfa1",
+        "theta_abs": 7.681,
+        "tipo": "ALERTA",
+        "ts": "2026-04-18T15:21:23.623600",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2"
+      }
+    }
+  },
+  "pairing": {
+    "acks": {
+      "b77272f8": {
+        "SeQvctD2cjfmLffdIDoAEZ0QqNV2": {
+          "accepted": true,
+          "deviceId": "b77272f8",
+          "message": "paired",
+          "timestamp": 1776553777278
+        }
+      }
+    },
+    "requests": {
+      "b77272f8": {
+        "SeQvctD2cjfmLffdIDoAEZ0QqNV2": {
+          "clientDeviceInfo": {
+            "appVersion": "unknown",
+            "platform": "android"
+          },
+          "clientDisplayName": "Ismael Fonseca",
+          "clientUid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2",
+          "requestedActions": [
+            "pair",
+            "calibrate"
+          ],
+          "timestamp": 1776553776207
+        }
+      }
+    }
+  },
+  "sensores": {
+    "79cfae80": {
+      "realtime": {
+        "buena_postura": true,
+        "clase_angulo": "Excelente",
+        "clase_icp": "Excelente",
+        "icp_parcial": 99.2,
+        "num_alertas": 1,
+        "pitch": 39.169,
+        "pitch_dev": 0.326,
+        "roll": 32.772,
+        "roll_dev": -0.21,
+        "session_id": "b810e76f-3793-49a9-8658-b9688eea797c",
+        "t_buena_min": 28.03,
+        "t_mala_min": 0.02,
+        "temp_c": 28.01,
+        "theta_abs": 0.388,
+        "ts": "2026-04-11T14:51:15.625003",
+        "uid": "79cfae80",
+        "v": "1.0"
+      }
+    },
+    "SeQvctD2cjfmLffdIDoAEZ0QqNV2": {
+      "realtime": {
+        "buena_postura": false,
+        "clase_angulo": "Bueno",
+        "clase_icp": "Regular",
+        "icp_parcial": 64.3,
+        "num_alertas": 2,
+        "pitch": 30.072,
+        "pitch_dev": 3.348,
+        "roll": 0.861,
+        "roll_dev": -0.11,
+        "session_id": "1c25365a-74ae-4543-b6cc-a9bd5169dfa1",
+        "t_buena_min": 0.03,
+        "t_mala_min": 12.65,
+        "temp_c": 30.22,
+        "theta_abs": 3.35,
+        "ts": "2026-04-18T15:34:28.406726",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2",
+        "v": "1.0"
+      }
+    }
+  },
+  "sesiones": {
+    "79cfae80": {
+      "1725edb3-5176-4071-a11b-7e1b9a1772f0": {
+        "clase_icp": "Excelente",
+        "dist_angulo_pct": {
+          "Bueno": 0,
+          "Excelente": 0,
+          "Malo": 0,
+          "Peligroso": 100,
+          "Regular": 0
+        },
+        "duracion_min": 0.01,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -29.283,
+            "roll_dev": -27.642,
+            "theta_abs": 40.269,
+            "timestamp": "2026-04-11T11:21:45.426407",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.51
+          }
+        ],
+        "icp": 100,
+        "n_muestras": 22,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 0,
+        "pct_buena": 95.3,
+        "pct_mala": 4.7,
+        "session_id": "1725edb3-5176-4071-a11b-7e1b9a1772f0",
+        "t_buena_min": 0.01,
+        "t_mala_min": 0,
+        "temp_prom_c": 24.96,
+        "theta_promedio": 46.285,
+        "ts_fin": "2026-04-11T11:21:46.075049",
+        "ts_inicio": "2026-04-11T11:21:44.915781",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "19a7e6d4-412c-48cb-a302-4a7a0efbc707": {
+        "clase_icp": "Excelente",
+        "dist_angulo_pct": {
+          "Bueno": 5.5,
+          "Excelente": 85.2,
+          "Malo": 0.8,
+          "Peligroso": 4.3,
+          "Regular": 4.2
+        },
+        "duracion_min": 0.39,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -28.68,
+            "roll_dev": -27.222,
+            "theta_abs": 39.542,
+            "timestamp": "2026-04-11T11:23:41.523906",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.53
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": -0.766,
+            "roll_dev": -0.818,
+            "theta_abs": 1.121,
+            "timestamp": "2026-04-11T11:23:43.429985",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 2.44
+          }
+        ],
+        "icp": 94.1,
+        "n_muestras": 865,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 1,
+        "pct_buena": 95.3,
+        "pct_mala": 4.7,
+        "session_id": "19a7e6d4-412c-48cb-a302-4a7a0efbc707",
+        "t_buena_min": 0.37,
+        "t_mala_min": 0.02,
+        "temp_prom_c": 25.06,
+        "theta_promedio": 2.443,
+        "ts_fin": "2026-04-11T11:24:06.057292",
+        "ts_inicio": "2026-04-11T11:23:40.992546",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "2514e299-8701-4284-a906-96fc88bad8a7": {
+        "clase_icp": "Excelente",
+        "dist_angulo_pct": {
+          "Bueno": 0.1,
+          "Excelente": 99.5,
+          "Malo": 0,
+          "Peligroso": 0.2,
+          "Regular": 0.2
+        },
+        "duracion_min": 11.22,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -28.737,
+            "roll_dev": -27.059,
+            "theta_abs": 39.471,
+            "timestamp": "2026-04-11T11:41:06.168126",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.53
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": -0.184,
+            "roll_dev": -0.789,
+            "theta_abs": 0.811,
+            "timestamp": "2026-04-11T11:41:07.890049",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 2.25
+          }
+        ],
+        "icp": 97.7,
+        "n_muestras": 25330,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 1,
+        "pct_buena": 99.9,
+        "pct_mala": 0.1,
+        "session_id": "2514e299-8701-4284-a906-96fc88bad8a7",
+        "t_buena_min": 11.2,
+        "t_mala_min": 0.02,
+        "temp_prom_c": 25.64,
+        "theta_promedio": 1.128,
+        "ts_fin": "2026-04-11T11:52:41.573085",
+        "ts_inicio": "2026-04-11T11:41:05.641572",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "5a5a13a6-bc80-4437-8627-a534c9e8d7a2": {
+        "clase_icp": "Malo",
+        "dist_angulo_pct": {
+          "Bueno": 0,
+          "Excelente": 0,
+          "Malo": 0.5,
+          "Peligroso": 1.2,
+          "Regular": 98.3
+        },
+        "duracion_min": 1.5,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -23.653,
+            "roll_dev": -25.027,
+            "theta_abs": 34.436,
+            "timestamp": "2026-04-11T11:13:41.054729",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.51
+          }
+        ],
+        "icp": 57.2,
+        "n_muestras": 3438,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 0,
+        "pct_buena": 0.5,
+        "pct_mala": 99.5,
+        "session_id": "5a5a13a6-bc80-4437-8627-a534c9e8d7a2",
+        "t_buena_min": 0.01,
+        "t_mala_min": 1.49,
+        "temp_prom_c": 26.98,
+        "theta_promedio": 7.788,
+        "ts_fin": "2026-04-11T11:15:14.134617",
+        "ts_inicio": "2026-04-11T11:13:40.545037",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "7c942acb-1873-478d-98c4-e043cb5e910c": {
+        "clase_icp": "Malo",
+        "dist_angulo_pct": {
+          "Bueno": 0,
+          "Excelente": 0,
+          "Malo": 6.6,
+          "Peligroso": 17.5,
+          "Regular": 76
+        },
+        "duracion_min": 0.1,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -23.635,
+            "roll_dev": -24.916,
+            "theta_abs": 34.343,
+            "timestamp": "2026-04-11T11:12:26.572817",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.52
+          }
+        ],
+        "icp": 52.2,
+        "n_muestras": 229,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 0,
+        "pct_buena": 8.3,
+        "pct_mala": 91.7,
+        "session_id": "7c942acb-1873-478d-98c4-e043cb5e910c",
+        "t_buena_min": 0.01,
+        "t_mala_min": 0.09,
+        "temp_prom_c": 26.74,
+        "theta_promedio": 12.199,
+        "ts_fin": "2026-04-11T11:12:32.930748",
+        "ts_inicio": "2026-04-11T11:12:26.050348",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "8405c9f0-e7d8-44dd-8011-052c6a35c886": {
+        "clase_icp": "Regular",
+        "dist_angulo_pct": {
+          "Bueno": 99.8,
+          "Excelente": 0.1,
+          "Malo": 0,
+          "Peligroso": 0,
+          "Regular": 0.1
+        },
+        "duracion_min": 63.06,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -28.532,
+            "roll_dev": -27.485,
+            "theta_abs": 39.617,
+            "timestamp": "2026-04-11T13:16:49.600779",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.51
+          }
+        ],
+        "icp": 65.7,
+        "n_muestras": 143919,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 0,
+        "pct_buena": 0,
+        "pct_mala": 100,
+        "session_id": "8405c9f0-e7d8-44dd-8011-052c6a35c886",
+        "t_buena_min": 0.01,
+        "t_mala_min": 63.05,
+        "temp_prom_c": 27.68,
+        "theta_promedio": 2.574,
+        "ts_fin": "2026-04-11T14:22:01.102885",
+        "ts_inicio": "2026-04-11T13:16:49.085730",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "9186c396-2101-4792-8003-c16639e4a18e": {
+        "clase_icp": "Regular",
+        "dist_angulo_pct": {
+          "Bueno": 5.4,
+          "Excelente": 54.1,
+          "Malo": 10,
+          "Peligroso": 24.4,
+          "Regular": 6.2
+        },
+        "duracion_min": 1.56,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": 16.095,
+            "roll_dev": 22.514,
+            "theta_abs": 27.675,
+            "timestamp": "2026-03-22T18:25:57.788573",
+            "tipo": "ALERTA",
+            "ts_rel_s": 55.15
+          }
+        ],
+        "icp": 70.5,
+        "n_muestras": 3418,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 0,
+        "pct_buena": 56.4,
+        "pct_mala": 43.6,
+        "session_id": "9186c396-2101-4792-8003-c16639e4a18e",
+        "t_buena_min": 0.88,
+        "t_mala_min": 0.68,
+        "temp_prom_c": 23.69,
+        "theta_promedio": 9.84,
+        "ts_fin": "2026-03-22T18:26:40.182200",
+        "ts_inicio": "2026-03-22T18:25:02.641244",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "b810e76f-3793-49a9-8658-b9688eea797c": {
+        "clase_icp": "Excelente",
+        "dist_angulo_pct": {
+          "Bueno": 0.1,
+          "Excelente": 99.8,
+          "Malo": 0,
+          "Peligroso": 0.1,
+          "Regular": 0.1
+        },
+        "duracion_min": 28.08,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -30.582,
+            "roll_dev": -25.925,
+            "theta_abs": 40.092,
+            "timestamp": "2026-04-11T14:22:21.509346",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.53
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": -0.716,
+            "roll_dev": -0.633,
+            "theta_abs": 0.956,
+            "timestamp": "2026-04-11T14:22:23.110238",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 2.13
+          }
+        ],
+        "icp": 99.2,
+        "n_muestras": 63241,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 1,
+        "pct_buena": 99.9,
+        "pct_mala": 0.1,
+        "session_id": "b810e76f-3793-49a9-8658-b9688eea797c",
+        "t_buena_min": 28.06,
+        "t_mala_min": 0.02,
+        "temp_prom_c": 27.86,
+        "theta_promedio": 0.224,
+        "ts_fin": "2026-04-11T14:51:17.502491",
+        "ts_inicio": "2026-04-11T14:22:20.979850",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "da0dde94-0549-4fd3-b485-4e80d3c2c1ce": {
+        "clase_icp": "Malo",
+        "dist_angulo_pct": {
+          "Bueno": 0.5,
+          "Excelente": 0,
+          "Malo": 10.1,
+          "Peligroso": 5.7,
+          "Regular": 83.6
+        },
+        "duracion_min": 0.42,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -23.531,
+            "roll_dev": -24.883,
+            "theta_abs": 34.247,
+            "timestamp": "2026-04-11T11:16:39.029172",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.53
+          }
+        ],
+        "icp": 54.7,
+        "n_muestras": 928,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 0,
+        "pct_buena": 2,
+        "pct_mala": 98,
+        "session_id": "da0dde94-0549-4fd3-b485-4e80d3c2c1ce",
+        "t_buena_min": 0.01,
+        "t_mala_min": 0.41,
+        "temp_prom_c": 26.89,
+        "theta_promedio": 9.536,
+        "ts_fin": "2026-04-11T11:17:05.374518",
+        "ts_inicio": "2026-04-11T11:16:38.501963",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "fa67277e-9d50-41ad-8cba-3cc185c4e106": {
+        "clase_icp": "Excelente",
+        "dist_angulo_pct": {
+          "Bueno": 4.2,
+          "Excelente": 85,
+          "Malo": 1.1,
+          "Peligroso": 4.8,
+          "Regular": 5
+        },
+        "duracion_min": 0.4,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -28.307,
+            "roll_dev": -26.836,
+            "theta_abs": 39.006,
+            "timestamp": "2026-04-11T11:32:56.411454",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.53
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": -0.71,
+            "roll_dev": -0.932,
+            "theta_abs": 1.172,
+            "timestamp": "2026-04-11T11:32:58.046413",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 2.16
+          }
+        ],
+        "icp": 93.7,
+        "n_muestras": 884,
+        "nombre": "Ismael",
+        "num_alertas": 1,
+        "num_correcciones": 1,
+        "pct_buena": 96.1,
+        "pct_mala": 3.9,
+        "session_id": "fa67277e-9d50-41ad-8cba-3cc185c4e106",
+        "t_buena_min": 0.38,
+        "t_mala_min": 0.02,
+        "temp_prom_c": 25.22,
+        "theta_promedio": 2.841,
+        "ts_fin": "2026-04-11T11:33:21.262422",
+        "ts_inicio": "2026-04-11T11:32:55.883282",
+        "uid": "79cfae80",
+        "v": "1.0"
+      },
+      "fe3646ec-f81b-4db3-8f0d-0de03077756f": {
+        "clase_icp": "Bueno",
+        "dist_angulo_pct": {
+          "Bueno": 9.2,
+          "Excelente": 74.7,
+          "Malo": 2.2,
+          "Peligroso": 5,
+          "Regular": 8.9
+        },
+        "duracion_min": 1.5,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -23.847,
+            "roll_dev": -23.822,
+            "theta_abs": 33.707,
+            "timestamp": "2026-04-11T10:37:35.492767",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.51
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": 0.64,
+            "roll_dev": -0.864,
+            "theta_abs": 1.075,
+            "timestamp": "2026-04-11T10:37:37.272175",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 2.29
+          },
+          {
+            "clase": "Malo",
+            "pitch_dev": 16.034,
+            "roll_dev": 6.079,
+            "theta_abs": 17.148,
+            "timestamp": "2026-04-11T10:38:49.753743",
+            "tipo": "ALERTA",
+            "ts_rel_s": 74.77
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": -0.811,
+            "roll_dev": -0.836,
+            "theta_abs": 1.165,
+            "timestamp": "2026-04-11T10:39:02.909700",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 87.93
+          }
+        ],
+        "icp": 87.8,
+        "n_muestras": 3427,
+        "nombre": "Ismael",
+        "num_alertas": 2,
+        "num_correcciones": 2,
+        "pct_buena": 85,
+        "pct_mala": 15,
+        "session_id": "fe3646ec-f81b-4db3-8f0d-0de03077756f",
+        "t_buena_min": 1.28,
+        "t_mala_min": 0.23,
+        "temp_prom_c": 25.57,
+        "theta_promedio": 4.157,
+        "ts_fin": "2026-04-11T10:39:09.256419",
+        "ts_inicio": "2026-04-11T10:37:34.980915",
+        "uid": "79cfae80",
+        "v": "1.0"
+      }
+    },
+    "SeQvctD2cjfmLffdIDoAEZ0QqNV2": {
+      "1c25365a-74ae-4543-b6cc-a9bd5169dfa1": {
+        "clase_icp": "Regular",
+        "dist_angulo_pct": {
+          "Bueno": 99.5,
+          "Excelente": 0,
+          "Malo": 0.1,
+          "Peligroso": 0.1,
+          "Regular": 0.3
+        },
+        "duracion_min": 12.71,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -22.307,
+            "roll_dev": -0.742,
+            "theta_abs": 22.319,
+            "timestamp": "2026-04-18T15:21:21.136973",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.52
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": -0.618,
+            "roll_dev": -0.057,
+            "theta_abs": 0.621,
+            "timestamp": "2026-04-18T15:21:22.280788",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 1.66
+          },
+          {
+            "clase": "Regular",
+            "pitch_dev": 7.681,
+            "roll_dev": -0.02,
+            "theta_abs": 7.681,
+            "timestamp": "2026-04-18T15:21:23.623478",
+            "tipo": "ALERTA",
+            "ts_rel_s": 3
+          }
+        ],
+        "icp": 64.3,
+        "n_muestras": 23090,
+        "nombre": "Ismael",
+        "num_alertas": 2,
+        "num_correcciones": 1,
+        "pct_buena": 0.2,
+        "pct_mala": 99.8,
+        "session_id": "1c25365a-74ae-4543-b6cc-a9bd5169dfa1",
+        "t_buena_min": 0.03,
+        "t_mala_min": 12.69,
+        "temp_prom_c": 30.3,
+        "theta_promedio": 3.226,
+        "ts_fin": "2026-04-18T15:34:30.628115",
+        "ts_inicio": "2026-04-18T15:21:20.619751",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2",
+        "v": "1.0"
+      },
+      "90f5282d-5380-43b6-b311-16a9c13cb609": {
+        "clase_icp": "Bueno",
+        "dist_angulo_pct": {
+          "Bueno": 3,
+          "Excelente": 66,
+          "Malo": 3.6,
+          "Peligroso": 10.6,
+          "Regular": 16.8
+        },
+        "duracion_min": 2.55,
+        "eventos": [
+          {
+            "clase": "Peligroso",
+            "pitch_dev": -30.889,
+            "roll_dev": -26.503,
+            "theta_abs": 40.701,
+            "timestamp": "2026-04-11T16:34:51.265970",
+            "tipo": "ALERTA",
+            "ts_rel_s": 0.51
+          },
+          {
+            "clase": "Excelente",
+            "pitch_dev": 0.55,
+            "roll_dev": -0.747,
+            "theta_abs": 0.927,
+            "timestamp": "2026-04-11T16:34:52.909587",
+            "tipo": "CORRECCION",
+            "ts_rel_s": 2.16
+          },
+          {
+            "clase": "Peligroso",
+            "pitch_dev": 23.118,
+            "roll_dev": -13.941,
+            "theta_abs": 26.996,
+            "timestamp": "2026-04-11T16:36:41.765187",
+            "tipo": "ALERTA",
+            "ts_rel_s": 111.01
+          }
+        ],
+        "icp": 77.8,
+        "n_muestras": 5822,
+        "nombre": "Ismael",
+        "num_alertas": 2,
+        "num_correcciones": 1,
+        "pct_buena": 69,
+        "pct_mala": 31,
+        "session_id": "90f5282d-5380-43b6-b311-16a9c13cb609",
+        "t_buena_min": 1.76,
+        "t_mala_min": 0.79,
+        "temp_prom_c": 27.88,
+        "theta_promedio": 7.474,
+        "ts_fin": "2026-04-11T16:37:29.829142",
+        "ts_inicio": "2026-04-11T16:34:50.753285",
+        "uid": "SeQvctD2cjfmLffdIDoAEZ0QqNV2",
+        "v": "1.0"
+      }
+    }
+  },
+  "test": {
+    "ping": "ok"
+  },
+  "users": {
+    "SeQvctD2cjfmLffdIDoAEZ0QqNV2": {
+      "last_activity_date": "2026-04-12",
+      "lecciones_completadas": 1,
+      "puntos": 30,
+      "racha_actual": 1
+    }
+  }
+}
