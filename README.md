@@ -44,20 +44,6 @@ SpineTrack es una solucion IoT para monitoreo postural en tiempo real con app An
   - Reporta estado en Firebase (`/dispositivos/{uid}/estado`).
 - La app refleja visualmente el proceso y habilita sesion cuando termina.
 
-## Publicar APK en GitHub
-
-### Opcion recomendada: GitHub Releases
-
-1. Genera APK release en Android Studio o con Gradle.
-2. Crea release/tag en GitHub (ej. `v1.0.0`).
-3. Adjunta `app-release.apk` como asset del release.
-
-### Opcion alternativa: carpeta versionada
-
-- Crear carpeta `apk/` en el repo.
-- Copiar ahi el APK release y versionarlo con nombre claro, por ejemplo:
-  - `apk/spinetrack-v1.0.0.apk`
-
 ## Seguridad
 
 - No subir credenciales reales (`serviceAccount.json`, claves MQTT, secretos locales).
