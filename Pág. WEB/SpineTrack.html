@@ -1,0 +1,2408 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpineTrack — Conectate con tu Postura</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+
+    <style>
+      :root {
+        --cream: #faf0e8;
+        --salmon: #f4956a;
+        --pink: #f2a7c3;
+        --lilac: #d4a8d8;
+        --dark: #3a2a2a;
+        --card-bg: #fff8f4;
+        --success: #7bc67e;
+        --danger: #e07070;
+        @keyframes floatLogo {
+          from {
+            transform: translateY(0px);
+          }
+          to {
+            transform: translateY(-12px);
+          }
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: var(--cream);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
+
+      /* ── MARBLE BLOBS ── */
+      .blob {
+        position: fixed;
+        border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+        filter: blur(60px);
+        opacity: 0.25;
+        pointer-events: none;
+        z-index: 0;
+        animation: blobFloat 12s ease-in-out infinite alternate;
+      }
+      .blob-1 {
+        width: 380px;
+        height: 380px;
+        background: var(--salmon);
+        top: -80px;
+        left: -80px;
+      }
+      .blob-2 {
+        width: 320px;
+        height: 320px;
+        background: var(--lilac);
+        bottom: -60px;
+        right: -60px;
+        animation-delay: -4s;
+      }
+      .blob-3 {
+        width: 260px;
+        height: 260px;
+        background: var(--pink);
+        top: 50%;
+        left: 60%;
+        animation-delay: -8s;
+      }
+      @keyframes blobFloat {
+        from {
+          transform: scale(1) translate(0, 0) rotate(0deg);
+        }
+        to {
+          transform: scale(1.08) translate(20px, 15px) rotate(8deg);
+        }
+      }
+
+      /* ── PAGES ── */
+      .page {
+        display: none;
+        min-height: 100vh;
+        position: relative;
+        z-index: 1;
+        animation: fadeIn 0.4s ease;
+      }
+      .page.active {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── NAV ── */
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 40px;
+        background: rgba(255, 248, 244, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1.5px solid rgba(244, 149, 106, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        color: var(--salmon);
+        font-style: italic;
+        cursor: pointer;
+      }
+      .nav-links {
+        display: flex;
+        gap: 16px;
+      }
+      .nav-btn {
+        padding: 8px 20px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        font-family: "Nunito", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+      }
+      .nav-btn.outline {
+        background: transparent;
+        border: 2px solid var(--salmon);
+        color: var(--salmon);
+      }
+      .nav-btn.outline:hover {
+        background: var(--salmon);
+        color: white;
+      }
+      .nav-btn.filled {
+        background: var(--salmon);
+        color: white;
+      }
+      .nav-btn.filled:hover {
+        background: #e07540;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 40px;
+        padding: 80px 60px 60px;
+        min-height: 90vh;
+      }
+      .hero-text h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 4.5rem;
+        line-height: 1.1;
+        color: var(--salmon);
+        font-style: italic;
+        animation: slideUp 0.7s ease both;
+      }
+      .hero-text h2 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--dark);
+        opacity: 0.7;
+        margin-top: 12px;
+        animation: slideUp 0.7s 0.15s ease both;
+      }
+      .hero-text p {
+        margin-top: 20px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--dark);
+        opacity: 0.75;
+        max-width: 480px;
+        animation: slideUp 0.7s 0.25s ease both;
+      }
+      .hero-cta {
+        margin-top: 36px;
+        display: flex;
+        gap: 14px;
+        animation: slideUp 0.7s 0.35s ease both;
+      }
+      .btn-primary {
+        padding: 14px 32px;
+        border-radius: 50px;
+        background: var(--salmon);
+        color: white;
+        border: none;
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 6px 20px rgba(244, 149, 106, 0.35);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(244, 149, 106, 0.45);
+      }
+      .btn-secondary {
+        padding: 14px 32px;
+        border-radius: 50px;
+        background: transparent;
+        color: var(--salmon);
+        border: 2px solid var(--salmon);
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-secondary:hover {
+        background: rgba(244, 149, 106, 0.1);
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: floatIn 0.9s 0.2s ease both;
+      }
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .hero-card {
+        background: var(--card-bg);
+        border-radius: 28px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(244, 149, 106, 0.15);
+        text-align: center;
+        border: 1.5px solid rgba(244, 149, 106, 0.15);
+        max-width: 340px;
+      }
+      .mascot-emoji {
+        font-size: 5rem;
+        display: block;
+        margin-bottom: 16px;
+        animation: bounce 3s ease-in-out infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .hero-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        color: var(--salmon);
+      }
+      .hero-card p {
+        margin-top: 8px;
+        font-size: 0.95rem;
+        opacity: 0.7;
+        line-height: 1.5;
+      }
+
+      /* ── STATS STRIP ── */
+      .stats-strip {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        padding: 32px 60px;
+        background: linear-gradient(135deg, var(--salmon) 0%, var(--pink) 100%);
+      }
+      .stat {
+        text-align: center;
+        color: white;
+      }
+      .stat-num {
+        font-family: "Playfair Display", serif;
+        font-size: 2.4rem;
+        font-weight: 900;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        opacity: 0.85;
+        margin-top: 2px;
+      }
+
+      /* ── FEATURES ── */
+      .features {
+        padding: 80px 60px;
+      }
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2.8rem;
+        color: var(--dark);
+        text-align: center;
+        margin-bottom: 48px;
+      }
+      .section-title span {
+        color: var(--salmon);
+        font-style: italic;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .feature-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 32px;
+        border: 1.5px solid rgba(244, 149, 106, 0.12);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .feature-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(244, 149, 106, 0.15);
+      }
+      .feature-icon {
+        font-size: 2.4rem;
+        margin-bottom: 14px;
+        display: flex;
+        justify-content: center;
+      }
+      .feature-card h4 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: var(--salmon);
+      }
+      .feature-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        opacity: 0.75;
+      }
+
+      /* ── AUTH PAGES ── */
+      .auth-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+      .auth-card {
+        background: var(--card-bg);
+        border-radius: 28px;
+        padding: 48px;
+        width: 100%;
+        max-width: 440px;
+        box-shadow: 0 24px 64px rgba(244, 149, 106, 0.15);
+        border: 1.5px solid rgba(244, 149, 106, 0.15);
+        animation: fadeIn 0.4s ease;
+      }
+      .auth-logo {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .auth-logo span {
+        font-size: 3rem;
+      }
+      .auth-logo h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        color: var(--salmon);
+        font-style: italic;
+        margin-top: 8px;
+      }
+      .auth-logo p {
+        font-size: 0.9rem;
+        opacity: 0.6;
+        margin-top: 4px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+        color: var(--dark);
+        opacity: 0.8;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1.5px solid rgba(244, 149, 106, 0.25);
+        background: white;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.95rem;
+        color: var(--dark);
+        transition: border 0.2s;
+        outline: none;
+      }
+      .form-group input:focus {
+        border-color: var(--salmon);
+        box-shadow: 0 0 0 3px rgba(244, 149, 106, 0.15);
+      }
+      .form-hint {
+        font-size: 0.75rem;
+        opacity: 0.55;
+        margin-top: 4px;
+      }
+      .form-error {
+        font-size: 0.78rem;
+        color: var(--danger);
+        margin-top: 4px;
+        display: none;
+      }
+      .form-error.show {
+        display: block;
+      }
+
+      .btn-full {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        background: var(--salmon);
+        color: white;
+        border: none;
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 8px;
+        box-shadow: 0 6px 20px rgba(244, 149, 106, 0.3);
+      }
+      .btn-full:hover {
+        background: #e07540;
+        transform: translateY(-1px);
+      }
+      .btn-full:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .auth-switch {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.88rem;
+        opacity: 0.7;
+      }
+      .auth-switch a {
+        color: var(--salmon);
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .auth-switch a:hover {
+        text-decoration: underline;
+      }
+
+      .password-strength {
+        margin-top: 6px;
+      }
+      .strength-bar {
+        height: 4px;
+        border-radius: 4px;
+        background: #eee;
+        overflow: hidden;
+      }
+      .strength-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: all 0.3s;
+        width: 0;
+      }
+      .strength-text {
+        font-size: 0.72rem;
+        margin-top: 3px;
+        font-weight: 700;
+      }
+
+      .msg-box {
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 16px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        display: none;
+      }
+      .msg-box.success {
+        background: rgba(123, 198, 126, 0.15);
+        color: #3a7a3d;
+        border: 1px solid rgba(123, 198, 126, 0.3);
+        display: block;
+      }
+      .msg-box.error {
+        background: rgba(224, 112, 112, 0.12);
+        color: #a03030;
+        border: 1px solid rgba(224, 112, 112, 0.25);
+        display: block;
+      }
+
+      /* ── DASHBOARD ── */
+      .dashboard-layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        background: var(--card-bg);
+        border-right: 1.5px solid rgba(244, 149, 106, 0.12);
+        padding: 28px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .sidebar-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        color: var(--salmon);
+        font-style: italic;
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1.5px solid rgba(244, 149, 106, 0.15);
+      }
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.18s;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--dark);
+        opacity: 0.7;
+      }
+      .sidebar-item:hover,
+      .sidebar-item.active {
+        background: rgba(244, 149, 106, 0.12);
+        color: var(--salmon);
+        opacity: 1;
+      }
+      .sidebar-item span {
+        font-size: 1.1rem;
+      }
+      .sidebar-logout {
+        margin-top: auto;
+        border-top: 1.5px solid rgba(244, 149, 106, 0.12);
+        padding-top: 12px;
+      }
+
+      .dash-main {
+        padding: 36px;
+        overflow-y: auto;
+      }
+      .dash-header {
+        margin-bottom: 32px;
+      }
+      .dash-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--dark);
+      }
+      .dash-header h1 span {
+        color: var(--salmon);
+        font-style: italic;
+      }
+      .dash-header p {
+        opacity: 0.6;
+        margin-top: 4px;
+        font-size: 0.95rem;
+      }
+
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+      .kpi-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 22px;
+        border: 1.5px solid rgba(244, 149, 106, 0.12);
+        transition: transform 0.18s;
+      }
+      .kpi-card:hover {
+        transform: translateY(-3px);
+      }
+      .kpi-icon {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+      }
+      .kpi-val {
+        font-size: 1.9rem;
+        font-weight: 900;
+        color: var(--salmon);
+      }
+      .kpi-label {
+        font-size: 0.78rem;
+        opacity: 0.6;
+        margin-top: 2px;
+        font-weight: 600;
+      }
+
+      .dash-grid2 {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .dash-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 24px;
+        border: 1.5px solid rgba(244, 149, 106, 0.12);
+      }
+      .dash-card h3 {
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Live data display */
+      .live-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(123, 198, 126, 0.15);
+        color: #3a7a3d;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+      .live-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #7bc67e;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.3);
+        }
+      }
+
+      .sensor-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .sensor-item {
+        background: white;
+        border-radius: 12px;
+        padding: 14px;
+        border: 1px solid rgba(244, 149, 106, 0.1);
+      }
+      .sensor-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        opacity: 0.55;
+        margin-bottom: 4px;
+      }
+      .sensor-val {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--salmon);
+      }
+      .sensor-unit {
+        font-size: 0.7rem;
+        font-weight: 600;
+        opacity: 0.5;
+      }
+
+      .posture-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px;
+        border-radius: 14px;
+        font-size: 1rem;
+        font-weight: 800;
+        margin-top: 16px;
+        transition: all 0.3s;
+      }
+      .posture-badge.good {
+        background: rgba(123, 198, 126, 0.15);
+        color: #3a7a3d;
+      }
+      .posture-badge.bad {
+        background: rgba(224, 112, 112, 0.12);
+        color: #a03030;
+      }
+
+      /* ICP Ring */
+      .icp-ring-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .icp-ring {
+        position: relative;
+        width: 130px;
+        height: 130px;
+      }
+      .icp-ring svg {
+        transform: rotate(-90deg);
+      }
+      .icp-ring-track {
+        fill: none;
+        stroke: #f0e4d8;
+        stroke-width: 10;
+      }
+      .icp-ring-fill {
+        fill: none;
+        stroke: var(--salmon);
+        stroke-width: 10;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 1s ease;
+      }
+      .icp-ring-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      .icp-ring-text .num {
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--salmon);
+        display: block;
+      }
+      .icp-ring-text .lbl {
+        font-size: 0.7rem;
+        font-weight: 700;
+        opacity: 0.55;
+        display: block;
+        margin-top: -2px;
+      }
+      .icp-class {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: var(--dark);
+      }
+
+      /* Weekly bar */
+      .week-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        height: 80px;
+      }
+      .week-bar-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        height: 100%;
+        justify-content: flex-end;
+      }
+      .week-bar {
+        width: 100%;
+        border-radius: 6px 6px 0 0;
+        background: linear-gradient(180deg, var(--salmon), var(--pink));
+        transition: height 0.8s ease;
+        min-height: 4px;
+      }
+      .week-day {
+        font-size: 0.65rem;
+        font-weight: 700;
+        opacity: 0.5;
+      }
+
+      /* History table */
+      .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+      }
+      .history-table th {
+        text-align: left;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        opacity: 0.5;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1.5px solid rgba(244, 149, 106, 0.12);
+      }
+      .history-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid rgba(244, 149, 106, 0.07);
+      }
+      .history-table tr:hover td {
+        background: rgba(244, 149, 106, 0.04);
+      }
+      .badge {
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+      .badge-ex {
+        background: rgba(123, 198, 126, 0.2);
+        color: #3a7a3d;
+      }
+      .badge-gd {
+        background: rgba(244, 149, 106, 0.2);
+        color: #c05a20;
+      }
+      .badge-rg {
+        background: rgba(242, 167, 195, 0.25);
+        color: #a03070;
+      }
+      .badge-bd {
+        background: rgba(224, 112, 112, 0.15);
+        color: #a03030;
+      }
+
+      /* Toast */
+      .toast {
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: var(--dark);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.88rem;
+        z-index: 9999;
+        transition: transform 0.3s ease;
+        pointer-events: none;
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .offline-banner {
+        background: rgba(224, 112, 112, 0.1);
+        border: 1px solid rgba(224, 112, 112, 0.2);
+        color: #a03030;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        display: none;
+      }
+      .offline-banner.show {
+        display: block;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 50px 28px;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .kpi-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .dash-grid2 {
+          grid-template-columns: 1fr;
+        }
+        .dashboard-layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          display: none;
+        }
+        .stats-strip {
+          flex-wrap: wrap;
+          gap: 24px;
+        }
+      }
+
+      /* ── STATS SECTION ── */
+      .stats-section { display: none; }
+      .stats-section.active { display: block; }
+
+      .stat-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+      .stat-big-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 24px;
+        border: 1.5px solid rgba(244,149,106,0.12);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .stat-big-label {
+        font-size: 0.75rem;
+        font-weight: 800;
+        opacity: 0.45;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .stat-big-val {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: var(--salmon);
+        line-height: 1;
+      }
+      .stat-big-sub {
+        font-size: 0.8rem;
+        opacity: 0.55;
+        font-weight: 600;
+      }
+
+      /* Donut chart */
+      .donut-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+      .donut-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 24px;
+        border: 1.5px solid rgba(244,149,106,0.12);
+      }
+      .donut-card h3 {
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+        color: var(--dark);
+      }
+      .donut-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .donut-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      /* Bar chart */
+      .bar-chart-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 24px;
+        border: 1.5px solid rgba(244,149,106,0.12);
+        margin-bottom: 24px;
+      }
+      .bar-chart-card h3 {
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: var(--dark);
+      }
+      .bar-chart {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        height: 120px;
+      }
+      .bar-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        height: 100%;
+        justify-content: flex-end;
+      }
+      .bar-fill {
+        width: 100%;
+        border-radius: 6px 6px 0 0;
+        background: linear-gradient(180deg, var(--salmon), var(--pink));
+        transition: height 0.9s cubic-bezier(.4,0,.2,1);
+        min-height: 4px;
+        position: relative;
+      }
+      .bar-fill:hover::after {
+        content: attr(data-val);
+        position: absolute;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--dark);
+        color: white;
+        padding: 2px 7px;
+        border-radius: 6px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .bar-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        opacity: 0.5;
+        text-align: center;
+      }
+      .bar-icp {
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: var(--salmon);
+        opacity: 0.8;
+      }
+
+      @media (max-width: 900px) {
+        .stat-cards-grid { grid-template-columns: 1fr 1fr; }
+        .donut-row { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Marble blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ══════════════ HOME PAGE ══════════════ -->
+    <div class="page active" id="page-home">
+      <nav>
+        <div class="nav-logo" onclick="showPage('home')">SpineTrack</div>
+        <div class="nav-links">
+          <button class="nav-btn outline" onclick="showPage('login')">
+            Iniciar sesión
+          </button>
+          <button class="nav-btn filled" onclick="showPage('register')">
+            Registrarse
+          </button>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-text">
+          <h1>SpineTrack</h1>
+          <h2>Conectate con tu Postura</h2>
+          <p>
+            Sistema IoT inteligente que monitorea tu postura en tiempo real
+            usando sensores y te ayuda a construir hábitos saludables
+            con retroalimentación inmediata.
+          </p>
+          <div class="hero-cta">
+            <button class="btn-primary" onclick="showPage('register')">
+              Comenzar gratis
+            </button>
+            <button class="btn-secondary" onclick="showPage('login')">
+              Ya tengo cuenta
+            </button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div style="text-align: center">
+            <img
+              src="https://i.ibb.co/ym1NfLDQ/imagenbonita.png"
+              alt="SpineTrack Logo"
+              style="
+                width: 100%;
+                max-width: 300px;
+                display: block;
+                margin: 0 auto;
+                object-fit: contain;
+                filter: drop-shadow(0 12px 32px rgba(244, 149, 106, 0.4));
+                animation: floatLogo 4s ease-in-out infinite alternate;
+              "
+            ></p>
+          </div>
+        </div>
+      </section>
+
+      <div class="stats-strip">
+        <div class="stat">
+          <div class="stat-num">75%</div>
+          <div class="stat-label">teletrabajadores con dolor</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">93%</div>
+          <div class="stat-label">universitarios con asimetrías</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4–8h</div>
+          <div class="stat-label">sentados cada día</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">en tiempo real</div>
+        </div>
+      </div>
+
+      <section class="features">
+        <h2 class="section-title">¿Qué hace <span>SpineTrack</span>?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Pulso / señal vital en tiempo real -->
+              <lord-icon
+                src="https://cdn.lordicon.com/warimioc.json"
+                trigger="loop" delay="1000"
+                colors="primary:#f4956a,secondary:#f2a7c3"
+                style="width:72px;height:72px">
+              </lord-icon>
+            </div>
+            <h4>Monitoreo en tiempo real</h4>
+            <p>El sensor mide pitch, roll y aceleración. Filtro Kalman para datos precisos y libres de ruido.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Vibración / alerta táctil -->
+              <lord-icon
+                src="https://cdn.lordicon.com/fozsorqm.json"
+                trigger="loop" delay="1200"
+                colors="primary:#f4956a,secondary:#f2a7c3"
+                style="width:72px;height:72px">
+              </lord-icon>
+            </div>
+            <h4>Retroalimentación háptica</h4>
+            <p>Vibradores se activan cuando detectamos mala postura. Corrección inmediata, no invasiva.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Medalla / índice de calidad -->
+              <lord-icon
+                src="https://cdn.lordicon.com/lbcxnxti.json"
+                trigger="loop" delay="800"
+                colors="primary:#f4956a,secondary:#f2a7c3"
+                style="width:72px;height:72px">
+              </lord-icon>
+            </div>
+            <h4>Índice ICP</h4>
+            <p>Calculamos tu Índice de Calidad Postural basado en ángulo promedio, tiempo y correcciones del día.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Fuego / racha -->
+              <lord-icon
+                src="https://cdn.lordicon.com/saubmkdm.json"
+                trigger="loop" delay="1500"
+                colors="primary:#f4956a,secondary:#f2a7c3"
+                style="width:72px;height:72px">
+              </lord-icon>
+            </div>
+            <h4>Rachas diarias</h4>
+            <p>Gamificación que te motiva a mantener buena postura día tras día. Compite con tu comunidad.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Gráfica de tendencia / análisis -->
+              <lord-icon
+                src="https://cdn.lordicon.com/rrbmabsx.json"
+                trigger="loop" delay="1000"
+                colors="primary:#f4956a,secondary:#f2a7c3"
+                style="width:72px;height:72px">
+              </lord-icon>
+            </div>
+            <h4>Historial y análisis</h4>
+            <p>Revisa tus sesiones anteriores, tendencias semanales y evolución de tu postura con el tiempo.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <!-- Nube con flecha / sincronización -->
+              <lord-icon
+                src="https://cdn.lordicon.com/xqdfobxg.json"
+                trigger="loop" delay="900"
+                colors="primary:#f4956a,secondary:#f2a7c3"
+                style="width:72px;height:72px">
+              </lord-icon>
+            </div>
+            <h4>Sincronización en la nube</h4>
+            <p>Datos guardados en Firebase en tiempo real. Accede desde cualquier dispositivo en cualquier momento.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CLOSING BRAND SECTION ── -->
+      <section
+        style="
+          padding: 80px 60px;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        "
+      >
+        <div
+          style="
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+              135deg,
+              rgba(244, 149, 106, 0.08),
+              rgba(242, 167, 195, 0.1)
+            );
+          "
+        ></div>
+        <h2
+          style="
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: var(--dark);
+            margin-bottom: 12px;
+            position: relative;
+          "
+        >
+          ¿Listo para conectarte con
+          <span style="color: var(--salmon); font-style: italic"
+            >tu postura</span
+          >?
+        </h2>
+        <p
+          style="
+            opacity: 0.65;
+            font-size: 1rem;
+            margin-bottom: 48px;
+            position: relative;
+          "
+        >
+          Únete a SpineTrack y transforma tus hábitos posturales hoy
+        </p>
+        <div style="position: relative; max-width: 900px; margin: 0 auto">
+          <img
+            src="https://i.ibb.co/Jjdd1j2G/Whats-App-Image-2026-03-22-at-7-14-00-PM-1.jpg"
+            alt="SpineTrack en acción"
+            style="
+              width: 100%;
+              border-radius: 28px;
+              box-shadow: 0 24px 64px rgba(244, 149, 106, 0.2);
+              object-fit: cover;
+              max-height: 420px;
+            "
+          />
+          <div
+            style="
+              position: absolute;
+              bottom: 28px;
+              left: 50%;
+              transform: translateX(-50%);
+            "
+          >
+            <button
+              class="btn-primary"
+              onclick="showPage('register')"
+              style="
+                font-size: 1.1rem;
+                padding: 16px 40px;
+                box-shadow: 0 8px 28px rgba(244, 149, 106, 0.5);
+              "
+            >
+              Comenzar gratis
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ══════════════ REGISTER PAGE ══════════════ -->
+    <div class="page" id="page-register">
+      <nav>
+        <div class="nav-logo" onclick="showPage('home')">SpineTrack</div>
+        <div class="nav-links">
+          <button class="nav-btn outline" onclick="showPage('login')">
+            Iniciar sesión
+          </button>
+        </div>
+      </nav>
+      <div class="auth-container">
+        <div class="auth-card">
+          <div class="auth-logo">
+            <span>🐹</span>
+            <h2>Crear cuenta</h2>
+            <p>Únete a SpineTrack y mejora tu postura</p>
+          </div>
+          <div class="msg-box" id="reg-msg"></div>
+          <div class="form-group">
+            <label>Nombre completo</label>
+            <input
+              type="text"
+              id="reg-name"
+              placeholder="Tu nombre"
+              autocomplete="name"
+            />
+            <div class="form-error" id="err-reg-name">Ingresa tu nombre</div>
+          </div>
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input
+              type="email"
+              id="reg-email"
+              placeholder="correo@ejemplo.com"
+              autocomplete="email"
+            />
+            <div class="form-error" id="err-reg-email">
+              Ingresa un correo válido
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input
+              type="password"
+              id="reg-pass"
+              placeholder="Mínimo 8 caracteres"
+              autocomplete="new-password"
+              oninput="checkStrength(this.value)"
+            />
+            <div class="password-strength">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strength-fill"></div>
+              </div>
+              <div class="strength-text" id="strength-text"></div>
+            </div>
+            <div class="form-hint">
+              Al menos 1 letra, 1 número o símbolo, mínimo 8 caracteres
+            </div>
+            <div class="form-error" id="err-reg-pass">
+              Contraseña demasiado débil
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Confirmar contraseña</label>
+            <input
+              type="password"
+              id="reg-pass2"
+              placeholder="Repite tu contraseña"
+              autocomplete="new-password"
+            />
+            <div class="form-error" id="err-reg-pass2">
+              Las contraseñas no coinciden
+            </div>
+          </div>
+          <button class="btn-full" id="btn-register" onclick="doRegister()">
+            Crear mi cuenta
+          </button>
+          <div class="auth-switch">
+            ¿Ya tienes cuenta? <a onclick="showPage('login')">Inicia sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ LOGIN PAGE ══════════════ -->
+    <div class="page" id="page-login">
+      <nav>
+        <div class="nav-logo" onclick="showPage('home')">SpineTrack</div>
+        <div class="nav-links">
+          <button class="nav-btn filled" onclick="showPage('register')">
+            Registrarse
+          </button>
+        </div>
+      </nav>
+      <div class="auth-container">
+        <div class="auth-card">
+          <div class="auth-logo">
+            <span>🐹</span>
+            <h2>Bienvenido</h2>
+            <p>Ingresa a tu cuenta SpineTrack</p>
+          </div>
+          <div class="msg-box" id="login-msg"></div>
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input
+              type="email"
+              id="login-email"
+              placeholder="correo@ejemplo.com"
+              autocomplete="email"
+            />
+            <div class="form-error" id="err-login-email">Ingresa tu correo</div>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input
+              type="password"
+              id="login-pass"
+              placeholder="Tu contraseña"
+              autocomplete="current-password"
+            />
+            <div class="form-error" id="err-login-pass">
+              Ingresa tu contraseña
+            </div>
+          </div>
+          <button class="btn-full" id="btn-login" onclick="doLogin()">
+            Entrar
+          </button>
+          <div class="auth-switch">
+            ¿No tienes cuenta?
+            <a onclick="showPage('register')">Regístrate gratis</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ DASHBOARD PAGE ══════════════ -->
+    <div class="page" id="page-dashboard">
+      <div class="dashboard-layout">
+        <aside class="sidebar">
+          <div class="sidebar-logo">🐹 SpineTrack</div>
+          <div class="sidebar-item active" onclick="showDashSection('stats')">
+            <span>📊</span> Estadísticas
+          </div>
+          <div class="sidebar-item" onclick="showDashSection('history')">
+            <span>📋</span> Historial
+          </div>
+          <div class="sidebar-item sidebar-logout" onclick="doLogout()">
+            <span>🚪</span> Cerrar sesión
+          </div>
+        </aside>
+
+        <main class="dash-main">
+          <div class="dash-header">
+            <h1>Hola, <span id="dash-username">Usuario</span> 👋</h1>
+            <p id="dash-date">Cargando...</p>
+          </div>
+
+          <div class="offline-banner" id="offline-banner">
+            ⚠️ Sin conexión a Firebase — mostrando datos de ejemplo
+          </div>
+
+          <!-- ══ SECCIÓN ESTADÍSTICAS ══ -->
+          <div class="stats-section active" id="section-stats">
+
+            <!-- KPIs resumen general -->
+            <div class="kpi-grid" style="margin-bottom:24px;">
+              <div class="kpi-card">
+                <div class="kpi-icon">🔥</div>
+                <div class="kpi-val" id="kpi-racha">0</div>
+                <div class="kpi-label">Días de racha</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">📅</div>
+                <div class="kpi-val" id="kpi-sesiones">—</div>
+                <div class="kpi-label">Total de sesiones</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">⏱️</div>
+                <div class="kpi-val" id="kpi-tiempo-total">—</div>
+                <div class="kpi-label">Minutos totales</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-icon">🏆</div>
+                <div class="kpi-val" id="kpi-icp-promedio">—</div>
+                <div class="kpi-label">ICP promedio</div>
+              </div>
+            </div>
+
+            <!-- Tarjetas de estadísticas detalladas -->
+            <div class="stat-cards-grid">
+              <div class="stat-big-card">
+                <div class="stat-big-label">Mejor sesión</div>
+                <div class="stat-big-val" id="stat-mejor-icp">—</div>
+                <div class="stat-big-sub" id="stat-mejor-fecha">—</div>
+              </div>
+              <div class="stat-big-card">
+                <div class="stat-big-label">Total alertas</div>
+                <div class="stat-big-val" id="stat-alertas-total">—</div>
+                <div class="stat-big-sub">en todas las sesiones</div>
+              </div>
+              <div class="stat-big-card">
+                <div class="stat-big-label">Total correcciones</div>
+                <div class="stat-big-val" id="stat-correcciones-total">—</div>
+                <div class="stat-big-sub">respuestas al sensor</div>
+              </div>
+            </div>
+
+            <!-- Donut postura + ICP ring promedio -->
+            <div class="donut-row">
+              <div class="donut-card">
+                <h3>⏱️ Distribución de postura</h3>
+                <div class="donut-container">
+                  <svg width="110" height="110" viewBox="0 0 110 110" id="donut-postura">
+                    <circle cx="55" cy="55" r="40" fill="none" stroke="#f0e4d8" stroke-width="14"/>
+                    <circle id="donut-buena" cx="55" cy="55" r="40" fill="none"
+                      stroke="#7bc67e" stroke-width="14" stroke-linecap="round"
+                      stroke-dasharray="251.2" stroke-dashoffset="251.2"
+                      transform="rotate(-90 55 55)" style="transition:stroke-dashoffset 1s ease"/>
+                    <circle id="donut-mala" cx="55" cy="55" r="40" fill="none"
+                      stroke="#f4956a" stroke-width="14" stroke-linecap="round"
+                      stroke-dasharray="251.2" stroke-dashoffset="251.2"
+                      transform="rotate(-90 55 55)" style="transition:stroke-dashoffset 1s ease 0.2s"/>
+                    <text x="55" y="50" text-anchor="middle" font-size="13" font-weight="900"
+                      fill="#3a2a2a" id="donut-pct-text">—</text>
+                    <text x="55" y="65" text-anchor="middle" font-size="9" fill="#888">buena</text>
+                  </svg>
+                  <div class="donut-legend">
+                    <div class="legend-item">
+                      <div class="legend-dot" style="background:#7bc67e"></div>
+                      <div>
+                        <div style="font-size:0.85rem;font-weight:800;" id="legend-buena-val">— min</div>
+                        <div style="font-size:0.72rem;opacity:0.55;">Buena postura</div>
+                      </div>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-dot" style="background:#f4956a"></div>
+                      <div>
+                        <div style="font-size:0.85rem;font-weight:800;" id="legend-mala-val">— min</div>
+                        <div style="font-size:0.72rem;opacity:0.55;">Mala postura</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="donut-card">
+                <h3>🏅 Índice ICP promedio</h3>
+                <div class="icp-ring-container">
+                  <div class="icp-ring">
+                    <svg width="130" height="130" viewBox="0 0 130 130">
+                      <circle class="icp-ring-track" cx="65" cy="65" r="55"/>
+                      <circle class="icp-ring-fill" id="icp-ring-fill"
+                        cx="65" cy="65" r="55"
+                        stroke-dasharray="345.4" stroke-dashoffset="345.4"/>
+                    </svg>
+                    <div class="icp-ring-text">
+                      <span class="num" id="icp-num">—</span>
+                      <span class="lbl">ICP</span>
+                    </div>
+                  </div>
+                  <div class="icp-class" id="icp-class">Sin datos</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gráfico de barras: ICP por sesión -->
+            <div class="bar-chart-card">
+              <h3>📈 ICP por sesión (más recientes primero)</h3>
+              <div class="bar-chart" id="sessions-bar-chart">
+                <div style="opacity:0.4;font-size:0.85rem;align-self:center;">Cargando...</div>
+              </div>
+            </div>
+
+          </div><!-- /section-stats -->
+
+          <!-- ══ SECCIÓN HISTORIAL ══ -->
+          <div class="stats-section" id="section-history">
+            <div class="dash-card">
+              <h3>📋 Historial de sesiones</h3>
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Fecha y hora</th>
+                    <th>Duración</th>
+                    <th>ICP</th>
+                    <th>Clasificación</th>
+                    <th>Alertas</th>
+                    <th>Correcciones</th>
+                  </tr>
+                </thead>
+                <tbody id="history-body">
+                  <tr>
+                    <td colspan="6" style="text-align:center;opacity:0.4;padding:24px;">
+                      Cargando sesiones...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div><!-- /section-history -->
+
+        </main>
+      </div>
+    </div>
+
+    <!-- ══════════════ FIREBASE SDK ══════════════ -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+        updateProfile,
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+        get,
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBNpyQXxNqdPkLccLZn0GsfrlHAyS5g1xc",
+        authDomain: "spinetrack-c3179.firebaseapp.com",
+        databaseURL: "https://spinetrack-c3179-default-rtdb.firebaseio.com",
+        projectId: "spinetrack-c3179",
+        storageBucket: "spinetrack-c3179.firebasestorage.app",
+        messagingSenderId: "946200977386",
+        appId: "1:946200977386:web:4529b304532f7123535c93",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const dbInst = getDatabase(app);
+
+      window.currentUID = null;
+      let realtimeUnsub = null;
+
+      /* Cierra sesión guardada al abrir la página */
+      signOut(auth).catch(() => {});
+
+      /* ── AUTH STATE ── */
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          window.currentUID = user.uid;
+          loadDashboard(user);
+          const activePage = document.querySelector(".page.active");
+          if (activePage && (activePage.id === "page-login" || activePage.id === "page-register")) {
+            window._goToPage("dashboard");
+          }
+        } else {
+          window.currentUID = null;
+          // Always reset login button so a new login is possible
+          const btnLogin = document.getElementById("btn-login");
+          if (btnLogin) { btnLogin.disabled = false; btnLogin.textContent = "Entrar"; }
+          const activePage = document.querySelector(".page.active");
+          if (activePage && activePage.id === "page-dashboard") {
+            window._goToPage("login");
+            window.showToast("Sesión expirada. Inicia sesión nuevamente.");
+          }
+        }
+      });
+
+      /* ── REGISTER ── */
+      window.doRegister = async () => {
+        const name = document.getElementById("reg-name").value.trim();
+        const email = document.getElementById("reg-email").value.trim();
+        const pass = document.getElementById("reg-pass").value;
+        const pass2 = document.getElementById("reg-pass2").value;
+
+        clearErrors();
+        let ok = true;
+
+        if (!name) {
+          showErr("err-reg-name", true);
+          ok = false;
+        }
+        if (!email || !email.includes("@")) {
+          showErr("err-reg-email", true);
+          ok = false;
+        }
+        if (getStrength(pass) < 2) {
+          showErr("err-reg-pass", true);
+          ok = false;
+        }
+        if (pass !== pass2) {
+          showErr("err-reg-pass2", true);
+          ok = false;
+        }
+        if (!ok) return;
+
+        const btn = document.getElementById("btn-register");
+        btn.disabled = true;
+        btn.textContent = "Creando cuenta...";
+
+        try {
+          const cred = await createUserWithEmailAndPassword(auth, email, pass);
+          await updateProfile(cred.user, { displayName: name });
+          showMsg("reg-msg", "¡Cuenta creada! Redirigiendo...", "success");
+          setTimeout(() => {
+            loadDashboard(cred.user);
+            window._goToPage("dashboard");
+          }, 1200);
+        } catch (e) {
+          const msgs = {
+            "auth/email-already-in-use": "Este correo ya tiene una cuenta.",
+            "auth/weak-password": "La contraseña es muy débil.",
+            "auth/invalid-email": "Correo inválido.",
+          };
+          showMsg("reg-msg", msgs[e.code] || "Error: " + e.message, "error");
+          btn.disabled = false;
+          btn.textContent = "Crear mi cuenta";
+        }
+      };
+
+      /* ── LOGIN ── */
+      window.doLogin = async () => {
+        const email = document.getElementById("login-email").value.trim();
+        const pass = document.getElementById("login-pass").value;
+
+        clearErrors();
+        let ok = true;
+        if (!email) {
+          showErr("err-login-email", true);
+          ok = false;
+        }
+        if (!pass) {
+          showErr("err-login-pass", true);
+          ok = false;
+        }
+        if (!ok) return;
+
+        const btn = document.getElementById("btn-login");
+        btn.disabled = true;
+        btn.textContent = "Ingresando...";
+
+        try {
+          const cred = await signInWithEmailAndPassword(auth, email, pass);
+          showMsg("login-msg", "✅ ¡Bienvenido!", "success");
+          setTimeout(() => {
+            loadDashboard(cred.user);
+            window._goToPage("dashboard");
+          }, 800);
+        } catch (e) {
+          const msgs = {
+            "auth/user-not-found": "No existe cuenta con ese correo.",
+            "auth/wrong-password": "Contraseña incorrecta.",
+            "auth/invalid-email": "Correo inválido.",
+            "auth/invalid-credential": "Correo o contraseña incorrectos.",
+          };
+          showMsg(
+            "login-msg",
+            msgs[e.code] || "Error al iniciar sesión.",
+            "error"
+          );
+          btn.disabled = false;
+          btn.textContent = "Entrar";
+        }
+      };
+
+      /* ── LOGOUT ── */
+      window.doLogout = async () => {
+        if (realtimeUnsub) realtimeUnsub();
+        await signOut(auth);
+        // Reset login button so it's usable again after logout
+        const btnLogin = document.getElementById("btn-login");
+        if (btnLogin) { btnLogin.disabled = false; btnLogin.textContent = "Entrar"; }
+        const loginMsg = document.getElementById("login-msg");
+        if (loginMsg) { loginMsg.className = "msg-box"; loginMsg.textContent = ""; }
+        const loginEmail = document.getElementById("login-email");
+        if (loginEmail) loginEmail.value = "";
+        const loginPass = document.getElementById("login-pass");
+        if (loginPass) loginPass.value = "";
+        window._goToPage("login");
+        window.showToast("Sesión cerrada");
+      };
+
+      /* ── LOAD DASHBOARD ── */
+      function loadDashboard(user) {
+        const name = user.displayName || user.email.split("@")[0];
+        document.getElementById("dash-username").textContent = name;
+
+        const now = new Date();
+        document.getElementById("dash-date").textContent =
+          now.toLocaleDateString("es-CO", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+
+        subscribeRealtime(user.uid);
+        loadSessions(user.uid);
+        loadUserStats(user.uid);
+      }
+
+      /* ── RACHA Y PUNTOS desde users/{uid} ── */
+      async function loadUserStats(uid) {
+        try {
+          const snap = await get(ref(dbInst, `users/${uid}`));
+          const d = snap.val();
+          // Show 0 if node exists but racha_actual is missing, or if no node at all
+          const racha = (d && d.racha_actual !== undefined) ? d.racha_actual : 0;
+          setText("kpi-racha", racha);
+        } catch (e) { /* offline — leave as 0 */ }
+      }
+
+      /* ── DEBUG PANEL ── */
+      function showDebug(msg, color) {
+        let panel = document.getElementById("debug-panel");
+        if (!panel) {
+          panel = document.createElement("div");
+          panel.id = "debug-panel";
+          panel.style.cssText = "position:fixed;bottom:16px;right:16px;z-index:9999;background:#1a1a2e;color:#e0e0e0;font-family:monospace;font-size:12px;padding:12px 16px;border-radius:12px;max-width:420px;max-height:260px;overflow-y:auto;box-shadow:0 4px 20px rgba(0,0,0,0.4);line-height:1.6;";
+          const title = document.createElement("div");
+          title.style.cssText = "color:#f4956a;font-weight:700;margin-bottom:6px;display:flex;justify-content:space-between;";
+          title.innerHTML = "\uD83D\uDD0D Debug Firebase <span onclick=\"document.getElementById(\'debug-panel\').remove()\" style=\"cursor:pointer;opacity:0.6\">\u2715</span>";
+          panel.appendChild(title);
+          document.body.appendChild(panel);
+        }
+        const line = document.createElement("div");
+        line.style.color = color || "#e0e0e0";
+        line.textContent = "[" + new Date().toLocaleTimeString() + "] " + msg;
+        panel.appendChild(line);
+        panel.scrollTop = panel.scrollHeight;
+        console.log("[SpineTrack] " + msg);
+      }
+
+      /* ── REALTIME LISTENER ── */
+      function subscribeRealtime(uid) {
+        if (realtimeUnsub) realtimeUnsub();
+        showDebug("UID del usuario: " + uid, "#7ec8e3");
+        showDebug("Leyendo: sensores/" + uid + "/realtime", "#aaa");
+        const rtRef = ref(dbInst, `sensores/${uid}/realtime`);
+        realtimeUnsub = onValue(
+          rtRef,
+          (snap) => {
+            const d = snap.val();
+            if (!d) {
+              showDebug("\u274C Nodo vac\u00edo o no existe en Firebase", "#ff6b6b");
+              showDebug("Verifica que el UID coincida con un nodo en sensores/", "#ffaa55");
+              showDemo();
+              return;
+            }
+            showDebug("\u2705 Datos recibidos correctamente", "#7bc67e");
+            document.getElementById("offline-banner").classList.remove("show");
+            updateLiveUI(d);
+          },
+          (error) => {
+            showDebug("\uD83D\uDD12 Error: " + (error.code || error.message), "#ff6b6b");
+            showDebug("Revisa las Reglas de Firebase Database", "#ffaa55");
+            document.getElementById("offline-banner").classList.add("show");
+            showDemo();
+          }
+        );
+      }
+
+      function updateLiveUI(d) {
+        setText("val-pitch", d.pitch !== undefined ? d.pitch.toFixed(1) : "—");
+        setText("val-roll", d.roll !== undefined ? d.roll.toFixed(1) : "—");
+        setText(
+          "val-theta",
+          d.theta_abs !== undefined ? d.theta_abs.toFixed(1) : "—"
+        );
+        setText("val-temp", d.temp_c !== undefined ? d.temp_c.toFixed(1) : "—");
+
+        const badge = document.getElementById("posture-badge");
+        if (d.buena_postura === false) {
+          badge.textContent = "⚠️ Mala postura";
+          badge.className = "posture-badge bad";
+        } else {
+          badge.textContent = "✅ Buena postura";
+          badge.className = "posture-badge good";
+        }
+
+        if (d.icp_parcial !== undefined) updateICP(d.icp_parcial, d.clase_icp);
+        if (d.t_buena_min !== undefined)
+          setText("kpi-tiempo", d.t_buena_min.toFixed(1) + " min");
+        if (d.num_alertas !== undefined) setText("kpi-alertas", d.num_alertas);
+      }
+
+      function updateICP(val, clase) {
+        setText("icp-num", val);
+        setText("icp-class", clase || "—");
+        const circ = 2 * Math.PI * 55;
+        const offset = circ - (val / 100) * circ;
+        document.getElementById("icp-ring-fill").style.strokeDashoffset =
+          offset;
+      }
+
+      function showDemo() {
+        document.getElementById("offline-banner").classList.add("show");
+        updateLiveUI({
+          pitch: -3.5,
+          roll: 1.2,
+          theta_abs: 3.7,
+          temp_c: 28.5,
+          buena_postura: true,
+          icp_parcial: 87,
+          clase_icp: "Bueno",
+          t_buena_min: 12.3,
+          num_alertas: 2,
+        });
+        setText("kpi-racha", 3);
+      }
+
+      /* ── SESSIONS + STATS desde sesiones/{uid} ── */
+      async function loadSessions(uid) {
+        try {
+          const snap = await get(ref(dbInst, `sesiones/${uid}`));
+          const data = snap.val();
+          if (!data) return;
+
+          const sessions = Object.values(data).sort(
+            (a, b) => new Date(b.ts_inicio) - new Date(a.ts_inicio)
+          );
+
+          renderHistory(sessions);
+          renderStats(sessions);
+        } catch (e) { /* offline */ }
+      }
+
+      function renderStats(sessions) {
+        if (!sessions.length) return;
+
+        // KPIs generales
+        setText("kpi-sesiones", sessions.length);
+        const tiempoTotal = sessions.reduce((s, r) => s + (r.duracion_min || 0), 0);
+        setText("kpi-tiempo-total", tiempoTotal.toFixed(0));
+        const icpProm = sessions.reduce((s, r) => s + (r.icp || 0), 0) / sessions.length;
+        const icpPromRound = Math.round(icpProm);
+        setText("kpi-icp-promedio", icpPromRound);
+
+        // Tarjetas detalle
+        const mejor = sessions.reduce((a, b) => (b.icp || 0) > (a.icp || 0) ? b : a, sessions[0]);
+        setText("stat-mejor-icp", mejor.icp || "—");
+        const fechaMejor = mejor.ts_inicio
+          ? new Date(mejor.ts_inicio).toLocaleDateString("es-CO", { day:"numeric", month:"short", year:"numeric" })
+          : "—";
+        setText("stat-mejor-fecha", fechaMejor);
+        setText("stat-alertas-total", sessions.reduce((s, r) => s + (r.num_alertas || 0), 0));
+        setText("stat-correcciones-total", sessions.reduce((s, r) => s + (r.num_correcciones || 0), 0));
+
+        // ICP ring promedio
+        updateICP(icpPromRound, icpClase(icpPromRound));
+
+        // Donut postura
+        const totalBuena = sessions.reduce((s, r) => s + (r.t_buena_min || 0), 0);
+        const totalMala  = sessions.reduce((s, r) => s + (r.t_mala_min || 0), 0);
+        const totalMin = totalBuena + totalMala;
+        if (totalMin > 0) {
+          const circ = 2 * Math.PI * 40;
+          const pctBuena = totalBuena / totalMin;
+          const pctMala  = totalMala  / totalMin;
+          const offBuena = circ * (1 - pctBuena);
+          const offMala  = circ * (1 - pctMala);
+          document.getElementById("donut-buena").style.strokeDashoffset = offBuena;
+          document.getElementById("donut-mala").style.strokeDashoffset = offMala;
+          // Stack mala arc after buena: rotate by pctBuena * 360
+          const rotateMala = -90 + pctBuena * 360;
+          document.getElementById("donut-mala").setAttribute("transform", `rotate(${rotateMala} 55 55)`);
+          setText("donut-pct-text", Math.round(pctBuena * 100) + "%");
+          document.getElementById("legend-buena-val").textContent = totalBuena.toFixed(1) + " min";
+          document.getElementById("legend-mala-val").textContent  = totalMala.toFixed(1)  + " min";
+        }
+
+        // Barras ICP por sesión (máx 10 más recientes)
+        buildSessionBars(sessions.slice(0, 10));
+      }
+
+      function buildSessionBars(sessions) {
+        const container = document.getElementById("sessions-bar-chart");
+        if (!sessions.length) return;
+        const maxICP = Math.max(...sessions.map(s => s.icp || 0), 1);
+        container.innerHTML = sessions.map(s => {
+          const h = Math.max(((s.icp || 0) / maxICP) * 100, 4);
+          const fecha = s.ts_inicio
+            ? new Date(s.ts_inicio).toLocaleDateString("es-CO", { day:"numeric", month:"short" })
+            : "?";
+          const cls = icpClase(s.icp || 0);
+          return `<div class="bar-col">
+            <div class="bar-icp">${s.icp || 0}</div>
+            <div class="bar-fill" style="height:${h}%" data-val="ICP ${s.icp || 0}"></div>
+            <div class="bar-label">${fecha}</div>
+          </div>`;
+        }).join("");
+      }
+
+      function icpClase(icp) {
+        if (icp >= 90) return "Excelente";
+        if (icp >= 75) return "Bueno";
+        if (icp >= 55) return "Regular";
+        if (icp >= 35) return "Malo";
+        return "Crítico";
+      }
+
+      function renderHistory(sessions) {
+        const tbody = document.getElementById("history-body");
+        if (!sessions.length) return;
+        const badgeClass = (c) =>
+          ({ Excelente:"badge-ex", Bueno:"badge-gd", Regular:"badge-rg", Malo:"badge-bd", Critico:"badge-bd" }[c] || "badge-gd");
+        tbody.innerHTML = sessions.map((s) => {
+          const d = s.ts_inicio
+            ? new Date(s.ts_inicio).toLocaleString("es-CO", { dateStyle:"short", timeStyle:"short" })
+            : "—";
+          return `<tr>
+            <td>${d}</td>
+            <td>${s.duracion_min?.toFixed(1) || "—"} min</td>
+            <td><strong>${s.icp || "—"}</strong></td>
+            <td><span class="badge ${badgeClass(s.clase_icp)}">${s.clase_icp || "—"}</span></td>
+            <td>${s.num_alertas || 0}</td>
+            <td>${s.num_correcciones || 0}</td>
+          </tr>`;
+        }).join("");
+      }
+
+      function buildWeekBars(vals) {
+        const days = ["L", "M", "X", "J", "V", "S", "D"];
+        const bars = document.getElementById("week-bars");
+        const daysEl = document.getElementById("week-days");
+        const filled =
+          vals.length === 7
+            ? vals
+            : Array(7)
+                .fill(0)
+                .map((_, i) => vals[i] || 0);
+        bars.innerHTML = filled
+          .map(
+            (v) =>
+              `<div class="week-bar-wrap"><div class="week-bar" style="height:${v}%"></div></div>`
+          )
+          .join("");
+        daysEl.innerHTML = days
+          .map(
+            (d) =>
+              `<div style="flex:1;text-align:center;font-size:.65rem;font-weight:700;opacity:.5">${d}</div>`
+          )
+          .join("");
+      }
+
+      /* ── HELPERS ── */
+      function setText(id, val) {
+        const el = document.getElementById(id);
+        if (el) el.childNodes[0].textContent = val;
+      }
+      function showErr(id, show) {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle("show", show);
+      }
+      function clearErrors() {
+        document
+          .querySelectorAll(".form-error")
+          .forEach((e) => e.classList.remove("show"));
+        document.querySelectorAll(".msg-box").forEach((e) => {
+          e.className = "msg-box";
+          e.textContent = "";
+        });
+      }
+      function showMsg(id, text, type) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.textContent = text;
+          el.className = "msg-box " + type;
+        }
+      }
+    </script>
+
+    <script>
+      /* ── PAGE NAVIGATION ── */
+      function showPage(name) {
+        if (name === "dashboard" && !window.currentUID) {
+          _goToPage("login");
+          showToast("⚠️ Debes iniciar sesión primero");
+          return;
+        }
+        if ((name === "login" || name === "register") && window.currentUID) {
+          name = "dashboard";
+        }
+        _goToPage(name);
+      }
+
+      function _goToPage(name) {
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        document.getElementById("page-" + name).classList.add("active");
+        window.scrollTo(0, 0);
+      }
+
+      function showDashSection(sec) {
+        document.querySelectorAll(".stats-section").forEach(s => s.classList.remove("active"));
+        const el = document.getElementById("section-" + sec);
+        if (el) el.classList.add("active");
+        document.querySelectorAll(".sidebar-item").forEach(i => i.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+      }
+
+      /* ── PASSWORD STRENGTH ── */
+      function getStrength(p) {
+        let s = 0;
+        if (p.length >= 8) s++;
+        if (/[A-Za-z]/.test(p) && /[0-9!@#$%^&*]/.test(p)) s++;
+        if (p.length >= 12) s++;
+        return s;
+      }
+      function checkStrength(p) {
+        const s = getStrength(p);
+        const fill = document.getElementById("strength-fill");
+        const text = document.getElementById("strength-text");
+        const configs = [
+          { w: "0%", color: "transparent", label: "" },
+          { w: "33%", color: "#e07070", label: "Débil" },
+          { w: "66%", color: "#f4956a", label: "Moderada" },
+          { w: "100%", color: "#7bc67e", label: "Fuerte" },
+        ];
+        const c = configs[s] || configs[0];
+        fill.style.width = c.w;
+        fill.style.background = c.color;
+        text.textContent = c.label;
+        text.style.color = c.color;
+      }
+
+      /* ── TOAST ── */
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 2800);
+      }
+
+      /* ── DATE ── */
+      const now = new Date();
+      const dateStr = now.toLocaleDateString("es-CO", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      const el = document.getElementById("dash-date");
+      if (el) el.textContent = dateStr;
+
+      /* Allow Enter key on forms */
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter") return;
+        const p = document.querySelector(".page.active");
+        if (!p) return;
+        if (p.id === "page-login") doLogin();
+        if (p.id === "page-register") doRegister();
+      });
+
+      /* ══════════════════════════════════════
+         ANIMACIONES JAVASCRIPT
+      ══════════════════════════════════════ */
+
+      /* ── 1. PAGE TRANSITION con overlay ── */
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position:fixed;inset:0;background:var(--salmon);z-index:9998;
+        pointer-events:none;opacity:0;transition:opacity 0.3s ease;
+      `;
+      document.body.appendChild(overlay);
+
+      const _origShowPage = showPage;
+      window.showPage = function(name) {
+        overlay.style.opacity = '0.18';
+        setTimeout(() => {
+          _origShowPage(name);
+          overlay.style.opacity = '0';
+          initAnimations();
+        }, 280);
+      };
+
+      /* ── 2. SCROLL REVEAL ── */
+      function initScrollReveal() {
+        const targets = document.querySelectorAll(
+          '.feature-card, .kpi-card, .dash-card, .stat, .section-title'
+        );
+        targets.forEach((el, i) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(32px)';
+          el.style.transition = `opacity 0.55s ease ${i * 0.07}s, transform 0.55s ease ${i * 0.07}s`;
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        targets.forEach(el => observer.observe(el));
+      }
+
+      /* ── 3. CONTADOR ANIMADO en stats ── */
+      function animateCounters() {
+        const stats = [
+          { id: null, selector: '.stat-num', targets: ['75%', '93%', '4–8h', '100%'] }
+        ];
+        document.querySelectorAll('.stat-num').forEach((el, i) => {
+          const raw = el.textContent;
+          const num = parseFloat(raw);
+          if (isNaN(num)) return;
+          const suffix = raw.replace(String(Math.round(num)), '');
+          let start = 0;
+          const duration = 1400;
+          const step = 16;
+          const increment = num / (duration / step);
+          el.textContent = '0' + suffix;
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= num) { start = num; clearInterval(timer); }
+            el.textContent = Math.round(start) + suffix;
+          }, step);
+        });
+      }
+
+      /* ── 4. CURSOR PERSONALIZADO ── */
+      const cursor = document.createElement('div');
+      cursor.style.cssText = `
+        width:18px;height:18px;border-radius:50%;
+        background:rgba(244,149,106,0.5);
+        position:fixed;pointer-events:none;z-index:99999;
+        transform:translate(-50%,-50%);
+        transition:transform 0.12s ease, background 0.2s;
+        mix-blend-mode:multiply;
+      `;
+      const cursorRing = document.createElement('div');
+      cursorRing.style.cssText = `
+        width:38px;height:38px;border-radius:50%;
+        border:2px solid rgba(244,149,106,0.35);
+        position:fixed;pointer-events:none;z-index:99998;
+        transform:translate(-50%,-50%);
+        transition:left 0.18s ease, top 0.18s ease, transform 0.2s;
+      `;
+      document.body.appendChild(cursor);
+      document.body.appendChild(cursorRing);
+
+      let mx = 0, my = 0;
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cursor.style.left = mx + 'px';
+        cursor.style.top  = my + 'px';
+        cursorRing.style.left = mx + 'px';
+        cursorRing.style.top  = my + 'px';
+      });
+      document.addEventListener('mousedown', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(0.7)';
+        cursorRing.style.transform = 'translate(-50%,-50%) scale(1.4)';
+      });
+      document.addEventListener('mouseup', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        cursorRing.style.transform = 'translate(-50%,-50%) scale(1)';
+      });
+      document.querySelectorAll('button, a, [onclick]').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.style.background = 'rgba(242,167,195,0.7)';
+          cursor.style.transform = 'translate(-50%,-50%) scale(1.5)';
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.style.background = 'rgba(244,149,106,0.5)';
+          cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        });
+      });
+
+      /* ── 5. PARTÍCULAS FLOTANTES en hero ── */
+      function spawnParticles() {
+        const hero = document.querySelector('#page-home .hero');
+        if (!hero) return;
+        hero.style.position = 'relative';
+        hero.style.overflow = 'hidden';
+        for (let i = 0; i < 18; i++) {
+          const p = document.createElement('div');
+          const size = Math.random() * 10 + 5;
+          const x = Math.random() * 100;
+          const delay = Math.random() * 6;
+          const duration = Math.random() * 8 + 6;
+          const shapes = ['50%', '30% 70% 70% 30% / 30% 30% 70% 70%', '0%'];
+          p.style.cssText = `
+            position:absolute;
+            width:${size}px;height:${size}px;
+            left:${x}%;bottom:-20px;
+            background:${['rgba(244,149,106,0.25)','rgba(242,167,195,0.25)','rgba(212,168,216,0.2)'][Math.floor(Math.random()*3)]};
+            border-radius:${shapes[Math.floor(Math.random()*shapes.length)]};
+            animation:particleRise ${duration}s ${delay}s ease-in infinite;
+            pointer-events:none;z-index:0;
+          `;
+          hero.appendChild(p);
+        }
+      }
+
+      /* ── 6. TYPING EFFECT en el h1 del hero ── */
+      function typewriterHero() {
+        const h1 = document.querySelector('#page-home .hero-text h1');
+        if (!h1) return;
+        const text = h1.textContent;
+        h1.textContent = '';
+        h1.style.borderRight = '3px solid var(--salmon)';
+        let i = 0;
+        const timer = setInterval(() => {
+          h1.textContent += text[i];
+          i++;
+          if (i >= text.length) {
+            clearInterval(timer);
+            setTimeout(() => { h1.style.borderRight = 'none'; }, 600);
+          }
+        }, 80);
+      }
+
+      /* ── 7. RIPPLE en botones ── */
+      document.querySelectorAll('.btn-primary, .btn-secondary, .btn-full').forEach(btn => {
+        btn.style.position = 'relative';
+        btn.style.overflow = 'hidden';
+        btn.addEventListener('click', function(e) {
+          const r = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          r.style.cssText = `
+            position:absolute;
+            width:${size}px;height:${size}px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.35);
+            left:${e.clientX - rect.left - size/2}px;
+            top:${e.clientY - rect.top - size/2}px;
+            transform:scale(0);
+            animation:rippleAnim 0.55s ease-out forwards;
+            pointer-events:none;
+          `;
+          this.appendChild(r);
+          setTimeout(() => r.remove(), 600);
+        });
+      });
+
+      /* ── 8. FEATURE CARDS tilt 3D en hover ── */
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width  - 0.5;
+          const y = (e.clientY - rect.top)  / rect.height - 0.5;
+          card.style.transform = `perspective(600px) rotateY(${x*12}deg) rotateX(${-y*12}deg) translateY(-6px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          card.style.transition = 'transform 0.4s ease';
+        });
+      });
+
+      /* ── CSS EXTRA para partículas y ripple ── */
+      const extraStyle = document.createElement('style');
+      extraStyle.textContent = `
+        @keyframes particleRise {
+          0%   { transform:translateY(0) rotate(0deg);   opacity:0; }
+          10%  { opacity:1; }
+          90%  { opacity:0.6; }
+          100% { transform:translateY(-110vh) rotate(360deg); opacity:0; }
+        }
+        @keyframes rippleAnim {
+          to { transform:scale(2.5); opacity:0; }
+        }
+        .feature-card { transition: transform 0.15s ease, box-shadow 0.2s; }
+      `;
+      document.head.appendChild(extraStyle);
+
+      /* ── INIT ── */
+      function initAnimations() {
+        setTimeout(initScrollReveal, 100);
+        const homePage = document.querySelector('#page-home');
+        if (homePage && homePage.classList.contains('active')) {
+          animateCounters();
+        }
+      }
+
+      window.addEventListener('load', () => {
+        spawnParticles();
+        typewriterHero();
+        initAnimations();
+      });
+    </script>
+  </body>
+</html>
