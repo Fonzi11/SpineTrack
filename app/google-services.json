@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "946200977386",
+    "firebase_url": "https://spinetrack-c3179-default-rtdb.firebaseio.com",
+    "project_id": "spinetrack-c3179",
+    "storage_bucket": "spinetrack-c3179.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946200977386:android:4d53a30eb0792913535c93",
+        "android_client_info": {
+          "package_name": "com.example.spinetrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946200977386-hgfkv5ja7djk4e6a0cd8t4c3khdc8ipi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-Iu4k5ApYsLYceijR36OiaZlzGdcw0B4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946200977386-hgfkv5ja7djk4e6a0cd8t4c3khdc8ipi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

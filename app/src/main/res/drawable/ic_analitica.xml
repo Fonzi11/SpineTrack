@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Barras de gráfica ascendente -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M3,18 L3,13 L7,13 L7,18 Z" />
+
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M9,18 L9,9 L13,9 L13,18 Z" />
+
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M15,18 L15,5 L19,5 L19,18 Z" />
+
+    <!-- Línea base -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M2,20 L22,20" />
+
+</vector>

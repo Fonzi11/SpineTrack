@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_leccion.xml
+    Tarjeta de una lección individual en la lista.
+    Replica el diseño de la slide "Descripción de la HMI" de la presentación.
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_leccion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/surface_white"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Número de lección -->
+        <TextView
+            android:id="@+id/tv_lesson_number"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_lesson_number"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/text_on_peach"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Título de la lección -->
+        <TextView
+            android:id="@+id/tv_lesson_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="¿Qué es la buena postura?"
+            android:textColor="@color/text_dark"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_lesson_number"
+            app:layout_constraintTop_toTopOf="@id/tv_lesson_number" />
+
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/tv_lesson_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_regular"
+            android:maxLines="2"
+            android:text="Descubre por qué la postura importa y cómo afecta tu salud"
+            android:textColor="@color/text_soft"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_lesson_number"
+            app:layout_constraintTop_toBottomOf="@id/tv_lesson_title" />
+
+        <!-- Fila inferior: badge nivel + duración + puntos + estado -->
+        <LinearLayout
+            android:id="@+id/row_meta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_lesson_number"
+            app:layout_constraintTop_toBottomOf="@id/tv_lesson_desc">
+
+            <!-- Badge nivel -->
+            <TextView
+                android:id="@+id/tv_level_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_badge_beginner"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="Principiante"
+                android:textColor="@color/good_green"
+                android:textSize="11sp" />
+
+            <!-- Duración -->
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="3dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="⏱ 5 min"
+                android:textColor="@color/text_soft"
+                android:textSize="12sp" />
+
+            <!-- Puntos -->
+            <TextView
+                android:id="@+id/tv_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="⭐ +15"
+                android:textColor="@color/peach_primary"
+                android:textSize="12sp" />
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Ícono completado -->
+            <ImageView
+                android:id="@+id/iv_completed"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_check_circle"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

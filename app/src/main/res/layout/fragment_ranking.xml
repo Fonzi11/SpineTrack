@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_cream">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_ranking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_cream"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Ranking"
+                android:textColor="@color/text_dark"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Compite con la comunidad"
+                android:textColor="@color/text_soft"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/background_cream"
+            android:paddingHorizontal="12dp"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/peach_primary"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed"
+            app:tabRippleColor="@color/peach_light"
+            app:tabSelectedTextColor="@color/peach_primary"
+            app:tabTextAppearance="@style/TabTextStyle"
+            app:tabTextColor="@color/text_soft" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_ranking"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_angle_reference.xml
+    Fila de referencia de ángulos saludables — tabla en StatsFragment.
+    Uso: <include layout="@layout/item_angle_reference" android:id="@+id/row_cuello"/>
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingVertical="6dp">
+
+    <!-- Nombre de la zona corporal -->
+    <TextView
+        android:id="@+id/tv_body_part"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Cuello"
+        android:textColor="@color/text_medium"
+        android:textSize="13sp" />
+
+    <!-- Rango ideal -->
+    <TextView
+        android:id="@+id/tv_angle_range"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_angle_range_pill"
+        android:fontFamily="@font/poppins_semibold"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="3dp"
+        android:text="0–15°"
+        android:textColor="@color/pink_primary"
+        android:textSize="12sp" />
+
+</LinearLayout>

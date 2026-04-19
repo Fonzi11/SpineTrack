@@ -1,0 +1,3 @@
+Archivo deprecado.
+Runtime canonico: spinetrack_full_integrated.py
+

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_cream">
+
+    <!-- ══════════════════════════════════════════════
+         APP BAR  — Título + Tabs
+    ══════════════════════════════════════════════ -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_lecciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_cream"
+        app:elevation="0dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Lecciones"
+                android:textColor="@color/text_dark"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Aprende y mejora tu postura"
+                android:textColor="@color/text_soft"
+                android:textSize="14sp" />
+
+            <!-- Barra de progreso general -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progress_general"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:layout_weight="1"
+                    android:progress="15"
+                    app:indicatorColor="@color/peach_primary"
+                    app:trackColor="@color/peach_light"
+                    app:trackCornerRadius="4dp" />
+
+                <TextView
+                    android:id="@+id/tv_progress_pct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="15%"
+                    android:textColor="@color/peach_primary"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- TabLayout -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_lecciones"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/background_cream"
+            android:paddingHorizontal="12dp"
+            app:tabGravity="start"
+            app:tabIndicatorColor="@color/peach_primary"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="scrollable"
+            app:tabRippleColor="@color/peach_light"
+            app:tabSelectedTextColor="@color/peach_primary"
+            app:tabTextAppearance="@style/TabTextStyle"
+            app:tabTextColor="@color/text_soft"
+            app:tabUnboundedRipple="false" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ══════════════════════════════════════════════
+         VIEWPAGER2  — Contenido de cada tab
+    ══════════════════════════════════════════════ -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_lecciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

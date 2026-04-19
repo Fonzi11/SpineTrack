@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_inicio">
+
+    <!-- ══════════════════════════════════════
+         AUTENTICACIÓN
+    ══════════════════════════════════════ -->
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.spinetrack.ui.auth.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/nav_register"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_login_to_reset_password"
+            app:destination="@id/nav_reset_password"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_login_to_inicio"
+            app:destination="@id/nav_inicio"
+            app:popUpTo="@id/nav_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="com.example.spinetrack.ui.auth.RegisterFragment"
+        android:label="Registro"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/nav_login"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/nav_login"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_register_to_inicio"
+            app:destination="@id/nav_inicio"
+            app:popUpTo="@id/nav_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_reset_password"
+        android:name="com.example.spinetrack.ui.auth.ResetPasswordFragment"
+        android:label="Recuperar Contraseña"
+        tools:layout="@layout/fragment_reset_password">
+        <action
+            android:id="@+id/action_reset_password_to_login"
+            app:destination="@id/nav_login"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/nav_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ══════════════════════════════════════
+         APP PRINCIPAL
+    ══════════════════════════════════════ -->
+
+    <fragment
+        android:id="@+id/nav_inicio"
+        android:name="com.example.spinetrack.ui.inicio.InicioFragment"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_inicio">
+        <action
+            android:id="@+id/action_inicio_to_dispositivo"
+            app:destination="@id/nav_dispositivo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_lecciones"
+        android:name="com.example.spinetrack.ui.lecciones.LeccionesFragment"
+        android:label="Lecciones"
+        tools:layout="@layout/fragment_lecciones" />
+
+    <fragment
+        android:id="@+id/nav_leccion_detail"
+        android:name="com.example.spinetrack.ui.lecciones.LeccionDetailFragment"
+        android:label="Detalle Lección"
+        tools:layout="@layout/fragment_leccion_detail">
+        <argument
+            android:name="leccion_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_leccion_detail_to_tutorial"
+            app:destination="@id/nav_tutorial"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_leccion_detail_to_ejercicio"
+            app:destination="@id/nav_ejercicio"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_leccion_detail_to_habito"
+            app:destination="@id/nav_habito"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_tutorial"
+        android:name="com.example.spinetrack.ui.lecciones.TutorialFragment"
+        android:label="Tutorial"
+        tools:layout="@layout/fragment_tutorial" />
+
+    <fragment
+        android:id="@+id/nav_ejercicio"
+        android:name="com.example.spinetrack.ui.lecciones.EjercicioFragment"
+        android:label="Ejercicio"
+        tools:layout="@layout/fragment_ejercicio" />
+
+    <fragment
+        android:id="@+id/nav_habito"
+        android:name="com.example.spinetrack.ui.lecciones.HabitoFragment"
+        android:label="Hábito"
+        tools:layout="@layout/fragment_habito" />
+
+    <fragment
+        android:id="@+id/nav_stats"
+        android:name="com.example.spinetrack.ui.estadisticas.EstadisticasFragment"
+        android:label="Stats"
+        tools:layout="@layout/fragment_estadisticas" />
+
+    <!-- Detalle de sesión — hijo de estadísticas -->
+    <fragment
+        android:id="@+id/detalleSesionFragment"
+        android:name="com.example.spinetrack.ui.estadisticas.DetalleSesionFragment"
+        android:label="Detalle de sesión">
+        <argument
+            android:name="sesion_json"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_realtime"
+        android:name="com.example.spinetrack.ui.realtime.RealtimeFragment"
+        android:label="Monitor en vivo" />
+
+    <fragment
+        android:id="@+id/nav_analitica"
+        android:name="com.example.spinetrack.ui.analitica.AnaliticaFragment"
+        android:label="Analítica" />
+
+    <fragment
+        android:id="@+id/nav_ranking"
+        android:name="com.example.spinetrack.ui.ranking.RankingFragment"
+        android:label="Ranking"
+        tools:layout="@layout/fragment_ranking" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.example.spinetrack.ui.perfil.PerfilFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_dispositivo"
+        android:name="com.example.spinetrack.ui.dispositivo.DispositivoFragment"
+        android:label="Dispositivo"
+        tools:layout="@layout/fragment_dispositivo" />
+
+    <fragment
+        android:id="@+id/nav_comunidad"
+        android:name="com.example.spinetrack.ui.comunidad.CommunityFragment"
+        android:label="Comunidad"
+        tools:layout="@layout/fragment_community" />
+
+    <fragment
+        android:id="@+id/nav_user_profile"
+        android:name="com.example.spinetrack.ui.comunidad.UserProfileFragment"
+        android:label="Perfil usuario"
+        tools:layout="@layout/fragment_user_profile">
+        <argument
+            android:name="uid"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

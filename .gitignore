@@ -1,0 +1,24 @@
+﻿# Gradle / Android
+.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets
+**/serviceAccount.json
+**/*firebase-adminsdk*.json
+scripts/serviceAccount.json

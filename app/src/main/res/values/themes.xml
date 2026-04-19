@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ── Tema base SpineTrack ── -->
+    <style name="Base.Theme.SpineTrack" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Colores primarios -->
+        <item name="colorPrimary">@color/peach_primary</item>
+        <item name="colorPrimaryVariant">@color/peach_dark</item>
+        <item name="colorOnPrimary">@color/text_on_peach</item>
+
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/pink_primary</item>
+        <item name="colorSecondaryVariant">@color/text_pink</item>
+        <item name="colorOnSecondary">@color/surface_white</item>
+
+        <!-- Superficie y fondo -->
+        <item name="android:colorBackground">@color/background_cream</item>
+        <item name="colorSurface">@color/surface_white</item>
+        <item name="colorOnSurface">@color/text_dark</item>
+        <item name="colorOnBackground">@color/text_dark</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/bad_red</item>
+        <item name="colorOnError">@color/surface_white</item>
+
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/background_cream</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Navigation Bar -->
+        <item name="android:navigationBarColor">@color/nav_background</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
+        <!-- Fuente global -->
+        <item name="android:fontFamily">@font/poppins_regular</item>
+
+        <!-- Shape system -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.SpineTrack.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.SpineTrack.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.SpineTrack.Large</item>
+
+    </style>
+
+    <style name="Theme.SpineTrack" parent="Base.Theme.SpineTrack" />
+
+    <!-- ── Shapes ── -->
+    <style name="ShapeAppearance.SpineTrack.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SpineTrack.Medium" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SpineTrack.Large" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+
+    <!-- ── Texto ── -->
+    <style name="TextStyle.SpineTrack.Title" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextStyle.SpineTrack.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/text_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextStyle.SpineTrack.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/text_medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextStyle.SpineTrack.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/text_soft</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- ── Cards ── -->
+    <style name="CardStyle.SpineTrack" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/surface_white</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="contentPaddingLeft">20dp</item>
+        <item name="contentPaddingRight">20dp</item>
+        <item name="contentPaddingTop">16dp</item>
+        <item name="contentPaddingBottom">16dp</item>
+    </style>
+
+    <style name="CardStyle.SpineTrack.Pink" parent="CardStyle.SpineTrack">
+        <item name="cardBackgroundColor">@color/pink_light</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="CardStyle.SpineTrack.Peach" parent="CardStyle.SpineTrack">
+        <item name="cardBackgroundColor">@color/peach_light</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <!-- ── Botones ── -->
+    <style name="ButtonStyle.SpineTrack.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/peach_primary</item>
+        <item name="android:textColor">@color/surface_white</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="ButtonStyle.SpineTrack.Secondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/peach_primary</item>
+        <item name="android:textColor">@color/peach_primary</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="cornerRadius">14dp</item>
+    </style>
+    <!-- ── Bottom Navigation ── -->
+    <style name="BottomNav.SpineTrack" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">@color/nav_background</item>
+        <item name="itemIconTint">@color/nav_item_color</item>
+        <item name="itemTextColor">@color/nav_item_color</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="android:elevation">12dp</item>
+    </style>
+
+    <!-- ── Splash ── -->
+    <style name="Theme.SpineTrack.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background_cream</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.SpineTrack</item>
+    </style>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    AÑADIR estas líneas dentro de themes.xml (en el mismo archivo),
+    junto con los demás estilos.
+-->
+<resources>
+
+    <style name="NavTextActive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/peach_primary</item>
+    </style>
+
+    <style name="NavTextInactive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/nav_unselected</item>
+    </style>
+
+</resources>

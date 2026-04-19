@@ -1,0 +1,4 @@
+Archivo deprecado.
+La logica de pairing vive en spinetrack_full_integrated.py
+
+

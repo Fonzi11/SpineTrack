@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <TextView
+        android:id="@+id/tv_badge_icon"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_badge_locked"
+        android:gravity="center"
+        android:text="🎖️"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tv_badge_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="Insignia"
+        android:textColor="@color/text_soft"
+        android:textSize="11sp" />
+
+</LinearLayout>

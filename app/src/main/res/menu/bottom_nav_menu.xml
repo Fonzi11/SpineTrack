@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_inicio"
+        android:icon="@drawable/ic_nav_home"
+        android:title="@string/nav_inicio" />
+
+    <item
+        android:id="@+id/nav_realtime"
+        android:icon="@drawable/ic_monitor"
+        android:title="@string/nav_realtime" />
+
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/ic_nav_stats"
+        android:title="@string/nav_stats" />
+
+    <item
+        android:id="@+id/nav_analitica"
+        android:icon="@drawable/ic_analitica"
+        android:title="@string/nav_analitica" />
+
+    <item
+        android:id="@+id/nav_perfil"
+        android:icon="@drawable/ic_nav_profile"
+        android:title="@string/nav_perfil" />
+
+    <!-- Removed Comunidad from bottom nav to keep original 5 items -->
+
+</menu>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App -->
+    <string name="app_name">SpineTrack</string>
+    <string name="app_tagline">Conecta con tu Postura</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_lecciones">Lecciones</string>
+    <string name="nav_stats">Stats</string>
+    <string name="nav_ranking">Ranking</string>
+    <string name="nav_perfil">Perfil</string>
+    <string name="nav_realtime">En vivo</string>
+    <string name="nav_analitica">Analítica</string>
+    <string name="nav_comunidad">Comunidad</string>
+    <string name="nav_dispositivo">Dispositivo</string>
+
+    <!-- Home / Inicio -->
+    <string name="greeting_hello">Hola de nuevo,</string>
+    <string name="mascot_message">¡Hola! Mantén una buena postura hoy y gana puntos 👊</string>
+    <string name="streak_label">Racha actual</string>
+    <string name="streak_days">días consecutivos</string>
+    <string name="best_streak">🔥 Mejor racha: %d días</string>
+    <string name="daily_progress">Progreso de hoy</string>
+    <string name="daily_goal">Meta diaria</string>
+    <string name="minutes_label">Minutos</string>
+    <string name="exercises_label">Ejercicios</string>
+    <string name="lessons_label">Lecciones</string>
+    <string name="points_label">Puntos</string>
+    <string name="this_week">Esta semana</string>
+    <string name="tip_day">💡 Tip del día</string>
+    <string name="tip_default">Ajusta tu monitor a la altura de los ojos para mantener el cuello en posición neutral.</string>
+
+    <!-- Postura -->
+    <string name="posture_excellent">Excelente</string>
+    <string name="posture_good">Bueno</string>
+    <string name="posture_regular">Regular</string>
+    <string name="posture_bad">Malo</string>
+    <string name="posture_danger">Peligroso</string>
+    <string name="posture_optimal">Alineación óptima</string>
+
+    <!-- ICP -->
+    <string name="icp_label">Índice de Calidad Postural</string>
+    <string name="icp_score">ICP: %d/100</string>
+
+    <!-- Lecciones -->
+    <string name="lessons_title">Lecciones</string>
+    <string name="lessons_subtitle">Aprende y mejora tu postura</string>
+    <string name="tab_lecciones">Lecciones</string>
+    <string name="tab_ejercicios">Ejercicios</string>
+    <string name="tab_ergonomia">Ergonomía</string>
+    <string name="tab_habitos">Hábitos</string>
+    <string name="level_beginner">Principiante</string>
+    <string name="level_intermediate">Intermedio</string>
+    <string name="level_advanced">Avanzado</string>
+    <string name="points_earn">+%d pts</string>
+    <string name="duration_min">%d min</string>
+
+    <!-- Stats -->
+    <string name="stats_title">Estadísticas</string>
+    <string name="stats_subtitle">Tu progreso postural</string>
+    <string name="healthy_angles">Ángulos de referencia saludables</string>
+    <string name="postural_angles">Ángulos posturales</string>
+    <string name="point_trend">Tendencia de puntos</string>
+    <string name="last_4_weeks">Últimas 4 semanas</string>
+    <string name="ideal_label">Ideal</string>
+    <string name="your_posture">Tu postura</string>
+
+    <!-- Cuerpo partes -->
+    <string name="body_cuello">Cuello</string>
+    <string name="body_hombros">Hombros</string>
+    <string name="body_espalda">Espalda</string>
+    <string name="body_caderas">Caderas</string>
+    <string name="body_rodillas">Rodillas</string>
+
+    <!-- Ranking -->
+    <string name="ranking_title">Ranking</string>
+    <string name="ranking_subtitle">Compite con la comunidad</string>
+    <string name="tab_puntos">Puntos</string>
+    <string name="tab_rachas">Rachas</string>
+    <string name="tab_lecciones_rank">Lecciones</string>
+    <string name="streak_days_short">%d días de racha</string>
+
+    <!-- Perfil -->
+    <string name="profile_title">Perfil</string>
+    <string name="level_label">Nivel %d</string>
+    <string name="profile_level_points_format">%1$d/%2$d pts</string>
+    <string name="current_streak">Racha actual</string>
+    <string name="total_points">Puntos totales</string>
+    <string name="best_streak_profile">Mejor racha</string>
+    <string name="badges_title">Insignias</string>
+    <string name="sign_out">Cerrar sesión</string>
+
+    <!-- Insignias -->
+    <string name="badge_first_lesson">Primera lección</string>
+    <string name="badge_3_days">3 días seguidos</string>
+    <string name="badge_7_days">7 días seguidos</string>
+    <string name="badge_100_points">100 puntos</string>
+    <string name="badge_30_days">30 días seguidos</string>
+    <string name="badge_500_points">500 puntos</string>
+
+    <!-- Sensor / dispositivo -->
+    <string name="device_connected">Dispositivo conectado ✓</string>
+    <string name="device_disconnected">Conecta tu SpineTrack</string>
+    <string name="device_waiting_connection">Dispositivo desconectado (esperando Raspberry)</string>
+    <string name="calibrating">Calibrando…</string>
+    <string name="device_connect_raspberry">Conectar Raspberry</string>
+    <string name="device_pairing_dialog_message">Ingresa el ID de la Raspberry (raspberryId)</string>
+    <string name="device_pairing_invalid_id">ID invalido</string>
+    <string name="msg_pairing_sent">Solicitud de emparejamiento enviada</string>
+    <string name="msg_pairing_accepted">Emparejamiento aceptado. Calibración iniciada</string>
+    <string name="device_start_session">Iniciar sesión</string>
+    <string name="device_calibrate">Calibrar postura</string>
+    <string name="device_stop_session">Detener sesión</string>
+    <string name="sensitivity_label">Sensibilidad</string>
+    <string name="sensitivity_low">Baja</string>
+    <string name="sensitivity_normal">Normal</string>
+    <string name="sensitivity_high">Alta</string>
+    <string name="calibrated_format">Calibrado: %1$s</string>
+    <string name="session_active_format">Sesión activa: %1$s</string>
+    <string name="msg_command_sent">Comando enviado</string>
+    <string name="msg_command_start_sent">Comando de inicio enviado</string>
+    <string name="msg_command_calibrate_sent">Comando de calibracion enviado</string>
+    <string name="msg_command_stop_sent">Comando de detencion enviado</string>
+    <string name="msg_calibration_started">Calibración iniciada</string>
+    <string name="msg_calibration_ok">Calibración completada correctamente</string>
+    <string name="calibration_title">Proceso de calibración</string>
+    <string name="calibration_done_title">Calibración completada</string>
+    <string name="calibration_waiting">Esperando inicio de calibración desde la Raspberry…</string>
+    <string name="calibration_step_gyro">1) Calibrando giroscopio (no mover el dispositivo)</string>
+    <string name="calibration_step_posture">2) Calibrando postura base (mantente en postura correcta)</string>
+    <string name="calibration_step_wait">3) Validando calibración y preparando sesión</string>
+    <string name="calibration_detail_gyro">Calibrando giroscopio… %1$ds</string>
+    <string name="calibration_detail_posture">Ahora adopta tu postura correcta. Midiendo postura base…</string>
+    <string name="calibration_detail_waiting">Guardando parámetros y esperando confirmación del dispositivo…</string>
+    <string name="calibration_detail_done">Todo listo. Puedes continuar con la sesión en vivo.</string>
+    <string name="msg_sensitivity_updated">Sensibilidad actualizada</string>
+    <string name="calibration_in_progress">En progreso</string>
+    <string name="answer_yes">Si</string>
+    <string name="answer_no">No</string>
+    <string name="error_user_not_identified">Usuario no identificado</string>
+    <string name="error_no_session_available">No hay sesión activa para importar</string>
+    <string name="status_good">✅  Buena postura</string>
+    <string name="status_bad">⚠️  Mala postura</string>
+
+    <!-- General -->
+    <string name="ok">OK</string>
+    <string name="comenzar">Comenzar</string>
+    <string name="marcar_completada">Marcar completada</string>
+    <string name="leccion_no_encontrada">Lección no encontrada</string>
+    <string name="leccion_marcada">Lección marcada como completada</string>
+    <string name="iniciar_ejercicio">Iniciar ejercicio</string>
+    <string name="ver_habito">Ver hábito</string>
+    <string name="ver_tutorial">Ver tutorial</string>
+    <string name="duration_format">⏱ %d min</string>
+    <string name="points_format">+%d pts</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="loading">Cargando…</string>
+    <string name="no_data">Sin datos aún</string>
+    <string name="days_label">días</string>
+    <string name="mins_label">min</string>
+    <string name="pts_label">pts</string>
+
+    <!-- Auth / Login -->
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_subtitle">Bienvenido de nuevo</string>
+    <string name="email_label">Email</string>
+    <string name="email_hint">tu@email.com</string>
+    <string name="password_label">Contraseña</string>
+    <string name="password_hint">••••••••</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="or_continue">O continúa con</string>
+    <string name="google_sign_in">Continuar con Google</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+    <string name="sign_up">Regístrate</string>
+
+    <!-- Auth / Register -->
+    <string name="register_title">Crear Cuenta</string>
+    <string name="register_subtitle">Únete a SpineTrack</string>
+    <string name="name_label">Nombre</string>
+    <string name="name_hint">Tu nombre</string>
+    <string name="confirm_password_label">Confirmar contraseña</string>
+    <string name="confirm_password_hint">Repite tu contraseña</string>
+    <string name="register_button">Registrarse</string>
+    <string name="have_account">¿Ya tienes cuenta?</string>
+    <string name="sign_in">Inicia sesión</string>
+
+    <!-- Auth / Reset Password -->
+    <string name="reset_title">Recuperar Contraseña</string>
+    <string name="reset_subtitle">Te enviaremos instrucciones</string>
+    <string name="reset_description">Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña.</string>
+    <string name="reset_button">Enviar Instrucciones</string>
+    <string name="reset_success">Email enviado. Revisa tu bandeja de entrada.</string>
+    <string name="back_to_login">Volver al login</string>
+
+    <!-- Auth / Validation Errors -->
+    <string name="error_email_required">El email es obligatorio</string>
+    <string name="error_email_invalid">Ingresa un email válido</string>
+    <string name="error_password_required">La contraseña es obligatoria</string>
+    <string name="error_password_min">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_name_required">El nombre es obligatorio</string>
+    <string name="error_name_min">El nombre debe tener al menos 2 caracteres</string>
+    <string name="error_password_mismatch">Las contraseñas no coinciden</string>
+    <string name="error_login">Error al iniciar sesión. Verifica tus credenciales.</string>
+    <string name="error_register">Error al crear la cuenta. Intenta de nuevo.</string>
+    <string name="error_google_sign_in">Error al iniciar sesión con Google.</string>
+    <string name="error_reset_password">Error al enviar el email. Verifica tu dirección.</string>
+
+</resources>

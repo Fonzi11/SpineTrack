@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <!-- Avatar -->
+    <TextView
+        android:id="@+id/tv_amigo_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_avatar_circle"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="A"
+        android:textColor="@color/text_on_peach"
+        android:textSize="20sp" />
+
+    <!-- Info -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_amigo_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/text_dark"
+            android:textSize="15sp"
+            tools:text="Ana García" />
+
+        <TextView
+            android:id="@+id/tv_amigo_puntos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/text_soft"
+            android:textSize="12sp"
+            tools:text="1,250 pts" />
+
+    </LinearLayout>
+
+    <!-- Flecha -->
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_arrow_right"
+        android:contentDescription="Ver perfil"
+        android:alpha="0.5" />
+
+</LinearLayout>
