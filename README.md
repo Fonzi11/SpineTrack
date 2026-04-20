@@ -32,10 +32,6 @@ SpineTrack es una solucion IoT para monitoreo postural en tiempo real con app An
 ### `.github/`
 - Automatizaciones y configuraciones de GitHub (si aplica en el repo).
 
-### `.claude/`
-- Config local del editor/asistente.
-- No es necesario para ejecutar SpineTrack y no se debe versionar.
-
 ## Flujo de calibracion
 
 - Desde la app, en `Dispositivo`, al enviar `iniciar` o `calibrar`:
