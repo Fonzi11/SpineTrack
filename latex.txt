@@ -1,0 +1,395 @@
+\documentclass[12pt]{article}
+
+% ==================================================
+% PAQUETES
+% ==================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,english]{babel}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+
+% ==================================================
+% CONFIGURACIÓN DE PÁGINA
+% ==================================================
+
+\geometry{
+    top=2.2cm,
+    bottom=2.2cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+\setlength{\parindent}{0.5cm}
+\setlength{\parskip}{0pt}
+
+\linespread{1.05}
+
+% ==================================================
+% COLORES
+% ==================================================
+
+\definecolor{azultitulo}{RGB}{0,51,102}
+\definecolor{grisfondo}{RGB}{240,240,240}
+\definecolor{gristexto}{RGB}{110,110,110}
+
+% ==================================================
+% FORMATO TÍTULOS
+% ==================================================
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}
+{\thesection.}{0.5em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\thesubsection}{0.5em}{}
+
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}
+{\thesubsubsection}{0.5em}{}
+
+% ==================================================
+% DOCUMENTO
+% ==================================================
+
+\begin{document}
+
+\pagestyle{plain}
+
+% ==================================================
+% ENCABEZADO SUPERIOR
+% ==================================================
+
+\noindent
+{\small IoT: Fundamentos y aplicaciones}
+
+\vspace{0.2cm}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+% ==================================================
+% GUÍA
+% ==================================================
+
+\vspace{0.3cm}
+
+{\footnotesize
+\textit{\textcolor{gray}{━━ GUÍA DE ESTILOS REDITEL 2026 — Lea antes de escribir ━━}}
+}
+
+\vspace{0.25cm}
+
+\footnotesize
+
+Abra el Panel de Estilos: Inicio $\rightarrow$ flecha (↗) en el grupo Estilos. Atajo: Ctrl+Alt+Shift+S.
+
+Seleccione el texto y haga clic en el nombre del estilo. \textbf{NUNCA} cambie fuente, tamaño o color directamente.
+
+\vspace{0.2cm}
+
+\textbf{ESTILOS DISPONIBLES:}
+
+\begin{itemize}[leftmargin=0.7cm,itemsep=1pt]
+    \item Título Artículo Español / Título Artículo Inglés — para los títulos del artículo
+    \item Autores / Afiliación / Correo Correspondencia / Línea Temática — bloque de identificación
+    \item Etiqueta Resumen / Contenido Resumen / Palabras Clave — bloque de resumen
+    \item Título 1 / Título 2 / Título 3 — secciones con numeración automática (1. / 1.1 / 1.1.1)
+    \item Título sin número — use SOLO para «Agradecimientos» y «Referencias»
+    \item Normal — cuerpo del artículo (estilo predeterminado)
+    \item Ecuación — párrafo de ecuaciones centrado
+    \item Título de ilustración — generado automáticamente por Insertar $\rightarrow$ Título
+    \item Bibliografía — generado automáticamente por Zotero, Mendeley, EndNote o RefWorks
+    \item Tabla REDITEL — aplíquelo desde Diseño de tabla
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{IMPORTANTE:} No olvide borrar el texto en gris antes de enviar el documento.
+
+Enviar una copia en formato .docx y otra en pdf
+
+\vspace{0.2cm}
+
+{\footnotesize
+\textit{\textcolor{gray}{━━ FIN DE LA GUÍA ━━}}
+}
+
+% ==================================================
+% TÍTULO ESPAÑOL
+% ==================================================
+
+\vspace{0.7cm}
+
+{\fontsize{22}{24}\selectfont
+\textbf{\textcolor{azultitulo}{
+Título del artículo en español: claro, conciso y descriptivo
+}}
+}
+
+\vspace{0.15cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Título Artículo Español». Máximo 15 palabras. Sin punto final. Sin mayúsculas sostenidas.
+}
+}
+
+% ==================================================
+% TÍTULO INGLÉS
+% ==================================================
+
+\vspace{0.45cm}
+
+{\fontsize{18}{20}\selectfont
+\textit{
+Article title in English: clear, concise and descriptive
+}
+}
+
+\vspace{0.15cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Título Artículo Inglés». Traducción fiel del título en español. Sin punto final.
+}
+}
+
+% ==================================================
+% AUTORES
+% ==================================================
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{
+Nombre Apellido$^{1}$,
+Nombre Apellido$^{2}$,
+Nombre Apellido$^{3}$,
+Nombre Apellido$^{4}$,
+Nombre Apellido$^{5}$
+}
+
+\vspace{0.2cm}
+
+\footnotesize
+
+$^{1}$ Programa académico, Universidad, Ciudad, País. \\
+$^{2}$ Programa académico, Universidad, Ciudad, País. \\
+$^{3}$ Programa académico, Universidad, Ciudad, País. \\
+$^{4}$ Programa académico, Universidad, Ciudad, País. \\
+$^{5}$ Programa académico, Universidad, Ciudad, País.
+
+\vspace{0.15cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Afiliación». Si hay menos de 5 autores elimine las filas sobrantes.
+}
+}
+
+% ==================================================
+% RESUMEN
+% ==================================================
+
+\vspace{0.45cm}
+
+\noindent
+\colorbox{grisfondo}{
+\parbox{\dimexpr\textwidth-2\fboxsep}{
+\vspace{0.15cm}
+
+\textbf{Resumen}
+
+\vspace{0.1cm}
+
+\footnotesize
+
+Escriba aquí el resumen en español. Entre 150 y 200 palabras. Presente el objetivo, la metodología, los principales resultados y las conclusiones. No incluya referencias ni siglas no definidas. Inicie directamente con el contenido sustantivo del trabajo.
+
+\vspace{0.25cm}
+
+\textbf{Abstract}
+
+\vspace{0.1cm}
+
+Write here the abstract in English. Between 150 and 200 words. Present the objective, methodology, main results and conclusions. Do not include references or undefined abbreviations. Must be a faithful translation of the Spanish version.
+
+\vspace{0.25cm}
+
+\textbf{Palabras clave:}
+telecomunicaciones, redes, [palabra 3], [palabra 4], [palabra 5]
+
+\vspace{0.1cm}
+
+\textbf{Keywords:}
+telecommunications, networks, [word 3], [word 4], [word 5]
+
+\vspace{0.1cm}
+
+}
+}
+
+\vspace{0.2cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Palabras Clave». Entre 4 y 6 términos en español e inglés separados por raya (—).
+}
+}
+
+% ==================================================
+% INTRODUCCIÓN
+% ==================================================
+
+\section{Introducción}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Título 1». La numeración (1.) se genera automáticamente. Solo escriba el título.
+}
+}
+
+\vspace{0.3cm}
+
+El estilo Normal es el predeterminado para el cuerpo del artículo. Georgia 10pt, justificado, sangría de primera línea 0.5 cm, interlineado 1.15.
+
+La introducción contextualiza el problema, presenta antecedentes relevantes y enuncia el objetivo. Extensión recomendada: dos a tres párrafos. Cite referencias con número entre corchetes en el texto: [1] o rango [1]--[3].
+
+% ==================================================
+% SECCIÓN 2
+% ==================================================
+
+\section{Trabajos relacionados}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Título 2». La numeración (1.1) se genera automáticamente.
+}
+}
+
+\vspace{0.3cm}
+
+Revise brevemente los trabajos previos más relacionados. Identifique qué distingue su aporte de los antecedentes.
+
+% ==================================================
+% SUBSECCIÓN
+% ==================================================
+
+\subsubsection{Aspecto específico}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Título 3». La numeración (1.1.1) se genera automáticamente.
+}
+}
+
+\vspace{0.2cm}
+
+Texto de ejemplo para el tercer nivel. Use con moderación.
+
+% ==================================================
+% DESARROLLO
+% ==================================================
+
+\section{Desarrollo (Reemplace por su título)}
+
+Describa el desarrollo realizado. Adapte el título según el tipo de trabajo.
+
+\vspace{0.3cm}
+
+Las ecuaciones se insertan con Insertar Ecuación y se numeran manualmente entre paréntesis al final del renglón.
+
+\vspace{0.3cm}
+
+:contentReference[oaicite:0]{index=0}
+
+\vspace{0.3cm}
+
+\begin{figure}[H]
+\centering
+
+\fbox{
+\parbox[c][5cm][c]{0.75\textwidth}{
+\centering
+Insertar $\rightarrow$ Imágenes $\rightarrow$ Este dispositivo
+}
+}
+
+\caption{Descripción de la figura}
+\end{figure}
+
+% ==================================================
+% RESULTADOS
+% ==================================================
+
+\section{Evaluaciones y Resultados}
+
+\begin{table}[H]
+\centering
+\caption{Descripción de la tabla}
+
+\vspace{0.2cm}
+
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Encabezado 1} &
+\textbf{Encabezado 2} &
+\textbf{Encabezado 3} \\
+\hline
+Dato 1.1 & Dato 1.2 & Dato 1.3 \\
+\hline
+Dato 2.1 & Dato 2.2 & Dato 2.3 \\
+\hline
+\end{tabular}
+\end{table}
+
+Referencie figuras y tablas en el texto antes de que aparezcan.
+
+% ==================================================
+% CONCLUSIONES
+% ==================================================
+
+\section{Conclusiones}
+
+Las conclusiones presentan los aportes principales, la respuesta al objetivo, las limitaciones y las líneas de trabajo futuro. Cuantifique cuando sea posible.
+
+% ==================================================
+% REFERENCIAS
+% ==================================================
+
+\section*{Referencias}
+
+Las referencias las genera automáticamente su gestor: Zotero, Mendeley, EndNote o RefWorks.
+
+\vspace{0.3cm}
+
+\begin{enumerate}[leftmargin=0.6cm]
+
+\item A. Apellido y B. Apellido, ``Título del artículo,'' \textit{Nombre de la Revista}, vol. XX, no. X, pp. XXX--XXX, año.
+
+\item A. Apellido, \textit{Título del libro}, X.ª ed. Ciudad: Editorial, año.
+
+\item A. Apellido, ``Título de la ponencia,'' en \textit{Memorias del Congreso}, Ciudad, año, pp. XXX--XXX.
+
+\item Nombre, ``Título del recurso,'' Sitio. [En línea]. Disponible: https://url.com
+
+\end{enumerate}
+
+\vspace{0.2cm}
+
+Numere en orden de primera aparición en el texto. Toda referencia citada debe tener su entrada aquí.
+
+\end{document}
