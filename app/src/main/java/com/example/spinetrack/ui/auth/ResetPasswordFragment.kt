@@ -31,8 +31,17 @@ class ResetPasswordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        prefillEmail()
         setupListeners()
         observeAuthState()
+    }
+
+    private fun prefillEmail() {
+        val emailPrefill = arguments?.getString("email_prefill").orEmpty()
+        if (emailPrefill.isNotBlank()) {
+            binding.etEmail.setText(emailPrefill)
+            binding.etEmail.setSelection(emailPrefill.length)
+        }
     }
 
     private fun setupListeners() {

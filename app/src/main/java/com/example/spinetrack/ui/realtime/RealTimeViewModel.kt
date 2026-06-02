@@ -16,6 +16,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import androidx.core.app.NotificationManagerCompat
+import com.example.spinetrack.util.PostureNotificationHelper
+import com.example.spinetrack.util.PostureAlertSeverity
 
 sealed class RealtimeUiState {
     object Conectando : RealtimeUiState()
@@ -48,6 +51,9 @@ class RealtimeViewModel(application: Application) : AndroidViewModel(application
     private var accumMalaSec: Double = 0.0
     private var lastAlertCount: Int = 0
     private var activeSessionId: String? = null
+    private var lastNotifiedAlertCount: Int = 0
+    private var lastNotifiedMs: Long = 0L
+    private var lastBuenaPostura: Boolean? = null
     private val mqttManager by lazy {
         // ClientId único para esta app - no debe colisionar con el dispositivo
         val clientId = "spinetrack_app_" + java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 12)
@@ -131,6 +137,7 @@ class RealtimeViewModel(application: Application) : AndroidViewModel(application
                                                     }
                                                 }
                                 datos = enrichWithSessionMath(datos)
+                                maybeNotifyBadPosture(datos)
                                 Log.i("RealtimeViewModel", "MQTT payload parsed: uid=${datos.uid} icp=${datos.icpParcial} theta=${datos.thetaAbs}")
                                 if (datos.uid.isEmpty()) {
                                     _uiState.value = RealtimeUiState.SinDispositivo
@@ -224,5 +231,36 @@ class RealtimeViewModel(application: Application) : AndroidViewModel(application
             tMalaMin = accumMalaSec / 60.0,
             numAlertas = alertas
         )
+    }
+
+    private fun maybeNotifyBadPosture(datos: RealtimePostura) {
+        val now = System.currentTimeMillis()
+        val notificationsEnabled = NotificationManagerCompat.from(getApplication()).areNotificationsEnabled()
+        if (!notificationsEnabled) {
+            lastBuenaPostura = datos.buenaPostura
+            return
+        }
+
+        val newAlert = datos.numAlertas > lastNotifiedAlertCount
+        val transitionToBad = (lastBuenaPostura == true && !datos.buenaPostura)
+        val shouldNotify = !datos.buenaPostura && (newAlert || transitionToBad)
+
+        if (!shouldNotify) {
+            lastBuenaPostura = datos.buenaPostura
+            return
+        }
+
+        val severity: PostureAlertSeverity = PostureNotificationHelper.severityFromIcp(datos.icpParcial)
+        val title = getApplication<Application>().getString(com.example.spinetrack.R.string.notif_bad_posture_title)
+        val body = getApplication<Application>().getString(
+            com.example.spinetrack.R.string.notif_bad_posture_body_format,
+            datos.icpParcial
+        )
+
+        PostureNotificationHelper.notifyPostureAlert(getApplication(), severity, title, body)
+
+        lastNotifiedMs = now
+        lastNotifiedAlertCount = maxOf(lastNotifiedAlertCount, datos.numAlertas)
+        lastBuenaPostura = datos.buenaPostura
     }
 }

@@ -7,10 +7,31 @@ import com.example.spinetrack.data.model.SesionPostural
 import com.example.spinetrack.data.preferences.UserPreferences
 import com.example.spinetrack.data.repository.SesionesRepository
 import com.google.firebase.auth.FirebaseAuth
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+
+enum class SegmentWindow(val days: Long?) {
+    ALL(null),
+    LAST_7(7),
+    LAST_30(30),
+    LAST_90(90)
+}
+
+enum class SegmentClass {
+    ALL,
+    EXCELENTE,
+    BUENO,
+    REGULAR,
+    MALO,
+    CRITICO
+}
 
 data class EstadisticasUiState(
     val isLoading: Boolean = true,
@@ -21,7 +42,9 @@ data class EstadisticasUiState(
     val rachaActual: Int = 0,
     val totalSesiones: Int = 0,
     val tiempoTotalMin: Double = 0.0,
-    val distAnguloPct: Map<String, Double> = emptyMap()
+    val distAnguloPct: Map<String, Double> = emptyMap(),
+    val segmentWindow: SegmentWindow = SegmentWindow.LAST_30,
+    val segmentClass: SegmentClass = SegmentClass.ALL
 )
 
 class EstadisticasViewModel(application: Application) : AndroidViewModel(application) {
@@ -35,6 +58,7 @@ class EstadisticasViewModel(application: Application) : AndroidViewModel(applica
     val importResult: StateFlow<String?> = _importResult
     private var lastImportedSessionId: String? = null
     private var importingSessionId: String? = null
+    private var sesionesBase: List<SesionPostural> = emptyList()
 
     private suspend fun resolveUid(): String? {
         val firebaseUid = FirebaseAuth.getInstance().currentUser?.uid
@@ -89,16 +113,8 @@ class EstadisticasViewModel(application: Application) : AndroidViewModel(applica
 
             SesionesRepository.obtenerUltimasSesiones(uid, limite = 30)
                 .onSuccess { sesiones ->
-                    val distAcumulada = acumularDistribucion(sesiones)
-                    _uiState.value = EstadisticasUiState(
-                        isLoading       = false,
-                        sesiones        = sesiones,
-                        icpPromedio     = SesionesRepository.calcularIcpPromedio(sesiones.take(7)),
-                        rachaActual     = SesionesRepository.calcularRachaActual(sesiones),
-                        totalSesiones   = sesiones.size,
-                        tiempoTotalMin  = SesionesRepository.calcularTiempoTotalMin(sesiones),
-                        distAnguloPct   = distAcumulada
-                    )
+                    sesionesBase = sesiones
+                    aplicarSegmentacion()
                 }
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
@@ -146,21 +162,11 @@ class EstadisticasViewModel(application: Application) : AndroidViewModel(applica
                         return@onSuccess
                     }
 
-                    // Añadir/actualizar la sesión en la lista actual y recalcular métricas
-                    val sesionesActuales = (_uiState.value.sesiones + sesion)
+                    sesionesBase = (sesionesBase + sesion)
                         .distinctBy { it.sessionId }
                         .sortedByDescending { it.tsInicio }
 
-                    val distAcumulada = acumularDistribucion(sesionesActuales)
-                    _uiState.value = _uiState.value.copy(
-                        isLoading = false,
-                        sesiones = sesionesActuales,
-                        icpPromedio = SesionesRepository.calcularIcpPromedio(sesionesActuales.take(7)),
-                        rachaActual = SesionesRepository.calcularRachaActual(sesionesActuales),
-                        totalSesiones = sesionesActuales.size,
-                        tiempoTotalMin = SesionesRepository.calcularTiempoTotalMin(sesionesActuales),
-                        distAnguloPct = distAcumulada
-                    )
+                    aplicarSegmentacion()
                     lastImportedSessionId = sesion.sessionId
                     _importResult.value = "Sesión importada: ${sesion.sessionId.take(8)}"
                     viewModelScope.launch { userPreferences.saveLastSessionId(null) }
@@ -170,6 +176,79 @@ class EstadisticasViewModel(application: Application) : AndroidViewModel(applica
                     _importResult.value = e.message ?: "Error importando sesión"
                 }
             importingSessionId = null
+        }
+    }
+
+    fun setSegmentWindow(window: SegmentWindow) {
+        if (_uiState.value.segmentWindow == window) return
+        _uiState.value = _uiState.value.copy(segmentWindow = window)
+        aplicarSegmentacion()
+    }
+
+    fun setSegmentClass(clase: SegmentClass) {
+        if (_uiState.value.segmentClass == clase) return
+        _uiState.value = _uiState.value.copy(segmentClass = clase)
+        aplicarSegmentacion()
+    }
+
+    private fun aplicarSegmentacion() {
+        val window = _uiState.value.segmentWindow
+        val clase = _uiState.value.segmentClass
+        val sesionesFiltradas = filtrarSesiones(sesionesBase, window, clase)
+        val distAcumulada = acumularDistribucion(sesionesFiltradas)
+
+        _uiState.value = _uiState.value.copy(
+            isLoading = false,
+            sesiones = sesionesFiltradas,
+            icpPromedio = SesionesRepository.calcularIcpPromedio(sesionesFiltradas),
+            rachaActual = SesionesRepository.calcularRachaActual(sesionesFiltradas),
+            totalSesiones = sesionesFiltradas.size,
+            tiempoTotalMin = SesionesRepository.calcularTiempoTotalMin(sesionesFiltradas),
+            distAnguloPct = distAcumulada
+        )
+    }
+
+    private fun filtrarSesiones(
+        sesiones: List<SesionPostural>,
+        window: SegmentWindow,
+        clase: SegmentClass
+    ): List<SesionPostural> {
+        val ahora = Instant.now()
+        val porVentana = sesiones.filter { sesion ->
+            val inicio = parseInicio(sesion.tsInicio)
+            when {
+                window.days == null -> true
+                inicio == null -> false
+                else -> inicio.isAfter(ahora.minusSeconds(window.days * 24 * 3600))
+            }
+        }
+
+        if (clase == SegmentClass.ALL) return porVentana
+        return porVentana.filter { sesion ->
+            normalizarClaseIcp(sesion.claseIcp) == clase
+        }
+    }
+
+    private fun parseInicio(tsInicio: String): Instant? {
+        if (tsInicio.isBlank()) return null
+        return runCatching { Instant.parse(tsInicio) }
+            .recoverCatching { OffsetDateTime.parse(tsInicio).toInstant() }
+            .recoverCatching {
+                LocalDateTime.parse(tsInicio, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                    .atZone(ZoneId.systemDefault())
+                    .toInstant()
+            }
+            .getOrNull()
+    }
+
+    private fun normalizarClaseIcp(clase: String): SegmentClass {
+        return when (clase.trim().lowercase()) {
+            "excelente" -> SegmentClass.EXCELENTE
+            "bueno" -> SegmentClass.BUENO
+            "regular" -> SegmentClass.REGULAR
+            "malo" -> SegmentClass.MALO
+            "critico", "crítico" -> SegmentClass.CRITICO
+            else -> SegmentClass.CRITICO
         }
     }
 

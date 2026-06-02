@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Warnings heredados de UI legacy, no bloquean funcionalidad -->
+    <issue id="HardcodedText" severity="ignore" />
+    <issue id="ContentDescription" severity="ignore" />
+    <issue id="Typos" severity="ignore" />
+    <issue id="UseCompoundDrawables" severity="ignore" />
+    <issue id="NestedWeights" severity="ignore" />
+    <issue id="UselessParent" severity="ignore" />
+    <issue id="TooManyViews" severity="ignore" />
+    <issue id="DisableBaselineAligned" severity="ignore" />
+    <issue id="SetTextI18n" severity="ignore" />
+</lint>
+

@@ -1,29 +1,35 @@
 package com.example.spinetrack.ui.realtime
 
+import android.Manifest
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import androidx.core.graphics.toColorInt
-import java.util.Locale
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.fragment.app.activityViewModels
-import com.example.spinetrack.data.model.RealtimePostura
-import com.example.spinetrack.databinding.FragmentRealtimeBinding
-import kotlinx.coroutines.launch
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.spinetrack.R
+import com.example.spinetrack.data.model.RealtimePostura
+import com.example.spinetrack.databinding.FragmentRealtimeBinding
+import java.util.Locale
+import kotlinx.coroutines.launch
 
 class RealtimeFragment : Fragment() {
 
     private var _binding: FragmentRealtimeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: RealtimeViewModel by viewModels()
+    private val requestNotifications = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,6 +40,7 @@ class RealtimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        maybeRequestNotifications()
         observeState()
         binding.btnReintentar.setOnClickListener { viewModel.iniciarEscucha() }
         // Mostrar el último payload JSON (debug) en la UI
@@ -41,6 +48,17 @@ class RealtimeFragment : Fragment() {
             viewModel.rawJson.collect { payload ->
                 binding.tvDebugPayload.text = payload
             }
+        }
+    }
+
+    private fun maybeRequestNotifications() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+        val granted = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
+        if (!granted) {
+            requestNotifications.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 

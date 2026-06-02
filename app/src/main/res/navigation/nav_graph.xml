@@ -56,6 +56,10 @@
         android:name="com.example.spinetrack.ui.auth.ResetPasswordFragment"
         android:label="Recuperar Contraseña"
         tools:layout="@layout/fragment_reset_password">
+        <argument
+            android:name="email_prefill"
+            app:argType="string"
+            android:defaultValue="" />
         <action
             android:id="@+id/action_reset_password_to_login"
             app:destination="@id/nav_login"
@@ -170,7 +174,17 @@
         android:id="@+id/nav_perfil"
         android:name="com.example.spinetrack.ui.perfil.PerfilFragment"
         android:label="Perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil">
+        <action
+            android:id="@+id/action_perfil_to_avatar_personalizacion"
+            app:destination="@id/nav_avatar_personalizacion" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_avatar_personalizacion"
+        android:name="com.example.spinetrack.ui.perfil.AvatarPersonalizacionFragment"
+        android:label="Avatar"
+        tools:layout="@layout/fragment_avatar_personalizacion" />
 
     <fragment
         android:id="@+id/nav_dispositivo"

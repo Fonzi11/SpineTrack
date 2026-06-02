@@ -39,6 +39,7 @@
                     android:background="@drawable/bg_avatar_circle"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:text="I"
                     android:textColor="@color/text_on_peach"
                     android:textSize="26sp"

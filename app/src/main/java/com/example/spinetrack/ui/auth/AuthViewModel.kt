@@ -9,10 +9,8 @@ import com.example.spinetrack.data.model.User
 import com.example.spinetrack.data.preferences.UserPreferences
 import com.example.spinetrack.data.repository.AuthRepository
 import com.example.spinetrack.data.repository.DispositivoRepository
-import com.example.spinetrack.util.await
+import com.example.spinetrack.data.repository.UsuariosRepository
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -57,6 +55,15 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     email    = user.email,
                     photoUrl = user.photoUrl
                 )
+                try {
+                    UsuariosRepository.upsertUsuarioPublico(
+                        uid = user.id,
+                        nombre = user.nombre,
+                        email = user.email,
+                        photoUrl = user.photoUrl
+                    )
+                } catch (_: Exception) {
+                }
                 _authState.value = AuthState.Authenticated(user)
             } else {
                 // Fallback a DataStore
@@ -75,43 +82,38 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    suspend fun login(email: String, password: String): Result<User> {
-        return try {
-            if (email.isBlank())
-                return Result.failure(Exception("El email es requerido"))
-            if (password.length < 6)
-                return Result.failure(Exception("La contraseña debe tener al menos 6 caracteres"))
+    fun login(email: String, password: String) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _errorMessage.value = null
 
-            val authResult = FirebaseAuth.getInstance()
-                .signInWithEmailAndPassword(email, password)
-                .await()
+            val result = AuthRepository.login(email.trim(), password)
+            _isLoading.value = false
 
-            val firebaseUser = authResult.user
-                ?: return Result.failure(Exception("Usuario no encontrado"))
-
-            val user = User(
-                id       = firebaseUser.uid,
-                nombre   = firebaseUser.displayName
-                    ?: email.substringBefore("@").replaceFirstChar { it.uppercase() },
-                email    = firebaseUser.email ?: email,
-                photoUrl = firebaseUser.photoUrl?.toString()
+            result.fold(
+                onSuccess = { user ->
+                    saveUserSession(user)
+                    try {
+                        UsuariosRepository.upsertUsuarioPublico(
+                            uid = user.id,
+                            nombre = user.nombre,
+                            email = user.email,
+                            photoUrl = user.photoUrl
+                        )
+                    } catch (_: Exception) {
+                    }
+                    _authState.value = AuthState.Authenticated(user)
+                    try {
+                        DispositivoRepository.registrarDispositivo(user.id, user.nombre)
+                    } catch (_: Exception) {
+                    }
+                },
+                onFailure = { error ->
+                    val msg = error.message ?: "Error al iniciar sesión"
+                    _errorMessage.value = msg
+                    _authState.value = AuthState.Error(msg)
+                }
             )
-            saveUserSession(user)
-            _authState.value = AuthState.Authenticated(user)
-            // Registrar dispositivo en Realtime Database (si no existe)
-            try {
-                DispositivoRepository.registrarDispositivo(user.id, user.nombre)
-            } catch (_: Exception) {
-                // Ignorar fallos para no bloquear el login
-            }
-            Result.success(user)
-
-        } catch (_: FirebaseAuthInvalidUserException) {
-            Result.failure(Exception("No existe una cuenta con este email"))
-        } catch (_: FirebaseAuthInvalidCredentialsException) {
-            Result.failure(Exception("Contraseña incorrecta"))
-        } catch (e: Exception) {
-            Result.failure(Exception(e.message ?: "Error al iniciar sesión"))
         }
     }
 
@@ -120,24 +122,43 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             _isLoading.value = true
             _errorMessage.value = null
 
-            val result = AuthRepository.register(email, password, nombre)
+            val result = AuthRepository.register(email.trim(), password, nombre.trim())
             _isLoading.value = false
 
-            result.fold(
-                onSuccess = { user ->
-                    saveUserSession(user)
-                    _authState.value = AuthState.Authenticated(user)
-                    // Registrar dispositivo en la RTDB (no bloquear el flujo de registro)
-                    try {
-                        DispositivoRepository.registrarDispositivo(user.id, user.nombre)
-                    } catch (_: Exception) {
-                    }
-                },
-                onFailure = { error ->
-                    _errorMessage.value = error.message ?: "Error desconocido"
-                    _authState.value = AuthState.Error(error.message ?: "Error desconocido")
-                }
+            val user = result.getOrNull()
+            if (user == null) {
+                val msg = result.exceptionOrNull()?.message ?: "Error desconocido"
+                _errorMessage.value = msg
+                _authState.value = AuthState.Error(msg)
+                return@launch
+            }
+
+            saveUserSession(user)
+
+            val upsertResult = UsuariosRepository.upsertUsuarioPublico(
+                uid = user.id,
+                nombre = user.nombre,
+                email = user.email,
+                photoUrl = user.photoUrl
             )
+
+            if (upsertResult.isFailure) {
+                val cause = upsertResult.exceptionOrNull()?.message ?: "Sin detalle"
+                AuthRepository.logout()
+                userPreferences.clearUserSession()
+                val msg = "Cuenta creada, pero no se pudo guardar el perfil en Firebase: $cause"
+                _errorMessage.value = msg
+                _authState.value = AuthState.Error(msg)
+                return@launch
+            }
+
+            _authState.value = AuthState.Authenticated(user)
+
+            // Registrar dispositivo en la RTDB (no bloquea el flujo principal)
+            try {
+                DispositivoRepository.registrarDispositivo(user.id, user.nombre)
+            } catch (_: Exception) {
+            }
         }
     }
 
@@ -152,6 +173,15 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             result.fold(
                 onSuccess = { user ->
                     saveUserSession(user)
+                    try {
+                        UsuariosRepository.upsertUsuarioPublico(
+                            uid = user.id,
+                            nombre = user.nombre,
+                            email = user.email,
+                            photoUrl = user.photoUrl
+                        )
+                    } catch (_: Exception) {
+                    }
                     _authState.value = AuthState.Authenticated(user)
                     // Registrar dispositivo en la RTDB
                     try {

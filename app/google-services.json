@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "946200977386-1ig5geq52iq50bl4og5mr1c7js94nbsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spinetrack",
+            "certificate_hash": "9e2ce391add5d0b804219c1bd627be4f6a5ad263"
+          }
+        },
+        {
           "client_id": "946200977386-hgfkv5ja7djk4e6a0cd8t4c3khdc8ipi.apps.googleusercontent.com",
           "client_type": 3
         }

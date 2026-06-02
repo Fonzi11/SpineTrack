@@ -23,5 +23,6 @@ class SpineTrackApp : Application() {
             // Delegar al handler anterior para no ocultar otros errores
             previousHandler?.uncaughtException(t, e)
         }
+        com.example.spinetrack.util.PostureNotificationHelper.ensureChannels(this)
     }
 }

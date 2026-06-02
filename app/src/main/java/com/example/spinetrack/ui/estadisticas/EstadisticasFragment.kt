@@ -32,6 +32,7 @@ class EstadisticasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupCharts()
+        setupSegmentacion()
         observeState()
 
         binding.btnRefrescar.setOnClickListener {
@@ -43,10 +44,84 @@ class EstadisticasFragment : Fragment() {
         }
     }
 
+    private fun setupSegmentacion() {
+        binding.chipGroupWindow.setOnCheckedChangeListener { _, checkedId ->
+            val window = when (checkedId) {
+                R.id.chip_window_7d -> SegmentWindow.LAST_7
+                R.id.chip_window_90d -> SegmentWindow.LAST_90
+                R.id.chip_window_all -> SegmentWindow.ALL
+                else -> SegmentWindow.LAST_30
+            }
+            viewModel.setSegmentWindow(window)
+        }
+
+        binding.chipGroupClass.setOnCheckedChangeListener { _, checkedId ->
+            val clase = when (checkedId) {
+                R.id.chip_class_excellent -> SegmentClass.EXCELENTE
+                R.id.chip_class_good -> SegmentClass.BUENO
+                R.id.chip_class_regular -> SegmentClass.REGULAR
+                R.id.chip_class_bad -> SegmentClass.MALO
+                R.id.chip_class_critical -> SegmentClass.CRITICO
+                else -> SegmentClass.ALL
+            }
+            viewModel.setSegmentClass(clase)
+        }
+
+        sincronizarChips(viewModel.uiState.value.segmentWindow, viewModel.uiState.value.segmentClass)
+    }
+
+    private fun sincronizarChips(window: SegmentWindow, clase: SegmentClass) {
+        val windowId = when (window) {
+            SegmentWindow.LAST_7 -> R.id.chip_window_7d
+            SegmentWindow.LAST_30 -> R.id.chip_window_30d
+            SegmentWindow.LAST_90 -> R.id.chip_window_90d
+            SegmentWindow.ALL -> R.id.chip_window_all
+        }
+        if (binding.chipGroupWindow.checkedChipId != windowId) {
+            binding.chipGroupWindow.check(windowId)
+        }
+
+        val classId = when (clase) {
+            SegmentClass.EXCELENTE -> R.id.chip_class_excellent
+            SegmentClass.BUENO -> R.id.chip_class_good
+            SegmentClass.REGULAR -> R.id.chip_class_regular
+            SegmentClass.MALO -> R.id.chip_class_bad
+            SegmentClass.CRITICO -> R.id.chip_class_critical
+            SegmentClass.ALL -> R.id.chip_class_all
+        }
+        if (binding.chipGroupClass.checkedChipId != classId) {
+            binding.chipGroupClass.check(classId)
+        }
+    }
+
+    private fun etiquetaVentana(window: SegmentWindow): String = when (window) {
+        SegmentWindow.ALL -> getString(R.string.stats_window_all)
+        SegmentWindow.LAST_7 -> getString(R.string.stats_window_7d)
+        SegmentWindow.LAST_30 -> getString(R.string.stats_window_30d)
+        SegmentWindow.LAST_90 -> getString(R.string.stats_window_90d)
+    }
+
+    private fun etiquetaClase(clase: SegmentClass): String = when (clase) {
+        SegmentClass.ALL -> getString(R.string.stats_class_all)
+        SegmentClass.EXCELENTE -> getString(R.string.stats_class_excellent)
+        SegmentClass.BUENO -> getString(R.string.stats_class_good)
+        SegmentClass.REGULAR -> getString(R.string.stats_class_regular)
+        SegmentClass.MALO -> getString(R.string.stats_class_bad)
+        SegmentClass.CRITICO -> getString(R.string.stats_class_critical)
+    }
+
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+
+                val segmentLabel = getString(
+                    R.string.stats_segment_label_format,
+                    etiquetaVentana(state.segmentWindow),
+                    etiquetaClase(state.segmentClass)
+                )
+                binding.tvSegmentoSubtitulo.text = segmentLabel
+                sincronizarChips(state.segmentWindow, state.segmentClass)
 
                 when {
                     state.error != null -> {
@@ -57,7 +132,7 @@ class EstadisticasFragment : Fragment() {
 
                     state.isDisconnected -> {
                         mostrarEstadoError(
-                            mensaje = "Inicia sesion y verifica internet para cargar tus sesiones."
+                            mensaje = getString(R.string.stats_error_disconnected)
                         )
                     }
 
@@ -96,7 +171,7 @@ class EstadisticasFragment : Fragment() {
         binding.tvIcpPromedio.setTextColor(colorIcp(state.icpPromedio))
 
         // Indicadores rápidos
-        binding.tvRacha.text = "${state.rachaActual} días"
+        binding.tvRacha.text = getString(R.string.stats_streak_format, state.rachaActual)
         binding.tvTotalSesiones.text = "${state.totalSesiones}"
         val horas = state.tiempoTotalMin / 60.0
         binding.tvTiempoTotal.text = if (horas >= 1)
@@ -114,7 +189,7 @@ class EstadisticasFragment : Fragment() {
             isDragEnabled = true
             setScaleEnabled(false)
             legend.isEnabled = false
-            setNoDataText("Sin sesiones registradas")
+            setNoDataText(getString(R.string.stats_chart_empty))
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.granularity = 1f
             xAxis.setDrawGridLines(false)
@@ -132,7 +207,7 @@ class EstadisticasFragment : Fragment() {
             setUsePercentValues(true)
             setDrawEntryLabels(false)
             legend.isEnabled = true
-            setNoDataText("Sin datos de distribución")
+            setNoDataText(getString(R.string.stats_pie_empty))
         }
     }
 
@@ -206,11 +281,11 @@ class EstadisticasFragment : Fragment() {
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private fun clasificarIcp(icp: Double) = when {
-        icp >= 90 -> "Excelente"
-        icp >= 75 -> "Bueno"
-        icp >= 60 -> "Regular"
-        icp >= 40 -> "Malo"
-        else      -> "Crítico"
+        icp >= 90 -> getString(R.string.stats_class_excellent)
+        icp >= 75 -> getString(R.string.stats_class_good)
+        icp >= 60 -> getString(R.string.stats_class_regular)
+        icp >= 40 -> getString(R.string.stats_class_bad)
+        else      -> getString(R.string.stats_class_critical)
     }
 
     private fun colorIcp(icp: Double) = when {

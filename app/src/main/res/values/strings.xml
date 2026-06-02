@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="all">
 
     <!-- App -->
     <string name="app_name">SpineTrack</string>
@@ -60,12 +60,41 @@
     <!-- Stats -->
     <string name="stats_title">Estadísticas</string>
     <string name="stats_subtitle">Tu progreso postural</string>
-    <string name="healthy_angles">Ángulos de referencia saludables</string>
-    <string name="postural_angles">Ángulos posturales</string>
-    <string name="point_trend">Tendencia de puntos</string>
-    <string name="last_4_weeks">Últimas 4 semanas</string>
-    <string name="ideal_label">Ideal</string>
-    <string name="your_posture">Tu postura</string>
+    <string name="stats_filters_title">Segmentación</string>
+    <string name="stats_filter_window">Periodo</string>
+    <string name="stats_filter_class">Clase</string>
+    <string name="stats_window_all">Todo</string>
+    <string name="stats_window_7d">Últimos 7 días</string>
+    <string name="stats_window_30d">Últimos 30 días</string>
+    <string name="stats_window_90d">Últimos 90 días</string>
+    <string name="stats_class_all">Todas</string>
+    <string name="stats_class_excellent">Excelente</string>
+    <string name="stats_class_good">Bueno</string>
+    <string name="stats_class_regular">Regular</string>
+    <string name="stats_class_bad">Malo</string>
+    <string name="stats_class_critical">Crítico</string>
+    <string name="stats_segment_label_format">Segmento: %1$s · %2$s</string>
+    <string name="stats_icp_segment">ICP promedio (segmento actual)</string>
+    <string name="stats_refresh">Actualizar datos</string>
+    <string name="stats_error_retry">Reintentar</string>
+    <string name="stats_error_title">Error de conexión</string>
+    <string name="stats_error_message">Parece que hay un problema de conexión. Verifica tu sesión e intenta nuevamente.</string>
+    <string name="stats_error_disconnected">Inicia sesión y verifica internet para cargar tus sesiones.</string>
+    <string name="stats_empty_title">Aún no hay sesiones</string>
+    <string name="stats_empty_message">Enciende la Raspberry y empieza tu primera sesión de monitoreo postural.</string>
+    <string name="stats_empty_steps_title">¿Cómo empezar?</string>
+    <string name="stats_empty_step_1">Enciende la Raspberry Pi</string>
+    <string name="stats_empty_step_2">Colócate el sensor en la espalda</string>
+    <string name="stats_empty_step_3">¡Las estadísticas aparecerán aquí!</string>
+    <string name="stats_label_streak">Racha</string>
+    <string name="stats_label_sessions">Sesiones</string>
+    <string name="stats_label_monitoring">Monitoreo</string>
+    <string name="stats_icp_chart_title">ICP por sesión</string>
+    <string name="stats_dist_title">Distribución postural</string>
+    <string name="stats_dist_subtitle">Promedio de todas las sesiones</string>
+    <string name="stats_chart_empty">Sin sesiones registradas</string>
+    <string name="stats_pie_empty">Sin datos de distribución</string>
+    <string name="stats_streak_format">%d días</string>
 
     <!-- Cuerpo partes -->
     <string name="body_cuello">Cuello</string>
@@ -91,6 +120,31 @@
     <string name="best_streak_profile">Mejor racha</string>
     <string name="badges_title">Insignias</string>
     <string name="sign_out">Cerrar sesión</string>
+    <string name="avatar_personalizacion_title">Personaliza tu camarón</string>
+    <string name="avatar_personalizacion_subtitle">Elige color, accesorio y tamaño para tu avatar</string>
+    <string name="avatar_color">Color</string>
+    <string name="avatar_color_coral">Coral</string>
+    <string name="avatar_color_menta">Menta</string>
+    <string name="avatar_color_mar">Mar</string>
+    <string name="avatar_color_lavanda">Lavanda</string>
+    <string name="avatar_color_sol">Sol</string>
+    <string name="avatar_color_noche">Noche</string>
+    <string name="avatar_accesorio">Accesorio</string>
+    <string name="avatar_acc_none">Sin accesorio</string>
+    <string name="avatar_acc_gafas">Gafas</string>
+    <string name="avatar_acc_corona">Corona</string>
+    <string name="avatar_acc_estrella">Estrella</string>
+    <string name="avatar_acc_lazo">Lazo</string>
+    <string name="avatar_acc_audifonos">Audifonos</string>
+    <string name="avatar_acc_bigote">Bigote</string>
+    <string name="avatar_acc_sombrero">Sombrero</string>
+    <string name="avatar_acc_flor">Flor</string>
+    <string name="avatar_acc_medalla">Medalla</string>
+    <string name="avatar_tamano">Tamaño</string>
+    <string name="avatar_restaurar">Restaurar</string>
+    <string name="avatar_guardar">Guardar</string>
+    <string name="avatar_camaron_base">🦐</string>
+    <string name="avatar_camaron_preview_format">%1$s%2$s</string>
 
     <!-- Insignias -->
     <string name="badge_first_lesson">Primera lección</string>
@@ -119,10 +173,10 @@
     <string name="sensitivity_high">Alta</string>
     <string name="calibrated_format">Calibrado: %1$s</string>
     <string name="session_active_format">Sesión activa: %1$s</string>
-    <string name="msg_command_sent">Comando enviado</string>
-    <string name="msg_command_start_sent">Comando de inicio enviado</string>
-    <string name="msg_command_calibrate_sent">Comando de calibracion enviado</string>
-    <string name="msg_command_stop_sent">Comando de detencion enviado</string>
+    <string name="msg_command_sent">Orden enviada</string>
+    <string name="msg_command_start_sent">Orden de inicio enviada</string>
+    <string name="msg_command_calibrate_sent">Orden de calibracion enviada</string>
+    <string name="msg_command_stop_sent">Orden de detencion enviada</string>
     <string name="msg_calibration_started">Calibración iniciada</string>
     <string name="msg_calibration_ok">Calibración completada correctamente</string>
     <string name="calibration_title">Proceso de calibración</string>
@@ -143,6 +197,30 @@
     <string name="error_no_session_available">No hay sesión activa para importar</string>
     <string name="status_good">✅  Buena postura</string>
     <string name="status_bad">⚠️  Mala postura</string>
+    <string name="friend_badge">Amigo</string>
+    <string name="friend_add">Agregar amigo</string>
+    <string name="friend_remove">Eliminar amigo</string>
+    <string name="friend_added_toast">Amigo agregado</string>
+    <string name="friend_removed_toast">Amigo eliminado</string>
+    <string name="friend_error_format">Error: %1$s</string>
+    <string name="community_search_hint">Buscar por nombre, email o UID</string>
+    <string name="community_empty_search">No encontramos usuarios con esa búsqueda.</string>
+    <string name="friends_search_hint">Buscar en mis amigos</string>
+    <string name="community_search_users_cta">Buscar y agregar usuarios</string>
+    <string name="community_empty">Aún no hay usuarios disponibles en la comunidad.</string>
+    <string name="community_stats_title">Resumen del usuario</string>
+    <string name="community_stats_format">%1$d pts · %2$d lecciones · racha %3$d · nivel %4$d</string>
+    <string name="community_points_format">Puntos: %1$d</string>
+    <string name="community_lessons_format">Lecciones completadas: %1$d</string>
+    <string name="community_streak_format">Racha actual: %1$d días</string>
+    <string name="community_level_format">Nivel: %1$d</string>
+    <string name="profile_unknown_user">Usuario sin nombre</string>
+    <string name="username_with_star">%1$s 🌟</string>
+    <string name="friend_card_points_format">%1$d pts · racha %2$d · nivel %3$d</string>
+    <string name="community_active_users">Usuarios activos</string>
+    <string name="community_active_count_format">%d activos</string>
+    <string name="community_friends">Mis amigos</string>
+    <string name="community_friends_count_format">%d amigos</string>
 
     <!-- General -->
     <string name="ok">OK</string>
@@ -162,6 +240,8 @@
     <string name="days_label">días</string>
     <string name="mins_label">min</string>
     <string name="pts_label">pts</string>
+    <string name="progress_pct_format">%1$d%%</string>
+    <string name="goal_time_format">%1$d/%2$d min</string>
 
     <!-- Auth / Login -->
     <string name="login_title">Iniciar Sesión</string>
@@ -208,5 +288,16 @@
     <string name="error_register">Error al crear la cuenta. Intenta de nuevo.</string>
     <string name="error_google_sign_in">Error al iniciar sesión con Google.</string>
     <string name="error_reset_password">Error al enviar el email. Verifica tu dirección.</string>
+
+    <!-- Notificaciones postura -->
+    <string name="notif_channel_low">Alerta postura leve</string>
+    <string name="notif_channel_low_desc">Alertas de mala postura leve</string>
+    <string name="notif_channel_medium">Alerta postura media</string>
+    <string name="notif_channel_medium_desc">Alertas de mala postura moderada</string>
+    <string name="notif_channel_high">Alerta postura alta</string>
+    <string name="notif_channel_high_desc">Alertas de mala postura critica</string>
+    <string name="notif_bad_posture_title">Alerta de postura</string>
+    <string name="notif_bad_posture_body_format">Postura incorrecta detectada. ICP: %1$.1f</string>
+    <string name="community_permission_hint">No se pudieron cargar usuarios. Verifica tu sesión y las reglas de Firebase.</string>
 
 </resources>

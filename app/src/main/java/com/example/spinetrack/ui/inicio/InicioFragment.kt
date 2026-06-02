@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -14,13 +15,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spinetrack.R
 import com.example.spinetrack.data.model.UserProfile
 import com.example.spinetrack.data.preferences.UserPreferences
+import com.example.spinetrack.data.repository.SesionesRepository
+import com.example.spinetrack.data.repository.UserStatsRepository
 import com.example.spinetrack.data.repository.UsuariosRepository
 import com.example.spinetrack.databinding.FragmentInicioBinding
+import com.example.spinetrack.ui.comunidad.UserProfileFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
 import java.util.Calendar
+import java.util.Locale
 
 /**
  * InicioFragment — Pantalla principal (tab "Inicio")
@@ -39,19 +45,20 @@ class InicioFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var userPreferences: UserPreferences
+    private var allAmigos: List<UserProfile> = emptyList()
     private val amigosAdapter = AmigosAdapter { amigo ->
         val bundle = Bundle().apply { putString("uid", amigo.uid) }
         findNavController().navigate(R.id.nav_user_profile, bundle)
     }
 
-    // ── Datos mock (reemplazar con ViewModel/Repository) ──
-    private val streakCurrent = 0
-    private val streakBest = 0
-    private val dailyMinutes = 0
+    // Datos sincronizados desde Firebase
+    private var streakCurrent = 0
+    private var streakBest = 0
+    private var dailyMinutes = 0
     private val dailyGoalMinutes = 30
-    private val dailyExercises = 0
-    private val dailyLessons = 0
-    private val dailyPoints = 0
+    private var dailyExercises = 0
+    private var dailyLessons = 0
+    private var dailyPoints = 0
 
     private val tips = listOf(
         "Ajusta tu monitor a la altura de los ojos para mantener el cuello en posición neutral.",
@@ -75,12 +82,24 @@ class InicioFragment : Fragment() {
 
         userPreferences = UserPreferences(requireContext())
         loadUserName()
-        setupStreak()
         setupQuickNav()
         setupAmigos()
-        setupProgress()
         setupWeekCalendar()
         setupTip()
+        syncProgressFromFirebase()
+
+        parentFragmentManager.setFragmentResultListener(
+            UserProfileFragment.RESULT_FRIENDSHIP_CHANGED,
+            viewLifecycleOwner
+        ) { _, _ ->
+            refreshAmigos()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        syncProgressFromFirebase()
+        refreshAmigos()
     }
 
     // ── Cargar nombre de usuario desde DataStore ────────────
@@ -88,37 +107,56 @@ class InicioFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             val name = userPreferences.userNameFlow.first()
             if (!name.isNullOrBlank()) {
-                binding.tvUsername.text = "$name 🌟"
+                binding.tvUsername.text = getString(R.string.username_with_star, name)
             } else {
-                binding.tvUsername.text = "Usuario 🌟"
+                val email = userPreferences.userEmailFlow.first()
+                val fallbackName = email?.substringBefore("@") ?: getString(R.string.app_name)
+                binding.tvUsername.text = getString(R.string.username_with_star, fallbackName)
             }
         }
-    }
-
-    // ── Header ──────────────────────────────────────────────
-    private fun setupHeader() {
-        // El nombre se carga desde loadUserName()
     }
 
     // ── Racha ────────────────────────────────────────────────
     private fun setupStreak() {
         binding.tvStreakCount.text = streakCurrent.toString()
-        binding.tvBestStreak.text = "🔥 Mejor racha: $streakBest días"
+        binding.tvBestStreak.text = getString(R.string.best_streak, streakBest)
     }
 
     // ── Amigos ────────────────────────────────────────────
     private fun setupAmigos() {
         binding.recyclerAmigos.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerAmigos.adapter = amigosAdapter
+        binding.etSearchAmigos.doAfterTextChanged { editable ->
+            applyAmigosFilter(editable?.toString().orEmpty())
+        }
 
+        refreshAmigos()
+    }
+
+    private fun refreshAmigos() {
         viewLifecycleOwner.lifecycleScope.launch {
             val uid = userPreferences.userIdFlow.first()
             if (uid.isNullOrBlank()) return@launch
             val result = withContext(Dispatchers.IO) { UsuariosRepository.obtenerAmigos(uid) }
             if (result.isSuccess) {
-                amigosAdapter.submitList(result.getOrDefault(emptyList()))
+                allAmigos = result.getOrDefault(emptyList()).filter { it.uid != uid }
+                applyAmigosFilter(binding.etSearchAmigos.text?.toString().orEmpty())
             }
         }
+    }
+
+    private fun applyAmigosFilter(query: String) {
+        val normalized = query.trim().lowercase()
+        val filtered = if (normalized.isBlank()) {
+            allAmigos
+        } else {
+            allAmigos.filter { user ->
+                user.nombre.lowercase().contains(normalized) ||
+                    user.email.lowercase().contains(normalized) ||
+                    user.uid.lowercase().contains(normalized)
+            }
+        }
+        amigosAdapter.submitList(filtered)
     }
 
     // ── Quick Nav ────────────────────────────────────────────
@@ -156,8 +194,14 @@ class InicioFragment : Fragment() {
         } else 0
 
         binding.progressDaily.progress = progressPct
-        binding.tvProgressPct.text = "$progressPct%"
-        binding.tvGoalTime.text = "$dailyMinutes/$dailyGoalMinutes min"
+        binding.tvProgressPct.text = String.format(Locale.getDefault(), "%d%%", progressPct)
+        binding.tvGoalTime.text = String.format(
+            Locale.getDefault(),
+            "%d/%d %s",
+            dailyMinutes,
+            dailyGoalMinutes,
+            getString(R.string.mins_label)
+        )
 
         val minutesLeft = dailyGoalMinutes - dailyMinutes
         binding.tvTimeLeft.text = if (minutesLeft > 0) "Faltan $minutesLeft min" else "¡Meta alcanzada! 🎉"
@@ -166,6 +210,38 @@ class InicioFragment : Fragment() {
         binding.tvEjercicios.text = dailyExercises.toString()
         binding.tvLeccionesCount.text = dailyLessons.toString()
         binding.tvPuntos.text = dailyPoints.toString()
+    }
+
+    private fun syncProgressFromFirebase() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val uid = userPreferences.userIdFlow.first()
+            if (uid.isNullOrBlank()) {
+                setupStreak()
+                setupProgress()
+                return@launch
+            }
+
+            val profileResult = UserStatsRepository.observeUserProfileStats(uid).first()
+            profileResult.getOrNull()?.let { profile ->
+                dailyPoints = profile.puntos
+                dailyLessons = profile.lecciones
+                streakCurrent = profile.rachaActual
+                streakBest = profile.mejorRacha
+            }
+
+            val sesionesResult = withContext(Dispatchers.IO) { SesionesRepository.obtenerSesiones(uid) }
+            if (sesionesResult.isSuccess) {
+                val today = LocalDate.now().toString()
+                val sesionesHoy = sesionesResult.getOrDefault(emptyList())
+                    .filter { it.tsInicio.take(10) == today }
+
+                dailyMinutes = sesionesHoy.sumOf { it.duracionMin }.toInt()
+                dailyExercises = sesionesHoy.size
+            }
+
+            setupStreak()
+            setupProgress()
+        }
     }
 
     // ── Calendario semanal ───────────────────────────────────
@@ -252,8 +328,13 @@ class InicioFragment : Fragment() {
 
             fun bind(user: UserProfile) {
                 tvAvatar.text = user.nombre.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
-                tvNombre.text = user.nombre.ifBlank { "Usuario" }
-                tvPuntos.text = "${user.puntosTotales} pts"
+                tvNombre.text = user.nombre.ifBlank { user.uid.take(8) }
+                tvPuntos.text = itemView.context.getString(
+                    R.string.friend_card_points_format,
+                    user.puntosTotales,
+                    user.rachaActual,
+                    user.nivel
+                )
                 itemView.setOnClickListener { onClick(user) }
             }
         }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:padding="8dp">
@@ -67,7 +68,28 @@
             android:textColor="#666666"
             android:fontFamily="@font/poppins_regular" />
 
+        <TextView
+            android:id="@+id/tv_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/text_soft"
+            android:textSize="12sp" />
+
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_friend"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/friend_add"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        app:strokeColor="@color/peach_primary"
+        app:strokeWidth="1dp"
+        app:cornerRadius="12dp" />
 
 </LinearLayout>
 

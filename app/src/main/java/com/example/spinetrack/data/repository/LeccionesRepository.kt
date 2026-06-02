@@ -17,31 +17,131 @@ object LeccionesRepository {
             else -> "Lección"
         }
 
-        // Plantilla HTML básica
+        val objetivo = objetivoPorLeccion[leccionId] ?: "Mejorar la higiene postural de forma progresiva y segura."
+        val contenido = when (leccion.categoria) {
+            CategoriaLeccion.EJERCICIOS -> renderEjercicio(leccionId)
+            CategoriaLeccion.HABITOS -> renderHabito(leccionId)
+            CategoriaLeccion.ERGONOMIA, CategoriaLeccion.LECCIONES -> renderLeccionTeorica(leccionId)
+        }
+
         return """
             <html>
             <head>
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <style>
-                body { font-family: sans-serif; color: #222; padding:16px }
-                h1 { color: #FF8A65 }
+                body { font-family: sans-serif; color: #222; padding:16px; line-height:1.45; background:#fffdf9; }
+                h1 { color: #FF8A65; margin-bottom:6px; }
+                h2 { color: #7a5c4a; font-size:18px; margin:16px 0 8px; }
                 .meta { color:#666; font-size:14px; margin-bottom:12px }
                 .section { margin-top:12px }
-                .steps { margin-left:18px }
+                .box { background:#fff3ea; border-radius:12px; padding:10px 12px; margin-top:8px; }
+                .steps { margin-left:18px; padding-left:6px; }
+                .steps li { margin-bottom:6px; }
+                .tip { margin-top:10px; color:#5f6368; }
               </style>
             </head>
             <body>
               <h1>${escapeHtml(leccion.titulo)}</h1>
               <div class="meta">Tipo: $tipo • Nivel: ${escapeHtml(leccion.nivel.label)} • Duración: ${leccion.duracionMin} min</div>
+              <div class="section"><strong>Objetivo</strong><div class="box">${escapeHtml(objetivo)}</div></div>
               <div class="section"><strong>Descripción</strong><p>${escapeHtml(leccion.descripcion)}</p></div>
-              ${if (leccion.categoria == CategoriaLeccion.EJERCICIOS)
-                "<div class=\"section\"><strong>Instrucciones</strong><ol class=\"steps\"><li>Realiza una breve entrada en calor (30s)</li><li>Sigue los movimientos descritos en la lección</li><li>Repite según tu nivel</li></ol></div>"
-                else ""}
-              <div class="section"><em>¡Sigue las indicaciones con cuidado y adapta según tu condición física!</em></div>
+              $contenido
+              <div class="tip"><em>Recomendación: mantén respiración controlada y detente si presentas dolor.</em></div>
             </body>
             </html>
         """.trimIndent()
     }
+
+    private fun renderLeccionTeorica(leccionId: Int): String {
+        val puntos = when (leccionId) {
+            1 -> listOf("Mantén orejas alineadas con hombros", "Evita encorvar la zona torácica", "Apoya ambos pies en el suelo")
+            2 -> listOf("Curva cervical y lumbar deben conservarse", "Evita posturas sostenidas por más de 45 minutos", "Activa core para descargar columna")
+            3 -> listOf("Pantalla a la altura de los ojos", "Codos cerca de 90°", "Apoyo lumbar firme")
+            4 -> listOf("Evita adelantamiento de cabeza", "Realiza retracción cervical suave", "Descansa cuello cada 30 minutos")
+            5 -> listOf("Hombros lejos de las orejas", "Evita tensión al escribir", "Incluye pausas de movilidad escapular")
+            6 -> listOf("Respira diafragmáticamente", "Expansión costal sin elevar hombros", "Coordina postura con respiración")
+            7 -> listOf("ICP alto indica mejor higiene postural", "Observa tendencia semanal, no solo un valor", "Corrige hábitos antes de aumentar exigencia")
+            201 -> listOf("Centro del monitor al nivel ocular", "Distancia entre 50 y 70 cm", "Evita reflejos directos")
+            202 -> listOf("Altura de silla para pies apoyados", "Rodillas cercanas a 90°", "Soporte lumbar en zona baja")
+            203 -> listOf("Teclado cerca del borde", "Muñecas neutras", "Mouse alineado al hombro")
+            204 -> listOf("Luz ambiental homogénea", "Evita contraste extremo", "Descansos visuales frecuentes")
+            205 -> listOf("Alterna sentado/de pie", "No bloquees rodillas", "Usa superficie estable")
+            else -> listOf("Define una meta semanal", "Registra progreso", "Ajusta entorno de trabajo")
+        }
+        return """
+            <h2>Puntos clave</h2>
+            <ol class="steps">
+                ${puntos.joinToString("\n") { "<li>${escapeHtml(it)}</li>" }}
+            </ol>
+            <h2>Aplicación práctica</h2>
+            <div class="box">Implementa al menos 2 puntos clave hoy y revisa tu postura cada 30 minutos.</div>
+        """.trimIndent()
+    }
+
+    private fun renderEjercicio(leccionId: Int): String {
+        val pasos = when (leccionId) {
+            101 -> listOf("Inclina cuello lateralmente 15 segundos por lado", "Flexiona y extiende cuello suavemente", "Realiza 2 repeticiones por movimiento")
+            102 -> listOf("Entrecruza manos detrás de la espalda", "Abre pecho sin arquear lumbar", "Mantén 20 segundos y repite 3 veces")
+            103 -> listOf("Rota hombros hacia atrás en círculos", "Haz 10 repeticiones lentas", "Cambia sentido y repite")
+            104 -> listOf("Activa abdomen y glúteos", "Mantén columna neutra", "Sostén 20-40 segundos según nivel")
+            105 -> listOf("Sentado al borde de la silla", "Inclina tronco adelante con espalda recta", "Mantén 20 segundos y respira profundo")
+            106 -> listOf("Movilidad cervical y torácica 2 minutos", "Secuencia de apertura de cadera", "Cierre con respiración guiada")
+            else -> listOf("Calentamiento breve", "Ejecución controlada", "Vuelta a la calma")
+        }
+        return """
+            <h2>Instrucciones paso a paso</h2>
+            <ol class="steps">
+                ${pasos.joinToString("\n") { "<li>${escapeHtml(it)}</li>" }}
+            </ol>
+            <h2>Dosificación</h2>
+            <div class="box">Realiza la rutina durante ${getLeccionById(leccionId)?.duracionMin ?: 3} minutos. Si aparece dolor agudo, detén el ejercicio.</div>
+        """.trimIndent()
+    }
+
+    private fun renderHabito(leccionId: Int): String {
+        val acciones = when (leccionId) {
+            301 -> listOf("Cada 20 minutos mira a 20 pies de distancia por 20 segundos", "Aprovecha la pausa para corregir postura", "Configura recordatorio automático")
+            302 -> listOf("Define meta de días consecutivos", "Asocia hábito a una rutina diaria", "Registra cumplimiento antes de dormir")
+            303 -> listOf("Usa alarmas cada 30-45 minutos", "Evita notificaciones excesivas", "Adapta frecuencia según jornada")
+            304 -> listOf("Toma agua en intervalos regulares", "Levántate al recargar botella", "Relaciona hidratación con micro-pausas")
+            305 -> listOf("Sostén el celular a nivel visual", "Alterna hombro al cargar bolso", "Camina con mirada al frente")
+            else -> listOf("Define señal de inicio", "Ejecuta acción corta", "Recompensa consistencia")
+        }
+        return """
+            <h2>Acciones recomendadas</h2>
+            <ol class="steps">
+                ${acciones.joinToString("\n") { "<li>${escapeHtml(it)}</li>" }}
+            </ol>
+            <h2>Checklist diario</h2>
+            <div class="box">Marca esta actividad como completada al finalizar para reforzar la racha y sincronizar puntos.</div>
+        """.trimIndent()
+    }
+
+    private val objetivoPorLeccion = mapOf(
+        1 to "Entender los principios base de una postura saludable.",
+        2 to "Reconocer la anatomía funcional de la columna vertebral.",
+        3 to "Configurar una postura sentada ergonómica para estudio/trabajo.",
+        4 to "Reducir carga cervical y mejorar alineación de cabeza.",
+        5 to "Disminuir tensión de hombros durante actividades prolongadas.",
+        6 to "Integrar respiración y estabilidad postural.",
+        7 to "Interpretar el ICP y usarlo para mejorar hábitos.",
+        101 to "Liberar tensión cervical en una rutina corta.",
+        102 to "Mejorar apertura torácica y reducir encorvamiento.",
+        103 to "Activar cintura escapular y movilidad de hombros.",
+        104 to "Fortalecer core para sostener la columna.",
+        105 to "Mejorar movilidad lumbar en puesto de escritorio.",
+        106 to "Realizar rutina completa de movilidad consciente.",
+        201 to "Optimizar altura y distancia del monitor.",
+        202 to "Ajustar correctamente silla y soporte lumbar.",
+        203 to "Alinear teclado/mouse para prevenir sobrecarga.",
+        204 to "Reducir fatiga visual por iluminación inadecuada.",
+        205 to "Aplicar uso seguro y progresivo del escritorio de pie.",
+        301 to "Aplicar pausas visuales y posturales periódicas.",
+        302 to "Construir consistencia en hábitos posturales.",
+        303 to "Automatizar recordatorios sin perder foco.",
+        304 to "Vincular hidratación con movimiento saludable.",
+        305 to "Extender buena postura fuera del escritorio."
+    )
 
     private fun escapeHtml(s: String): String {
         return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")

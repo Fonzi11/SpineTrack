@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_cream"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:ignore="all">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -323,7 +324,7 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_exercise"
+                    android:src="@drawable/ic_nav_device"
                     app:tint="@color/peach_primary" />
 
                 <TextView
@@ -381,6 +382,23 @@
                         android:textSize="18sp" />
 
                 </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.SpineTrack.SearchField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/friends_search_hint"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/Widget.SpineTrack.SearchInput"
+                        android:id="@+id/et_search_amigos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <!-- Lista de amigos -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -748,11 +766,11 @@
                         android:textColor="@color/text_dark"
                         android:textSize="16sp" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_streak_fire"
-                        app:tint="@color/streak_orange" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔥"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 

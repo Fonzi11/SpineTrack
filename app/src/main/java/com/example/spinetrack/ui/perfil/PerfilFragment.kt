@@ -12,15 +12,23 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.spinetrack.MainActivity
 import com.example.spinetrack.R
 import com.example.spinetrack.data.model.AuthState
+import com.example.spinetrack.data.preferences.UserPreferences
+import com.example.spinetrack.data.repository.UsuariosRepository
 import com.example.spinetrack.databinding.FragmentPerfilBinding
 import com.example.spinetrack.databinding.ItemBadgeBinding
 import com.example.spinetrack.ui.auth.AuthViewModel
+import androidx.navigation.fragment.findNavController
+import androidx.core.content.ContextCompat
+import android.content.res.ColorStateList
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class PerfilFragment : Fragment() {
 
     private var _binding: FragmentPerfilBinding? = null
     private val binding get() = _binding!!
+    private lateinit var userPreferences: UserPreferences
 
     private val authViewModel: AuthViewModel by viewModels()
     private val perfilViewModel: PerfilViewModel by viewModels()
@@ -41,6 +49,11 @@ class PerfilFragment : Fragment() {
         setupStatsPlaceholders()
         setupBadges(buildBadges(lecciones = 0, rachaActual = 0, puntos = 0))
         setupSignOut()
+        userPreferences = UserPreferences(requireContext())
+        syncAvatarFromRemote()
+        binding.btnEdit.setOnClickListener {
+            findNavController().navigate(R.id.action_perfil_to_avatar_personalizacion)
+        }
         observeAuthState()
         observePerfilState()
     }
@@ -74,6 +87,7 @@ class PerfilFragment : Fragment() {
                         ptsNivel = state.puntosNivelActual,
                         ptsNext = state.puntosSiguienteNivel
                     )
+                    applyAvatarVisual(state.nombre)
 
                     renderStats(
                         rachaActual = state.rachaActual,
@@ -113,6 +127,38 @@ class PerfilFragment : Fragment() {
         binding.tvNivelPts.text = getString(R.string.profile_level_points_format, ptsNivel, ptsNext)
         val progress = if (ptsNext > 0) (ptsNivel * 100) / ptsNext else 0
         binding.progressNivel.progress = progress
+    }
+
+    private fun applyAvatarVisual(userName: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val enabled = userPreferences.avatarCamaronEnabledFlow.first()
+            if (!enabled) {
+                val initial = userName.trim().firstOrNull()?.uppercase() ?: "U"
+                binding.tvProfileAvatar.text = initial
+                binding.tvProfileAvatar.textSize = 26f
+                binding.tvProfileAvatar.backgroundTintList = null
+                return@launch
+            }
+
+            val config = userPreferences.avatarCamaronConfigFlow.first()
+            binding.tvProfileAvatar.text = AvatarCamaronVisuals.composeAvatar(
+                context = requireContext(),
+                accesorioKey = config.accesorioKey,
+                sizeSp = config.sizeSp
+            )
+            binding.tvProfileAvatar.textSize = config.sizeSp.toFloat()
+            binding.tvProfileAvatar.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(requireContext(), AvatarCamaronVisuals.colorRes(config.colorKey))
+            )
+        }
+    }
+
+    private fun syncAvatarFromRemote() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@launch
+            val remote = UsuariosRepository.obtenerAvatarCamaron(uid).getOrNull() ?: return@launch
+            userPreferences.saveAvatarCamaronConfig(remote)
+        }
     }
 
     private fun setupStatsPlaceholders() {

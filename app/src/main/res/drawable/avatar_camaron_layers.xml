@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/layer_body"
+        android:drawable="@mipmap/ic_avatar_camaron_foreground" />
+    <item
+        android:id="@id/layer_eyes"
+        android:drawable="@drawable/avatar_camaron_eyes" />
+    <item
+        android:id="@id/layer_accessory"
+        android:drawable="@drawable/avatar_acc_none" />
+</layer-list>
+

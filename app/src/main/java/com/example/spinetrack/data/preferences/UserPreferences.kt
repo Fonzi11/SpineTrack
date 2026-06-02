@@ -1,8 +1,10 @@
 package com.example.spinetrack.data.preferences
 
 import android.content.Context
+import com.example.spinetrack.data.model.AvatarCamaronConfig
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -24,6 +26,10 @@ class UserPreferences(private val context: Context) {
         private val USER_NAME = stringPreferencesKey("user_name")
         private val USER_EMAIL = stringPreferencesKey("user_email")
         private val USER_PHOTO_URL = stringPreferencesKey("user_photo_url")
+        private val AVATAR_CAMARON_COLOR = stringPreferencesKey("avatar_camaron_color")
+        private val AVATAR_CAMARON_ACCESORIO = stringPreferencesKey("avatar_camaron_accesorio")
+        private val AVATAR_CAMARON_SIZE = stringPreferencesKey("avatar_camaron_size")
+        private val AVATAR_CAMARON_ENABLED = booleanPreferencesKey("avatar_camaron_enabled")
     }
 
     /**
@@ -58,6 +64,18 @@ class UserPreferences(private val context: Context) {
      */
     val userEmailFlow: Flow<String?> = context.dataStore.data.map { preferences ->
         preferences[USER_EMAIL]
+    }
+
+    val avatarCamaronConfigFlow: Flow<AvatarCamaronConfig> = context.dataStore.data.map { preferences ->
+        AvatarCamaronConfig(
+            colorKey = preferences[AVATAR_CAMARON_COLOR] ?: "coral",
+            accesorioKey = preferences[AVATAR_CAMARON_ACCESORIO] ?: "none",
+            sizeSp = preferences[AVATAR_CAMARON_SIZE]?.toIntOrNull() ?: 26
+        )
+    }
+
+    val avatarCamaronEnabledFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[AVATAR_CAMARON_ENABLED] ?: false
     }
 
     /**
@@ -123,6 +141,24 @@ class UserPreferences(private val context: Context) {
         context.dataStore.edit { preferences ->
             if (timestampIso == null) preferences.remove(LAST_STATS_UPDATE)
             else preferences[LAST_STATS_UPDATE] = timestampIso
+        }
+    }
+
+    suspend fun saveAvatarCamaronConfig(config: AvatarCamaronConfig) {
+        context.dataStore.edit { preferences ->
+            preferences[AVATAR_CAMARON_COLOR] = config.colorKey
+            preferences[AVATAR_CAMARON_ACCESORIO] = config.accesorioKey
+            preferences[AVATAR_CAMARON_SIZE] = config.sizeSp.toString()
+            preferences[AVATAR_CAMARON_ENABLED] = true
+        }
+    }
+
+    suspend fun resetAvatarCamaron() {
+        context.dataStore.edit { preferences ->
+            preferences.remove(AVATAR_CAMARON_COLOR)
+            preferences.remove(AVATAR_CAMARON_ACCESORIO)
+            preferences.remove(AVATAR_CAMARON_SIZE)
+            preferences[AVATAR_CAMARON_ENABLED] = false
         }
     }
 

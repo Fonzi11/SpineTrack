@@ -1,0 +1,419 @@
+\documentclass[12pt]{article}
+
+% ==================================================
+% PAQUETES
+% ==================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,english]{babel}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+
+% ==================================================
+% CONFIGURACIÓN DE PÁGINA
+% ==================================================
+
+\geometry{
+    top=2.2cm,
+    bottom=2.2cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+\setlength{\parindent}{0.5cm}
+\setlength{\parskip}{0pt}
+
+\linespread{1.05}
+
+% ==================================================
+% COLORES
+% ==================================================
+
+\definecolor{azultitulo}{RGB}{0,51,102}
+\definecolor{grisfondo}{RGB}{240,240,240}
+\definecolor{gristexto}{RGB}{110,110,110}
+
+% ==================================================
+% FORMATO TÍTULOS
+% ==================================================
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}
+{\thesection.}{0.5em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\thesubsection}{0.5em}{}
+
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}
+{\thesubsubsection}{0.5em}{}
+
+% ==================================================
+% DOCUMENTO
+% ==================================================
+
+\begin{document}
+
+\pagestyle{plain}
+
+% ==================================================
+% ENCABEZADO SUPERIOR
+% ==================================================
+
+\noindent
+{\small IoT: Fundamentos y aplicaciones}
+
+\vspace{0.2cm}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+% ==================================================
+% GUÍA
+% ==================================================
+
+\vspace{0.3cm}
+
+{\footnotesize
+\textit{\textcolor{gray}{━━ GUÍA DE ESTILOS REDITEL 2026 — Lea antes de escribir ━━}}
+}
+
+\vspace{0.25cm}
+
+\footnotesize
+
+Abra el Panel de Estilos: Inicio $\rightarrow$ flecha (↗) en el grupo Estilos. Atajo: Ctrl+Alt+Shift+S.
+
+Seleccione el texto y haga clic en el nombre del estilo. \textbf{NUNCA} cambie fuente, tamaño o color directamente.
+
+\vspace{0.2cm}
+
+\textbf{ESTILOS DISPONIBLES:}
+
+\begin{itemize}[leftmargin=0.7cm,itemsep=1pt]
+    \item Título Artículo Español / Título Artículo Inglés — para los títulos del artículo
+    \item Autores / Afiliación / Correo Correspondencia / Línea Temática — bloque de identificación
+    \item Etiqueta Resumen / Contenido Resumen / Palabras Clave — bloque de resumen
+    \item Título 1 / Título 2 / Título 3 — secciones con numeración automática (1. / 1.1 / 1.1.1)
+    \item Título sin número — use SOLO para «Agradecimientos» y «Referencias»
+    \item Normal — cuerpo del artículo (estilo predeterminado)
+    \item Ecuación — párrafo de ecuaciones centrado
+    \item Título de ilustración — generado automáticamente por Insertar $\rightarrow$ Título
+    \item Bibliografía — generado automáticamente por Zotero, Mendeley, EndNote o RefWorks
+    \item Tabla REDITEL — aplíquelo desde Diseño de tabla
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{IMPORTANTE:} No olvide borrar el texto en gris antes de enviar el documento.
+
+Enviar una copia en formato .docx y otra en pdf
+
+\vspace{0.2cm}
+
+{\footnotesize
+\textit{\textcolor{gray}{━━ FIN DE LA GUÍA ━━}}
+}
+
+% ==================================================
+% TÍTULO ESPAÑOL
+% ==================================================
+
+\vspace{0.7cm}
+
+{\fontsize{22}{24}\selectfont
+\textbf{\textcolor{azultitulo}{
+SpineTrack: sistema IoT para monitoreo postural en tiempo real con MQTT y Firebase
+}}
+}
+
+\vspace{0.15cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Título Artículo Español». Máximo 15 palabras. Sin punto final. Sin mayúsculas sostenidas.
+}
+}
+
+% ==================================================
+% TÍTULO INGLÉS
+% ==================================================
+
+\vspace{0.45cm}
+
+{\fontsize{18}{20}\selectfont
+\textit{
+SpineTrack: an IoT system for real-time posture monitoring with MQTT and Firebase
+}
+}
+
+\vspace{0.15cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Título Artículo Inglés». Traducción fiel del título en español. Sin punto final.
+}
+}
+
+% ==================================================
+% AUTORES
+% ==================================================
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{
+Ismael Fonseca$^{1}$,
+Karen Ballen$^{2}$,
+Mafe Tafur$^{3}$
+}
+
+\vspace{0.2cm}
+
+\footnotesize
+
+$^{1}$ Pontificia Universidad Javeriana, Bogotá, Colombia. \\
+$^{2}$ Pontificia Universidad Javeriana, Bogotá, Colombia. \\
+$^{3}$ Pontificia Universidad Javeriana, Bogotá, Colombia.
+
+\vspace{0.15cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Afiliación». Si hay menos de 5 autores elimine las filas sobrantes.
+}
+}
+
+% ==================================================
+% RESUMEN
+% ==================================================
+
+\vspace{0.45cm}
+
+\noindent
+\colorbox{grisfondo}{
+\parbox{\dimexpr\textwidth-2\fboxsep}{
+\vspace{0.15cm}
+
+\textbf{Resumen}
+
+\vspace{0.1cm}
+
+\footnotesize
+
+SpineTrack es un sistema IoT de monitoreo postural que integra un dispositivo wearable basado en ESP32 con sensores MPU6050 y flexores, y una aplicación Android para visualización en tiempo real, control de sesiones y análisis histórico. La arquitectura combina MQTT para telemetría y alertas, y Firebase Realtime Database para sesiones y configuración del dispositivo. La app implementa MVVM y flujos de datos reactivos para mostrar métricas como ICP, rachas, distribución postural y tiempos de uso. El sistema permite iniciar/calibrar sesiones desde la app, sincroniza parámetros de sensibilidad, y guarda eventos y sesiones en la nube para análisis posterior. Los resultados se presentan mediante gráficas y paneles de estadísticas, con una interfaz centrada en el usuario.
+
+\vspace{0.25cm}
+
+\textbf{Abstract}
+
+\vspace{0.1cm}
+
+SpineTrack is an IoT posture monitoring system that combines an ESP32-based wearable with an MPU6050 IMU and flex sensors, and an Android application for real-time visualization, session control, and historical analysis. The architecture uses MQTT for telemetry and alerts, and Firebase Realtime Database for sessions and device configuration. The app follows MVVM and reactive data flows to display metrics such as ICP score, streaks, posture distribution, and monitoring time. Users can start and calibrate sessions from the app, synchronize sensitivity parameters, and store events and sessions in the cloud for later analysis. Results are shown through charts and statistics panels with a user-centered interface.
+
+\vspace{0.25cm}
+
+\textbf{Palabras clave:}
+IoT — postura — MQTT — Firebase — Android
+
+\vspace{0.1cm}
+
+\textbf{Keywords:}
+IoT — posture — MQTT — Firebase — Android
+
+\vspace{0.1cm}
+
+}
+}
+
+\vspace{0.2cm}
+
+{\footnotesize
+\textcolor{gristexto}{
+Estilo: «Palabras Clave». Entre 4 y 6 términos en español e inglés separados por raya (—).
+}
+}
+
+% ==================================================
+% INTRODUCCIÓN
+% ==================================================
+
+\section{Introducción}
+
+SpineTrack aborda la necesidad de monitorear la postura de forma continua mediante un dispositivo wearable IoT y una aplicación móvil. El sistema busca reducir dolores musculoesqueléticos derivados de mala postura, proporcionando alertas, métricas de calidad postural e historiales de sesiones. La solución integra sensores inerciales, comunicación MQTT, una app Android con arquitectura MVVM y una base de datos en tiempo real para almacenamiento y consulta de sesiones. El objetivo es ofrecer una plataforma integral de monitoreo, control y análisis postural, con escalabilidad y acceso remoto.
+
+La contribución de este trabajo se centra en una arquitectura modular extremo a extremo, donde la telemetría en tiempo real y la persistencia de sesiones se separan por canales, permitiendo visualización en vivo sin afectar el registro histórico. Además, se define un esquema de tópicos MQTT y un modelo de sesión para análisis posterior con métricas como ICP y distribución postural.
+
+% ==================================================
+% SECCIÓN 2
+% ==================================================
+
+\section{Trabajos relacionados}
+
+Los sistemas de monitoreo postural han utilizado IMUs y aplicaciones móviles para visualizar ángulos y detectar desviaciones. Sin embargo, muchas soluciones presentan limitaciones en tiempo real, escalabilidad o análisis histórico. SpineTrack se diferencia al combinar MQTT para telemetría eficiente, Firebase para persistencia de sesiones y un modelo de análisis basado en métricas como ICP, rachas y distribución postural, además de un flujo de control desde la app hacia el dispositivo para calibración y sesiones.
+
+% ==================================================
+% DESARROLLO
+% ==================================================
+
+\section{Arquitectura y funcionamiento de SpineTrack}
+
+\subsection{Arquitectura general}
+
+SpineTrack sigue una arquitectura IoT distribuida con separación de capas:
+\begin{itemize}[leftmargin=0.7cm,itemsep=2pt]
+    \item \textbf{Dispositivo wearable:} ESP32 con sensor MPU6050 (acelerómetro y giroscopio) y sensores flexores para detectar flexión de la espalda.
+    \item \textbf{Comunicación:} MQTT sobre TCP con QoS para telemetría postural y alertas.
+    \item \textbf{App Android:} UI en Jetpack Compose/Views, MVVM, Flow/StateFlow para estado reactivo.
+    \item \textbf{Backend:} Firebase Realtime Database para sesiones, eventos y configuración.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=1.4cm, font=\footnotesize]
+\tikzstyle{block}=[draw, rounded corners, minimum height=0.8cm, minimum width=3.2cm, align=center]
+\tikzstyle{arrow}=[-Latex, thick]
+
+\node[block] (wearable) {ESP32 + IMU + Flexores};
+\node[block, right=2.2cm of wearable] (mqtt) {Broker MQTT};
+\node[block, right=2.2cm of mqtt] (app) {App Android\n(MVVM)};
+\node[block, below=1.6cm of app] (firebase) {Firebase RTDB};
+
+\draw[arrow] (wearable) -- node[above]{telemetría} (mqtt);
+\draw[arrow] (mqtt) -- node[above]{realtime} (app);
+\draw[arrow] (app) -- node[right]{sesiones/config} (firebase);
+\draw[arrow] (firebase) -- node[left]{estado/comandos} (wearable);
+\end{tikzpicture}
+\caption{Arquitectura general de SpineTrack}
+\end{figure}
+
+\subsection{Flujo de datos}
+
+El flujo principal se describe así:
+\begin{enumerate}[leftmargin=0.7cm]
+    \item El ESP32 lee los sensores a una tasa definida y calcula ángulos (pitch/roll) y métricas posturales.
+    \item Se genera un payload de telemetría y se publica en MQTT (ej. \texttt{spinetrack/\{uid\}/realtime}).
+    \item La app se suscribe al tópico MQTT para mostrar datos en vivo y alertas.
+    \item Al finalizar, el dispositivo publica un resumen de sesión en Firebase bajo \texttt{sesiones/uid/}.
+    \item La app consume las sesiones de Firebase para estadísticas y analítica.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=1.2cm, font=\footnotesize]
+\tikzstyle{step}=[draw, rounded corners, minimum height=0.7cm, minimum width=8.5cm, align=left]
+\tikzstyle{arrow}=[-Latex, thick]
+
+\node[step] (s1) {1. Lectura de sensores (IMU + flex)};
+\node[step, below=0.9cm of s1] (s2) {2. Cálculo de ángulos y clasificación postural};
+\node[step, below=0.9cm of s2] (s3) {3. Publicación MQTT (realtime / alertas)};
+\node[step, below=0.9cm of s3] (s4) {4. Visualización en vivo en la app};
+\node[step, below=0.9cm of s4] (s5) {5. Persistencia de sesión en Firebase};
+\node[step, below=0.9cm of s5] (s6) {6. Analítica y estadísticas en la app};
+
+\draw[arrow] (s1) -- (s2);
+\draw[arrow] (s2) -- (s3);
+\draw[arrow] (s3) -- (s4);
+\draw[arrow] (s4) -- (s5);
+\draw[arrow] (s5) -- (s6);
+\end{tikzpicture}
+\caption{Flujo de datos del sistema}
+\end{figure}
+
+\subsection{MQTT y tópicos}
+
+SpineTrack utiliza el esquema \texttt{spinetrack/\{device\_id\}/\{subtopic\}} con QoS diferenciado:
+\begin{itemize}[leftmargin=0.7cm,itemsep=2pt]
+    \item \textbf{realtime/imu/posture:} telemetría postural (QoS 1).
+    \item \textbf{alert:} alertas de mala postura (QoS 2).
+    \item \textbf{session/start} y \textbf{session/stop:} control de sesión (QoS 1).
+    \item \textbf{status:} estado del dispositivo (QoS 1, retain habilitado).
+\end{itemize}
+
+\subsection{Cálculo de métricas}
+
+El sistema calcula un Índice de Calidad Postural (ICP) entre 0 y 100. Este índice resume desviaciones angulares y tiempo en mala postura. La clasificación se muestra en la app como excelente, bueno, regular, malo o crítico. Además, se calcula la distribución de ángulos (porcentaje de tiempo en cada clase) y métricas de racha y tiempo de uso.
+
+\subsection{Control de sesiones y calibración}
+
+Desde la app, el usuario puede iniciar, detener o calibrar una sesión. El comando se envía a Firebase en \texttt{dispositivos/uid/control/comando} y la Raspberry/ESP32 responde ejecutando la calibración de giroscopio y postura base. La app refleja el estado con indicadores de conexión, calibración y sesión activa.
+
+\subsection{Aplicación Android}
+
+La aplicación se organiza en capas:
+\begin{itemize}[leftmargin=0.7cm,itemsep=2pt]
+    \item \textbf{Presentación:} Pantallas de Inicio, En Vivo, Estadísticas, Analítica, Comunidad y Perfil.
+    \item \textbf{ViewModel:} Maneja estados y acciones de UI, usa \texttt{StateFlow}.
+    \item \textbf{Repositorio:} Abstrae acceso a MQTT y Firebase.
+\end{itemize}
+
+\subsection{Seguridad y configuración}
+
+Las credenciales y configuraciones sensibles se manejan en la app con almacenamiento seguro y reglas de Firebase. MQTT se usa con autenticación y posibilidad de TLS. Los IDs de dispositivo se vinculan al UID de Firebase Auth para asegurar aislamiento de datos.
+
+% ==================================================
+% RESULTADOS
+% ==================================================
+
+\section{Evaluaciones y Resultados}
+
+Las métricas principales se visualizan en la app:
+\begin{itemize}[leftmargin=0.7cm,itemsep=2pt]
+    \item \textbf{ICP promedio y clase postural.}
+    \item \textbf{Racha de sesiones consecutivas.}
+    \item \textbf{Tiempo total de monitoreo.}
+    \item \textbf{Distribución porcentual de posturas.}
+\end{itemize}
+
+La app provee gráficas de ICP por sesión y gráficos de distribución postural, permitiendo comparar periodos mediante segmentación por ventana temporal y clase.
+
+% ==================================================
+% CONCLUSIONES
+% ==================================================
+
+\section{Conclusiones}
+
+SpineTrack integra hardware IoT, comunicación MQTT y un backend en tiempo real para ofrecer monitoreo postural confiable. La app permite visualización en vivo, control de sesiones, y análisis histórico con métricas claras. La arquitectura modular facilita escalabilidad y futuras mejoras (análisis avanzado, modelos predictivos y recomendaciones personalizadas).
+
+% ==================================================
+% REFERENCIAS
+% ==================================================
+
+\section*{Referencias}
+
+Las referencias las genera automáticamente su gestor: Zotero, Mendeley, EndNote o RefWorks.
+
+\vspace{0.3cm}
+
+\begin{enumerate}[leftmargin=0.6cm]
+
+\item A. Apellido y B. Apellido, ``Título del artículo,'' \textit{Nombre de la Revista}, vol. XX, no. X, pp. XXX--XXX, año.
+
+\item A. Apellido, \textit{Título del libro}, X.ª ed. Ciudad: Editorial, año.
+
+\item A. Apellido, ``Título de la ponencia,'' en \textit{Memorias del Congreso}, Ciudad, año, pp. XXX--XXX.
+
+\item Nombre, ``Título del recurso,'' Sitio. [En línea]. Disponible: https://url.com
+
+\end{enumerate}
+
+\vspace{0.2cm}
+
+Numere en orden de primera aparición en el texto. Toda referencia citada debe tener su entrada aquí.
+
+\end{document}
+

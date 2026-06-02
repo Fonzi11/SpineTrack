@@ -118,9 +118,10 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Forgot Password Link -->
-                <TextView
-                    android:id="@+id/tv_forgot_password"
+                <!-- Forgot Password Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_forgot_password"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -128,9 +129,8 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/forgot_password"
                     android:textColor="@color/peach_primary"
-                    android:textSize="13sp"
-                    android:clickable="true"
-                    android:focusable="true" />
+                    android:textAllCaps="false"
+                    app:iconPadding="0dp" />
 
                 <!-- Login Button -->
                 <com.google.android.material.button.MaterialButton

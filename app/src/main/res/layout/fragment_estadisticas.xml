@@ -19,18 +19,154 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Estadísticas"
+            android:text="@string/stats_title"
             android:textColor="@color/text_dark"
             android:textSize="24sp" />
 
         <TextView
+            android:id="@+id/tv_segmento_subtitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Últimas 30 sesiones"
+            android:text="@string/stats_subtitle"
             android:textColor="@color/text_soft"
             android:textSize="13sp" />
+
+        <!-- Segmentación -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/surface_white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/stats_filters_title"
+                    android:textColor="@color/text_dark"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/stats_filter_window"
+                    android:textColor="@color/text_soft"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_window"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_window_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_window_all" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_window_7d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_window_7d" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_window_30d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_window_30d" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_window_90d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_window_90d" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/stats_filter_class"
+                    android:textColor="@color/text_soft"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_class"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_class_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_class_all" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_class_excellent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_class_excellent" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_class_good"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_class_good" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_class_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_class_regular" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_class_bad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_class_bad" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_class_critical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:text="@string/stats_class_critical" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Loading -->
         <ProgressBar
@@ -81,7 +217,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="ICP Promedio (últimos 7 días)"
+                        android:text="@string/stats_icp_segment"
                         android:textColor="@color/text_soft"
                         android:textSize="13sp" />
 
@@ -149,7 +285,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Racha"
+                            android:text="@string/stats_label_streak"
                             android:textColor="@color/text_soft"
                             android:textSize="11sp" />
 
@@ -182,7 +318,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Sesiones"
+                            android:text="@string/stats_label_sessions"
                             android:textColor="@color/text_soft"
                             android:textSize="11sp" />
 
@@ -215,7 +351,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Monitoreo"
+                            android:text="@string/stats_label_monitoring"
                             android:textColor="@color/text_soft"
                             android:textSize="11sp" />
 
@@ -245,7 +381,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="ICP por sesión"
+                        android:text="@string/stats_icp_chart_title"
                         android:textColor="@color/text_dark"
                         android:textSize="15sp" />
 
@@ -278,7 +414,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="Distribución postural"
+                        android:text="@string/stats_dist_title"
                         android:textColor="@color/text_dark"
                         android:textSize="15sp" />
 
@@ -287,7 +423,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Promedio de todas las sesiones"
+                        android:text="@string/stats_dist_subtitle"
                         android:textColor="@color/text_soft"
                         android:textSize="12sp" />
 
@@ -308,7 +444,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Actualizar datos"
+                android:text="@string/stats_refresh"
                 app:cornerRadius="14dp"
                 app:strokeColor="@color/peach_primary" />
 
@@ -340,7 +476,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Aún no hay sesiones"
+                android:text="@string/stats_empty_title"
                 android:textColor="@color/text_dark"
                 android:textSize="20sp" />
 
@@ -352,7 +488,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.4"
-                android:text="Enciende la Raspberry y empieza tu primera sesión de monitoreo postural."
+                android:text="@string/stats_empty_message"
                 android:textColor="@color/text_soft"
                 android:textSize="14sp" />
 
@@ -405,7 +541,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Enciende la Raspberry Pi"
+                            android:text="@string/stats_empty_step_1"
                             android:textColor="@color/text_medium"
                             android:textSize="13sp" />
 
@@ -434,7 +570,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Colócate el sensor en la espalda"
+                            android:text="@string/stats_empty_step_2"
                             android:textColor="@color/text_medium"
                             android:textSize="13sp" />
 
@@ -502,7 +638,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Error de conexión"
+                android:text="@string/stats_error_title"
                 android:textColor="@color/text_dark"
                 android:textSize="20sp" />
 
@@ -514,7 +650,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.4"
-                android:text="Parece que hay un problema de conexión. Verifica tu sesión e intenta nuevamente."
+                android:text="@string/stats_error_message"
                 android:textColor="@color/text_soft"
                 android:textSize="14sp" />
 
@@ -524,7 +660,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Reintentar"
+                android:text="@string/stats_error_retry"
                 app:backgroundTint="@color/peach_primary"
                 app:cornerRadius="14dp" />
 

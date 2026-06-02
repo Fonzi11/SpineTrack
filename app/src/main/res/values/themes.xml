@@ -122,6 +122,39 @@
         <item name="android:fontFamily">@font/poppins_semibold</item>
         <item name="cornerRadius">14dp</item>
     </style>
+
+    <style name="Widget.SpineTrack.SearchField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxBackgroundColor">@color/peach_container</item>
+        <item name="boxStrokeColor">@color/peach_primary</item>
+        <item name="startIconDrawable">@android:drawable/ic_menu_search</item>
+        <item name="startIconTint">@color/peach_primary</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+    </style>
+
+    <style name="Widget.SpineTrack.SearchInput" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:maxLines">1</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="ButtonStyle.SpineTrack.SearchCta" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_height">36dp</item>
+        <item name="android:backgroundTint">@color/peach_light</item>
+        <item name="android:textColor">@color/text_peach</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="icon">@android:drawable/ic_menu_search</item>
+        <item name="iconTint">@color/text_peach</item>
+        <item name="iconPadding">6dp</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
     <!-- ── Bottom Navigation ── -->
     <style name="BottomNav.SpineTrack" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundTint">@color/nav_background</item>
